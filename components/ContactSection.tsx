@@ -1,4 +1,5 @@
 const contacts = [
+    { icon: 'https://img.icons8.com/ios-filled/100/ffffff/phone.png', label: 'Phone', value: '098-184-8532', href: 'tel:0981848532' },
     { icon: 'https://res.cloudinary.com/do6xlqizt/image/upload/v1773920728/mdi--gmail_rsnsn0.png', label: 'Email', value: 'narawit532@gmail.com' },
     { icon: 'https://res.cloudinary.com/do6xlqizt/image/upload/v1773920729/line-app-logo-block_ek3x9i.png', label: 'Line', value: 'narawit101' },
     { icon: 'https://res.cloudinary.com/do6xlqizt/image/upload/v1773920729/fe--instagram_bzhyko.png', label: 'Instagram', value: 'iiceee.n', href: 'https://www.instagram.com/iiceee.n/' },
@@ -32,18 +33,6 @@ export default function ContactSection() {
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                            <div className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl bg-white/2 border border-white/4 hover:border-orange-500/20 transition-all">
-                                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-orange-500/10 flex items-center justify-center shrink-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 sm:w-5 sm:h-5 text-white">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
-                                    </svg>
-                                </div>
-                                <div>
-                                    <p className="text-[10px] sm:text-[11px] text-gray-500 uppercase tracking-wider font-mono">Phone</p>
-                                    <p className="text-xs sm:text-sm text-gray-300">098-184-8532</p>
-                                </div>
-                            </div>
-
                             {contacts.map((item) => (
                                 <div key={item.label} className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl hover:-translate-y-1  transition-transform duration-500 bg-white/3 border border-white/4 hover:border-orange-500/20 ">
                                     <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-orange-500/10 flex items-center justify-center shrink-0">
