@@ -1,14 +1,63 @@
-@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@100;200;300;400;500;600;700;800;900&display=swap");
 @import "tailwindcss";
 
-* {
-  margin: 0;
-  padding: 0;
+/* @theme {
+  --color-orange-400: #fb923c;
+  --color-orange-500: #f97316;
+  --color-orange-600: #ea580c;
+  --color-brand: #f97316;
+} */
+
+body {
   font-family: "Kanit", sans-serif;
-  box-sizing: border-box;
-  /* word-wrap: break-word;
-  overflow-wrap: break-word;
-  word-break: break-word;
-  white-space: normal; */
+  background-color: #0a0a12;
+  color: white;
+}
+
+.terminal-type {
+  --typing-width: 18ch;
+  --typing-steps: 18;
+  display: inline-block;
+  width: 0;
+  max-width: var(--typing-width);
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid rgba(255, 255, 255, 0.55);
+  animation:
+    terminalTyping 4.2s steps(var(--typing-steps), end) infinite,
+    terminalCaret 0.8s step-end infinite;
+}
+
+@keyframes terminalTyping {
+  0%,
+  12% {
+    width: 0;
+  }
+
+  48%,
+  72% {
+    width: var(--typing-width);
+  }
+
+  100% {
+    width: 0;
+  }
+}
+
+@keyframes terminalCaret {
+  from,
+  to {
+    border-right-color: transparent;
+  }
+
+  50% {
+    border-right-color: rgba(255, 255, 255, 0.55);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .terminal-type {
+    width: var(--typing-width);
+    animation: none;
+  }
 }
