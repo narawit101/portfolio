@@ -10,16 +10,16 @@ const contacts = [
 export default function ContactSection() {
     return (
         <section id="section-contact" className="scroll-mt-20 py-10 sm:py-12 px-6 sm:px-10 relative">
-            <div className=" absolute top-0 left-0 w-full h-px bg-linear-to-r from-transparent via-orange-500/20 to-transparent" />
+            <div className=" absolute top-0 left-0 w-full h-px bg-linear-to-r from-transparent via-primary/20 to-transparent" />
 
             <div className="relative z-10 max-w-3xl mx-auto">
                 <div className="text-center mb-14">
                     <h2 className="text-3xl sm:text-4xl font-bold mt-3 text-white">Contact</h2>
-                    <span className="text-orange-500 text-xs font-semibold tracking-[0.25em] uppercase">Get In Touch</span>
-                    <div className="mt-4 h-[3px] w-12 bg-orange-500 rounded-full mx-auto" />
+                    <span className="text-primary text-xs font-semibold tracking-[0.25em] uppercase">Get In Touch</span>
+                    <div className="mt-4 h-[3px] w-12 bg-primary rounded-full mx-auto" />
                 </div>
 
-                <div className="hover:border-orange-500/20  bg-[#12121a] rounded-2xl border border-white/6 overflow-hidden">
+                <div className="hover:border-primary/20  bg-[#12121a] rounded-2xl border border-white/6 overflow-hidden">
                     <div className="flex items-center gap-2 px-4 sm:px-5 py-3 border-b border-white/6 bg-white/2">
                         <span className="w-3 h-3 rounded-full bg-red-500/80" />
                         <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
@@ -34,14 +34,14 @@ export default function ContactSection() {
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                             {contacts.map((item) => (
-                                <div key={item.label} className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl hover:-translate-y-1  transition-transform duration-500 bg-white/3 border border-white/4 hover:border-orange-500/20 ">
-                                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-orange-500/10 flex items-center justify-center shrink-0">
+                                <div key={item.label} className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl hover:-translate-y-1  transition-transform duration-500 bg-white/3 border border-white/4 hover:border-primary/20 ">
+                                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                                         <img src={item.icon} alt={item.label} className={`w-4 h-4 sm:w-5 sm:h-5 ${item.iconClass ?? ''}`} />
                                     </div>
                                     <div className="min-w-0">
                                         <p className="text-[10px] sm:text-[11px] text-gray-500 uppercase tracking-wider font-mono">{item.label}</p>
                                         {item.href ? (
-                                            <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-xs sm:text-sm text-gray-300 hover:text-orange-400 transition-colors truncate block">
+                                            <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-xs sm:text-sm text-gray-300 hover:text-primary-400 transition-colors truncate block">
                                                 {item.value}
                                             </a>
                                         ) : (

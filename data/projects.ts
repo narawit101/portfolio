@@ -3,126 +3,130 @@ import { Project } from '@/types'
 export const projects: Project[] = [
   {
     id: 1,
-    head: "Web Application แพลตฟอร์มการจองสนามกีฬาออนไลน์",
-    description: `ระบบจองสนามกีฬาออนไลน์ที่พัฒนาขึ้นเพื่อแก้ไขปัญหาการจัดการจองแบบดั้งเดิม เช่น การจองผ่านโทรศัพท์หรือการบันทึกข้อมูลด้วยมือ ซึ่งมักก่อให้เกิดความล่าช้า ความผิดพลาด และการจองซ้ำซ้อน ส่งผลต่อประสบการณ์ของผู้ใช้งานและประสิทธิภาพในการบริหารจัดการของผู้ให้บริการ
+    head: "แพลตฟอร์มจองสนามกีฬา | Sports Venue Booking Platform",
+    description: `Sport Hub คือแพลตฟอร์มจองสนามกีฬาแบบครบวงจรที่รวมการทำงานของลูกค้า เจ้าของสนาม และผู้ดูแลระบบไว้ในที่เดียว ช่วยให้การค้นหาสนาม การจองคิว และการจัดการหลังบ้านทำได้ง่ายขึ้นกว่าการประสานงานแบบเดิมที่ต้องใช้หลายช่องทาง
 
-โปรเจคนี้มีวัตถุประสงค์เพื่อยกระดับกระบวนการจองสนามกีฬาให้มีความสะดวก รวดเร็ว และแม่นยำมากยิ่งขึ้น โดยพัฒนาระบบในรูปแบบ Web Application ที่ช่วยให้ผู้ใช้งานสามารถตรวจสอบตารางเวลาว่างแบบเรียลไทม์ เลือกสนาม และทำการจองได้อย่างมีประสิทธิภาพ ขณะเดียวกัน ผู้ให้บริการสามารถจัดการข้อมูลสนาม ตรวจสอบรายการจอง และสื่อสารข่าวสารหรือโปรโมชั่นผ่านระบบได้อย่างสะดวก
+ปัญหาที่โปรเจคนี้แก้ไข
+- ลดปัญหาจองซ้ำซ้อนจากการจองผ่านโทรศัพท์หรือการบันทึกด้วยมือ
+- ลดความล่าช้าในการอัปเดตตารางว่างและสถานะการจอง
+- ทำให้เจ้าของสนามและแอดมินเห็นข้อมูลการดำเนินงานได้เป็นระบบมากขึ้น
 
-ระบบรองรับผู้ใช้งาน 3 กลุ่มหลัก ได้แก่ ลูกค้า เจ้าของสนามกีฬา และผู้ดูแลระบบ โดยมีฟีเจอร์สำคัญ เช่น การแสดงตารางเวลาว่าง การจองและยกเลิกการจอง การจัดการข้อมูลสนามกีฬา และการตรวจสอบสถานะการจอง นอกจากนี้ยังมีระบบอัปโหลดหลักฐานการชำระเงินผ่าน QR Code เพื่อใช้ยืนยันการจอง
+ฟีเจอร์สำคัญของระบบ
+- ลูกค้า (Customer): สมัครและยืนยันตัวตน, ค้นหาสนามตามประเภทกีฬา, ดูรายละเอียดสนามและรีวิว, จองช่วงเวลา, อัปโหลดหลักฐานการชำระเงิน, และติดตามสถานะการจอง
+- เจ้าของสนาม (Field Owner): ลงทะเบียนสนาม, จัดการสนามย่อยและสิ่งอำนวยความสะดวก, สร้างประกาศ, ตรวจสอบและอัปเดตสถานะการจอง, และดูสถิติพร้อม export รายงานไฟล์ .xlsx
+- ผู้ดูแลระบบ (Admin): จัดการผู้ใช้งาน, อนุมัติหรือปฏิเสธคำขอลงทะเบียนสนาม, และดูแลข้อมูลประเภทกีฬากลางของระบบ
 
-(Production-Ready) โดย Deploy Frontend บน Vercel และ Backend บน Railway พร้อมระบบจัดการรูปภาพประสิทธิภาพสูงผ่าน Cloudinary และการสื่อสารแบบเรียลไทม์ผ่าน Socket.IO เพื่ออัปเดตสถานะการจองแบบทันที นอกจากนี้ยังมีการออกแบบฐานข้อมูลด้วย PostgreSQL เพื่อรองรับการจัดเก็บข้อมูลที่มีความสัมพันธ์ซับซ้อน เช่น ข้อมูลผู้ใช้งาน สนามกีฬา และรายการจองต่างๆ
+จุดเด่นเชิงเทคนิค
+- Realtime booking และ notification ด้วย Socket.IO เพื่อลดความผิดพลาดจากข้อมูลไม่ตรงกัน
+- ระบบชำระเงินรองรับ PromptPay QR, การอัปโหลดสลิป, และการตรวจสอบหลักฐานการชำระเงิน
+- แจ้งเตือนอีเมลอัตโนมัติในเหตุการณ์สำคัญของผู้ใช้และเจ้าของสนาม
+- จัดการไฟล์ภาพด้วย Cloudinary และรองรับงานที่ต้องใช้แผนที่ผ่าน Longdo Map
+- ออกแบบระบบแบบ full-stack แยก frontend (Next.js) และ backend (Express + PostgreSQL) ชัดเจน
 
-ผลลัพธ์ที่ได้คือแพลตฟอร์มที่ช่วยลดความผิดพลาดจากกระบวนการเดิม เพิ่มประสิทธิภาพในการบริหารจัดการ และยกระดับประสบการณ์ของผู้ใช้งาน โดยจากการทดสอบกับผู้ใช้งานจริง ระบบได้รับคะแนนประเมินด้านประสิทธิภาพและการใช้งานเฉลี่ยสูงถึง 4.8/5.0 ซึ่งยืนยันความสามารถในการรองรับการบริหารจัดการสนามกีฬาหลายแห่งพร้อมกันได้อย่างมีเสถียรภาพ นอกจากนี้ ด้านโครงสร้างพื้นฐานยังได้รับการออกแบบให้รองรับการใช้งานจริง `,
-    pictures: ["https://res.cloudinary.com/do6xlqizt/image/upload/v1773920996/project4_zqcb7j.png",
-      "https://res.cloudinary.com/do6xlqizt/image/upload/v1773923908/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E1_kvtyag.png",
-      "https://res.cloudinary.com/do6xlqizt/image/upload/v1773923900/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E11_cdj0f5.png",
-      "https://res.cloudinary.com/do6xlqizt/image/upload/v1773923900/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E10_tdlncf.png",
-    ],
-    tags: ["TEAMWORK", "Next.js", "Node.js", "Express.js", "PostgreSQL", "Socket.IO", "Railway", "vercel", "cloudinary"]
+การนำขึ้นระบบ (Deploy)
+- Frontend deploy บน Vercel เพื่อรองรับการเข้าถึงและการอัปเดตหน้าเว็บอย่างรวดเร็ว
+- Backend API deploy บน Railway พร้อมเชื่อมต่อ PostgreSQL สำหรับข้อมูลธุรกรรม
+- จัดเก็บรูปภาพและไฟล์มีเดียบน Cloudinary เพื่อให้โหลดเร็วและดูแลง่ายใน production
+
+สรุปผลลัพธ์
+โปรเจคนี้แสดงความสามารถในการพัฒนาระบบจริงแบบ end-to-end ที่มีหลายบทบาทผู้ใช้และหลาย integration พร้อมกัน ทั้งด้านธุรกรรม การสื่อสารแบบเรียลไทม์ และการวิเคราะห์ข้อมูล ทำให้เป็นผลงานที่สื่อทั้งมุม product และ engineering ได้ครบ`,
+    pictures:
+      ["https://res.cloudinary.com/do6xlqizt/image/upload/v1773920996/project4_zqcb7j.png",
+        "https://res.cloudinary.com/do6xlqizt/image/upload/v1776675003/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E1_hbg19m.png",
+        "https://res.cloudinary.com/do6xlqizt/image/upload/v1776675037/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E2_rkpyjz.png",
+        "https://res.cloudinary.com/do6xlqizt/image/upload/v1776675034/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E3_fvbir4.png",
+        "https://res.cloudinary.com/do6xlqizt/image/upload/v1776675189/Screenshot_2025-09-08_185909_zeidig.png",
+        "https://res.cloudinary.com/do6xlqizt/image/upload/v1776675031/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E4_ukedcg.png",
+        "https://res.cloudinary.com/do6xlqizt/image/upload/v1776675282/Screenshot_2025-09-22_004414_tl9zks.png",
+        "https://res.cloudinary.com/do6xlqizt/image/upload/v1776675380/Screenshot_2025-07-19_213144_op2ka9.png",
+        "https://res.cloudinary.com/do6xlqizt/image/upload/v1776675022/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E7_pqebmc.png",
+        "https://res.cloudinary.com/do6xlqizt/image/upload/v1776675018/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E8_yrm62r.png",
+        "https://res.cloudinary.com/do6xlqizt/image/upload/v1776675014/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E10_ug5tmb.png",
+        "https://res.cloudinary.com/do6xlqizt/image/upload/v1776675006/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E12_rc5hyq.png",
+        "https://res.cloudinary.com/do6xlqizt/image/upload/v1776675002/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E14_p2nmsw.png",
+        "https://res.cloudinary.com/do6xlqizt/image/upload/v1776675008/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E13_c8ltei.png"
+
+
+
+      ],
+    tags: ["TEAMWORK", "Next.js 15", "Express.js", "PostgreSQL", "Socket.IO", "PromptPay QR", "Railway", "Vercel", "Cloudinary",]
   },
-  // {
-  //   id: 2,
-  //   head: "E-Commerce Web Application",
-  //   description: "ระบบร้านค้าออนไลน์ครบวงจร รองรับการจัดการตะกร้าสินค้า ระบบชำระเงิน และการติดตามสถานะการจัดส่ง พัฒนาขึ้นมาเพื่อให้ผู้ใช้งานสามารถเลือกซื้อสินค้าได้สะดวก พร้อมระบบจัดการหลังบ้าน (Admin Dashboard) สำหรับจัดการสต็อกและดูรายงานยอดขาย",
-  //   pictures: ["https://res.cloudinary.com/do6xlqizt/image/upload/v1773920996/project4_zqcb7j.png",
-  //     "https://res.cloudinary.com/do6xlqizt/image/upload/v1773923908/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E1_kvtyag.png",
-  //     "https://res-console.cloudinary.com/do6xlqizt/thumbnails/v1/image/upload/v1773923912/4Lij4Li54Lib4Lig4Liy4LieMl9zeHp0Yms=/preview",
-  //     "https://res-console.cloudinary.com/do6xlqizt/thumbnails/v1/image/upload/v1773923905/4Lij4Li54Lib4Lig4Liy4LieM19jZTRyOXA=/preview",
-  //     "https://res-console.cloudinary.com/do6xlqizt/thumbnails/v1/image/upload/v1773923904/4Lij4Li54Lib4Lig4Liy4LieNV9hYTk4MGQ=/preview",
-  //     "https://res-console.cloudinary.com/do6xlqizt/thumbnails/v1/image/upload/v1773923902/4Lij4Li54Lib4Lig4Liy4LieN191M2MydGk=/preview",
-  //     "https://res.cloudinary.com/do6xlqizt/image/upload/v1773923900/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E11_cdj0f5.png",
-  //     "https://res.cloudinary.com/do6xlqizt/image/upload/v1773923900/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E10_tdlncf.png",
-  //   ],
-  //   tags: ["Next.js", "Tailwind CSS", "Stripe", "Prisma"]
-  // },
-  // {
-  //   id: 3,
-  //   head: "Task Management Dashboard",
-  //   description: "แอปพลิเคชันจัดการตารางงานและโปรเจคสไตล์ Kanban Board คล้าย Trello รองรับการลากวาง (Drag & Drop) การมอบหมายงานให้สมาชิกในทีม ปรับสถานะงาน และมีระบบแจ้งเตือนเมื่อมีการอัปเดตงาน",
-  //   pictures: ["https://res.cloudinary.com/do6xlqizt/image/upload/v1773920996/project4_zqcb7j.png",
-  //     "https://res.cloudinary.com/do6xlqizt/image/upload/v1773923908/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E1_kvtyag.png",
-  //     "https://res-console.cloudinary.com/do6xlqizt/thumbnails/v1/image/upload/v1773923912/4Lij4Li54Lib4Lig4Liy4LieMl9zeHp0Yms=/preview",
-  //     "https://res-console.cloudinary.com/do6xlqizt/thumbnails/v1/image/upload/v1773923905/4Lij4Li54Lib4Lig4Liy4LieM19jZTRyOXA=/preview",
-  //     "https://res-console.cloudinary.com/do6xlqizt/thumbnails/v1/image/upload/v1773923904/4Lij4Li54Lib4Lig4Liy4LieNV9hYTk4MGQ=/preview",
-  //     "https://res-console.cloudinary.com/do6xlqizt/thumbnails/v1/image/upload/v1773923902/4Lij4Li54Lib4Lig4Liy4LieN191M2MydGk=/preview",
-  //     "https://res.cloudinary.com/do6xlqizt/image/upload/v1773923900/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E11_cdj0f5.png",
-  //     "https://res.cloudinary.com/do6xlqizt/image/upload/v1773923900/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E10_tdlncf.png",
-  //   ],
-  //   tags: ["React", "TypeScript", "Firebase", "Redux"]
-  // },
-  // {
-  //   id: 4,
-  //   head: "Personal Expense Tracker",
-  //   description: "ระบบบันทึกรายรับ-รายจ่ายส่วนบุคคล พร้อมแดชบอร์ดสรุปผลการใช้จ่ายในแต่ละเดือน แสดงผลข้อมูลในรูปแบบกราฟ (Pie Chart, Bar Chart) แยกตามหมวดหมู่ ช่วยให้ผูัใช้สามารถวางแผนการเงินได้มีประสิทธิภาพมากขึ้น",
-  //   pictures: ["https://res.cloudinary.com/do6xlqizt/image/upload/v1773920996/project4_zqcb7j.png",
-  //     "https://res.cloudinary.com/do6xlqizt/image/upload/v1773923908/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E1_kvtyag.png",
-  //     "https://res-console.cloudinary.com/do6xlqizt/thumbnails/v1/image/upload/v1773923912/4Lij4Li54Lib4Lig4Liy4LieMl9zeHp0Yms=/preview",
-  //     "https://res-console.cloudinary.com/do6xlqizt/thumbnails/v1/image/upload/v1773923905/4Lij4Li54Lib4Lig4Liy4LieM19jZTRyOXA=/preview",
-  //     "https://res-console.cloudinary.com/do6xlqizt/thumbnails/v1/image/upload/v1773923904/4Lij4Li54Lib4Lig4Liy4LieNV9hYTk4MGQ=/preview",
-  //     "https://res-console.cloudinary.com/do6xlqizt/thumbnails/v1/image/upload/v1773923902/4Lij4Li54Lib4Lig4Liy4LieN191M2MydGk=/preview",
-  //     "https://res.cloudinary.com/do6xlqizt/image/upload/v1773923900/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E11_cdj0f5.png",
-  //     "https://res.cloudinary.com/do6xlqizt/image/upload/v1773923900/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E10_tdlncf.png",
-  //   ],
-  //   tags: ["Vue.js", "Chart.js", "Express.js", "MongoDB"]
-  // },
-  // {
-  //   id: 5,
-  //   head: "Real Estate Listing Platform",
-  //   description: "เว็บไซต์สำหรับค้นหาและลงประกาศขาย-เช่าอสังหาริมทรัพย์ มีระบบค้นหาด้วยแผนที่แบบ Interactive มีระบบตัวกรองระยะลึก (Advanced Filter) ตามราคา ทำเล หรือประเภทบ้าน และมีระบบจำลองการผ่อนชำระเบื้องต้น",
-  //   pictures: ["https://res.cloudinary.com/do6xlqizt/image/upload/v1773920996/project4_zqcb7j.png",
-  //     "https://res.cloudinary.com/do6xlqizt/image/upload/v1773923908/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E1_kvtyag.png",
-  //     "https://res-console.cloudinary.com/do6xlqizt/thumbnails/v1/image/upload/v1773923912/4Lij4Li54Lib4Lig4Liy4LieMl9zeHp0Yms=/preview",
-  //     "https://res-console.cloudinary.com/do6xlqizt/thumbnails/v1/image/upload/v1773923905/4Lij4Li54Lib4Lig4Liy4LieM19jZTRyOXA=/preview",
-  //     "https://res-console.cloudinary.com/do6xlqizt/thumbnails/v1/image/upload/v1773923904/4Lij4Li54Lib4Lig4Liy4LieNV9hYTk4MGQ=/preview",
-  //     "https://res-console.cloudinary.com/do6xlqizt/thumbnails/v1/image/upload/v1773923902/4Lij4Li54Lib4Lig4Liy4LieN191M2MydGk=/preview",
-  //     "https://res.cloudinary.com/do6xlqizt/image/upload/v1773923900/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E11_cdj0f5.png",
-  //     "https://res.cloudinary.com/do6xlqizt/image/upload/v1773923900/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E10_tdlncf.png",
-  //   ],
-  //   tags: ["Next.js", "Google Maps API", "PostgreSQL", "GraphQL"]
-  // },
-  // {
-  //   id: 6,
-  //   head: "Healthcare Appointment System",
-  //   description: "แพลตฟอร์มนัดหมายคิวแพทย์แพทย์สำหรับคลินิกและโรงพยาบาล ลดความแออัดในพื้นที่ ผู้ป่วยสามารถเลือกเวลา แจ้งอาการเบื้องต้น และรับ QR Code สำหรับเช็คอินเมื่อถึงโรงพยาบาล พร้อมแจ้งเตือนผ่าน SMS",
-  //   pictures: ["https://res.cloudinary.com/do6xlqizt/image/upload/v1773920996/project4_zqcb7j.png",
-  //     "https://res.cloudinary.com/do6xlqizt/image/upload/v1773923908/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E1_kvtyag.png",
-  //     "https://res-console.cloudinary.com/do6xlqizt/thumbnails/v1/image/upload/v1773923912/4Lij4Li54Lib4Lig4Liy4LieMl9zeHp0Yms=/preview",
-  //     "https://res-console.cloudinary.com/do6xlqizt/thumbnails/v1/image/upload/v1773923905/4Lij4Li54Lib4Lig4Liy4LieM19jZTRyOXA=/preview",
-  //     "https://res-console.cloudinary.com/do6xlqizt/thumbnails/v1/image/upload/v1773923904/4Lij4Li54Lib4Lig4Liy4LieNV9hYTk4MGQ=/preview",
-  //     "https://res-console.cloudinary.com/do6xlqizt/thumbnails/v1/image/upload/v1773923902/4Lij4Li54Lib4Lig4Liy4LieN191M2MydGk=/preview",
-  //     "https://res.cloudinary.com/do6xlqizt/image/upload/v1773923900/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E11_cdj0f5.png",
-  //     "https://res.cloudinary.com/do6xlqizt/image/upload/v1773923900/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E10_tdlncf.png",
-  //   ],
-  //   tags: ["Angular", "Tailwind CSS", "Node.js", "MySQL"]
-  // },
-  // {
-  //   id: 7,
-  //   head: "Social Media Analytics",
-  //   description: "แดชบอร์ดวิเคราะห์ข้อมูลและสถิติจากแพลตฟอร์มโซเชียลมีเดียต่างๆ รวบรวมไว้ในที่เดียว ดึงข้อมูลผ่าน API เพื่อแสดง Engagement, Reach, และ Follower Growth แบบ Real-time เหมาะสำหรับนักการตลาด",
-  //   pictures: ["https://res.cloudinary.com/do6xlqizt/image/upload/v1773920996/project4_zqcb7j.png",
-  //     "https://res.cloudinary.com/do6xlqizt/image/upload/v1773923908/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E1_kvtyag.png",
-  //     "https://res-console.cloudinary.com/do6xlqizt/thumbnails/v1/image/upload/v1773923912/4Lij4Li54Lib4Lig4Liy4LieMl9zeHp0Yms=/preview",
-  //     "https://res-console.cloudinary.com/do6xlqizt/thumbnails/v1/image/upload/v1773923905/4Lij4Li54Lib4Lig4Liy4LieM19jZTRyOXA=/preview",
-  //     "https://res-console.cloudinary.com/do6xlqizt/thumbnails/v1/image/upload/v1773923904/4Lij4Li54Lib4Lig4Liy4LieNV9hYTk4MGQ=/preview",
-  //     "https://res-console.cloudinary.com/do6xlqizt/thumbnails/v1/image/upload/v1773923902/4Lij4Li54Lib4Lig4Liy4LieN191M2MydGk=/preview",
-  //     "https://res.cloudinary.com/do6xlqizt/image/upload/v1773923900/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E11_cdj0f5.png",
-  //     "https://res.cloudinary.com/do6xlqizt/image/upload/v1773923900/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E10_tdlncf.png",
-  //   ],
-  //   tags: ["React", "D3.js", "Python", "Django"]
-  // },
-  // {
-  //   id: 8,
-  //   head: "Smart Home IoT Controller",
-  //   description: "เว็บแอปพลิเคชันสำหรับควบคุมอุปกรณ์ Smart Home ภายในบ้านผ่านอินเทอร์เน็ต รองรับการสั่งเปิด-ปิดไฟ เครื่องปรับอากาศ และดูกล้องวงจรปิด รวมถึงดูสถานะเซ็นเซอร์วัดอุณหภูมิและความชื้นได้ตลอดเวลา",
-  //   pictures: ["https://res.cloudinary.com/do6xlqizt/image/upload/v1773920996/project4_zqcb7j.png",
-  //     "https://res.cloudinary.com/do6xlqizt/image/upload/v1773923908/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E1_kvtyag.png",
-  //     "https://res-console.cloudinary.com/do6xlqizt/thumbnails/v1/image/upload/v1773923912/4Lij4Li54Lib4Lig4Liy4LieMl9zeHp0Yms=/preview",
-  //     "https://res-console.cloudinary.com/do6xlqizt/thumbnails/v1/image/upload/v1773923905/4Lij4Li54Lib4Lig4Liy4LieM19jZTRyOXA=/preview",
-  //     "https://res-console.cloudinary.com/do6xlqizt/thumbnails/v1/image/upload/v1773923904/4Lij4Li54Lib4Lig4Liy4LieNV9hYTk4MGQ=/preview",
-  //     "https://res-console.cloudinary.com/do6xlqizt/thumbnails/v1/image/upload/v1773923902/4Lij4Li54Lib4Lig4Liy4LieN191M2MydGk=/preview",
-  //     "https://res.cloudinary.com/do6xlqizt/image/upload/v1773923900/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E11_cdj0f5.png",
-  //     "https://res.cloudinary.com/do6xlqizt/image/upload/v1773923900/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E10_tdlncf.png",
-  //   ],
-  //   tags: ["Svelte", "MQTT", "Node.js", "IoT"]
-  // }
+  {
+    id: 2,
+    head: "แพลตฟอร์มขนส่งช่วยเหลือผู้ป่วยและคนขับรถรับส่ง | DriveCare",
+    description: `DriveCare คือแพลตฟอร์มขนส่งทางการแพทย์ที่ออกแบบมาเพื่อเชื่อมการทำงานระหว่างผู้ป่วย คนขับ และผู้ดูแลระบบไว้ในระบบเดียว ตั้งแต่การล็อกอินผ่าน LINE, การจองรถรับส่ง, การมอบหมายงาน, การติดตามสถานะงาน, ไปจนถึงการตรวจสอบการชำระเงิน
+
+ปัญหาที่โปรเจคนี้แก้ไข
+- ลดความซับซ้อนในการประสานงานรถรับส่งผู้ป่วยที่ปกติต้องคุยหลายช่องทาง
+- ลดความผิดพลาดจากการจดข้อมูลด้วยมือและการอัปเดตสถานะแบบไม่ทันเวลา
+- ทำให้ทีมปฏิบัติการเห็นภาพรวมงานและรายได้แบบใกล้เคียงเรียลไทม์
+
+ฟีเจอร์สำคัญของระบบ
+- ผู้ใช้งาน (User): ล็อกอินด้วย LINE LIFF, กรอกข้อมูลสุขภาพ, คำนวณ BMI, สร้างรายการจองพร้อมจุดรับ-ส่ง, ติดตามสถานะงาน, และอัปโหลดสลิปชำระเงิน
+- คนขับ (Driver): เห็นงานที่ได้รับมอบหมาย, รับงาน, ดูเส้นทาง, อัปเดตความคืบหน้าระหว่างเดินทาง, และปิดงานเมื่อเสร็จสิ้น
+- ผู้ดูแลระบบ (Admin): อนุมัติคนขับ, มอบหมายงาน, ตรวจสอบสลิป, จัดการผู้ใช้งาน, และดู dashboard สำหรับ booking metrics และรายงานรายได้
+
+จุดเด่นเชิงเทคนิค
+- Realtime event ด้วย Pusher เพื่ออัปเดตสถานะงานและข้อมูลฝั่งปฏิบัติการ
+- เชื่อม LINE Messaging API สำหรับการแจ้งเตือนงานและสถานะสำคัญ
+- ใช้ Longdo Map ในการดูเส้นทางและงานที่เกี่ยวข้องกับตำแหน่ง
+- จัดการไฟล์รูปและหลักฐานผ่าน Cloudinary
+- พัฒนาแบบ type-safe ด้วย Next.js + TypeScript + PostgreSQL เพื่อให้ดูแลระบบระยะยาวได้ง่าย
+
+การนำขึ้นระบบ (Deploy)
+- Full-stack app (Frontend + Backend) deploy บน Vercel สำหรับประสบการณ์ใช้งานที่เสถียรทั้งมือถือและเดสก์ท็อป
+- Database (PostgreSQL) deploy บน Railway สำหรับจัดเก็บข้อมูลหลักของระบบ
+- ใช้ Cloudinary สำหรับรูปและหลักฐานการชำระเงิน เพื่อแยก storage layer ออกจากตัวแอปหลัก
+
+สรุปผลลัพธ์
+โปรเจคนี้แสดงความสามารถด้านการออกแบบระบบจริงที่มีหลายบทบาทผู้ใช้ (role-based workflow) และต้องประสานทั้งฝั่ง product, operation และ technical integration พร้อมกัน เหมาะกับงานที่ต้องการทั้งความแม่นยำของข้อมูลและประสบการณ์ใช้งานที่ลื่นไหล`,
+    pictures: [
+      "https://res.cloudinary.com/do6xlqizt/image/upload/v1776673862/image1_txylet.png",
+      "https://res.cloudinary.com/do6xlqizt/image/upload/v1776673861/image_u7usjx.png",
+      "https://res.cloudinary.com/do6xlqizt/image/upload/v1776673911/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E1_d4mqxn.png",
+      "https://res.cloudinary.com/do6xlqizt/image/upload/v1776673912/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E2_stj8ac.png",
+      "https://res.cloudinary.com/do6xlqizt/image/upload/v1776673913/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E3_ggdnub.png",
+      "https://res.cloudinary.com/do6xlqizt/image/upload/v1776673979/Screenshot_2026-04-20_152941_pg6eof.png",
+      "https://res.cloudinary.com/do6xlqizt/image/upload/v1776673980/Screenshot_2026-04-20_152949_yokjnm.png",
+    ],
+    tags: ["TEAMWORK", "Next.js 16 Fullstack", "Tailwind CSS", "TypeScript", "PostgreSQL", "LINE LIFF", "LINE Messaging Api", "Pusher", "Longdo Map", "Railway", "Vercel", "Cloudinary",]
+  },
+  {
+    id: 3,
+    head: "Ticket Helper Platform + Admin Dashboard",
+    description: `Ticket Helper Platform คือระบบที่รวม 2 ส่วนสำคัญเข้าด้วยกัน ได้แก่ แดชบอร์ดแอดมินสำหรับจัดการผู้ใช้งาน และ Chrome Extension สำหรับช่วยเตรียมขั้นตอนกดบัตรบนหน้า ThaiTicketMajor ให้เป็น workflow ที่ชัดเจนและทำซ้ำได้ง่ายขึ้น
+
+ปัญหาที่โปรเจคนี้แก้ไข
+- ลดภาระการจัดการบัญชีผู้ใช้แบบแมนนวล โดยให้แอดมินควบคุมสิทธิ์ วันหมดอายุ และจำนวนอุปกรณ์ได้จากจุดเดียว
+- ลดขั้นตอนซ้ำๆ ของผู้ใช้งานที่ต้องกรอกข้อมูลจองบัตรหลายรอบ
+- เพิ่มความคุมได้ของระบบด้วยการบังคับหยุดใช้งานอัตโนมัติเมื่อบัญชีหมดอายุหรือเกินเงื่อนไขอุปกรณ์
+
+ฟีเจอร์สำคัญของระบบ
+- ฝั่งแอดมิน (Admin Dashboard): ล็อกอินแอดมิน, จัดการผู้ใช้งานแบบ CRUD, ตั้งค่า expiry date และ device limit ต่อบัญชี, จัดการ session และ Redis cache invalidation
+- ฝั่งผู้ใช้งาน (Chrome Extension): ล็อกอินด้วยบัญชีที่ถูก provision พร้อม device key, ตั้งค่าจองผ่าน side panel, บันทึก draft การจอง, ระบบช่วยไล่ flow หน้าจองบน ThaiTicketMajor, รองรับ zone fallback, กลยุทธ์เลือกที่นั่งหลายแบบ, และ autofill ข้อมูลการจอง
+- การควบคุมสถานะ: มี status log แบบเรียลไทม์ใน extension และ forced stop/logout เมื่อสถานะบัญชีไม่พร้อมใช้งาน
+
+จุดเด่นเชิงเทคนิค
+- สถาปัตยกรรม monorepo ด้วย pnpm workspace แยก apps/admin, apps/extension และ packages/shared
+- ฝั่งแอดมินใช้ Next.js full-stack + Prisma + PostgreSQL + Redis พร้อม validation ด้วย Zod
+- ฝั่ง extension ใช้ Chrome Manifest V3, CRXJS และ Vite เพื่อพัฒนา workflow บน browser
+- แชร์ TypeScript contracts ระหว่างแอดมินและ extension เพื่อลดความผิดพลาดของ API shape
+
+การนำขึ้นระบบ (Deploy)
+- Admin Full-stack (Next.js UI + API) deploy บน Vercel เพื่อเข้าถึงและจัดการระบบได้สะดวก
+- ฐานข้อมูล PostgreSQL ใช้ Supabase และ Redis ใช้ Upstash สำหรับ cache และ session
+- ฝั่ง Chrome Extension build ด้วย Vite + CRXJS และจัดการ release เป็นแพ็กเกจแยกจากเว็บแอป
+
+สรุปผลลัพธ์
+โปรเจคนี้สะท้อนความสามารถในการพัฒนาระบบจริงที่ต้องเชื่อม full-stack web app กับ browser extension พร้อมบริหารสิทธิ์ผู้ใช้เชิงปฏิบัติการ ทำให้ผลงานชิ้นนี้โดดเด่นทั้งด้าน architecture, automation workflow และการดูแลระบบในระดับ production`,
+    pictures: [
+      "https://res.cloudinary.com/do6xlqizt/image/upload/v1776672735/Screenshot_2026-04-20_151039_k2f4uw.png",
+      "https://res.cloudinary.com/do6xlqizt/image/upload/v1776672732/Screenshot_2026-04-20_151012_q8vzxp.png",
+      "https://res.cloudinary.com/do6xlqizt/image/upload/v1776672731/Screenshot_2026-04-20_151052_o6nryt.png",
+      "https://res.cloudinary.com/do6xlqizt/image/upload/v1776672924/Screenshot_2026-04-20_151113_jdmygd.png",
+      "https://res.cloudinary.com/do6xlqizt/image/upload/v1776672732/Screenshot_2026-04-20_151124_iyvoak.png",
+      "https://res.cloudinary.com/do6xlqizt/image/upload/v1776672732/Screenshot_2026-04-20_151134_gommlp.png",
+    ],
+    tags: ["Next.js 15 Fullstack", "TypeScript", "Chrome Extension MV3", "Vite-React.js", "Prisma", "PostgreSQL", "Redis", "Zod", "CRXJS", "pnpm Workspace", "Vercel", "Supabase", "Upstash"]
+  },
 ]

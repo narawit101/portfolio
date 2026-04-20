@@ -19,20 +19,20 @@ export default function Navbar() {
     }
 
     return (
-        <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-[#0a0a12]/95 backdrop-blur-md  border-orange-500/10' : 'bg-transparent'}`}>
+        <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-[#0a0a12]/95 backdrop-blur-md  border-primary/10' : 'bg-transparent'}`}>
             <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-1">
-                    <span className="text-xl font-bold text-white">NARAWIT</span>
-                    {/* <span className="text-xl font-bold text-orange-500">.DEV</span> */}
+                    <span className="text-xl font-bold text-white">Portfolio</span>
+                    {/* <span className="text-xl font-bold text-primary">.DEV</span> */}
                 </Link>
 
                 {/* Desktop Nav */}
                 <div className="hidden md:flex items-center gap-8">
-                    <span onClick={() => scrollTo('section-hero')} className="text-sm text-gray-400 hover:text-orange-400 transition-colors cursor-pointer">Home</span>
-                    <span onClick={() => scrollTo('section-stack')} className="text-sm text-gray-400 hover:text-orange-400 transition-colors cursor-pointer">Tech Stack</span>
-                    <span onClick={() => scrollTo('section-project')} className="text-sm text-gray-400 hover:text-orange-400 transition-colors cursor-pointer">Projects</span>
-                    <span onClick={() => scrollTo('section-contact')} className="text-sm  text-gray-400 hover:text-orange-400 rounded-lg transition-colors cursor-pointer font-medium">Contact</span>
+                    <span onClick={() => scrollTo('section-hero')} className="text-sm text-gray-400 hover:text-primary-400 transition-colors cursor-pointer">Home</span>
+                    <span onClick={() => scrollTo('section-stack')} className="text-sm text-gray-400 hover:text-primary-400 transition-colors cursor-pointer">Skill</span>
+                    <span onClick={() => scrollTo('section-project')} className="text-sm text-gray-400 hover:text-primary-400 transition-colors cursor-pointer">Projects</span>
+                    <span onClick={() => scrollTo('section-contact')} className="text-sm  text-gray-400 hover:text-primary-400 rounded-lg transition-colors cursor-pointer font-medium">Contact</span>
                 </div>
 
                 {/* Mobile hamburger */}
@@ -49,10 +49,10 @@ export default function Navbar() {
             {/* Mobile Menu */}
             {menuOpen && (
                 <div className="md:hidden bg-[#0a0a12]/98 backdrop-blur-md px-6 pb-6 pt-4 flex flex-col gap-4">
-                    <span onClick={() => scrollTo('section-hero')} className="text-gray-400 hover:text-orange-400 transition-colors cursor-pointer py-2">Home</span>
-                    <span onClick={() => scrollTo('section-stack')} className="text-gray-400 hover:text-orange-400 transition-colors cursor-pointer py-2">Tech Stack</span>
-                    <span onClick={() => scrollTo('section-project')} className="text-gray-400 hover:text-orange-400 transition-colors cursor-pointer py-2">Projects</span>
-                    <span onClick={() => scrollTo('section-contact')} className="text-gray-400 hover:text-orange-400 hover:bg-orange-600  py-2 rounded-lg transition-colors cursor-pointer font-medium">Contact</span>
+                    <span onClick={() => scrollTo('section-hero')} className="text-gray-400 hover:text-primary-400 transition-colors cursor-pointer py-2">Home</span>
+                    <span onClick={() => scrollTo('section-stack')} className="text-gray-400 hover:text-primary-400 transition-colors cursor-pointer py-2">Tech Stack</span>
+                    <span onClick={() => scrollTo('section-project')} className="text-gray-400 hover:text-primary-400 transition-colors cursor-pointer py-2">Projects</span>
+                    <span onClick={() => scrollTo('section-contact')} className="text-gray-400 hover:text-primary-400 hover:bg-primary-600  py-2 rounded-lg transition-colors cursor-pointer font-medium">Contact</span>
                 </div>
             )}
         </nav>
