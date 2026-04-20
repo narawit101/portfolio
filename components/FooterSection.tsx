@@ -154,14 +154,14 @@ export default function FooterSection() {
 
                     </div>
                 </div>
-                {/* <div className="flex flex-col gap-3 border-t border-white/6 px-6 py-4 text-xs text-gray-500 sm:px-8 md:flex-row md:items-center md:justify-between">
-                    <div className="flex flex-wrap gap-4 uppercase tracking-wide">
+                <div className="flex flex-col gap-3 border-t border-white/6 px-10 py-4 xl:px-0 text-xs text-gray-500  md:flex-row md:items-center md:justify-between">
+                    {/* <div className="flex flex-wrap gap-4 uppercase tracking-wide">
                         <span>Terms and Conditions</span>
                         <span>Privacy Policy</span>
                         <span>Refund</span>
-                    </div>
+                    </div> */}
                     <p>&copy; {currentYear} Narawit Soiaudom</p>
-                </div> */}
+                </div>
             </div>
         </footer>
     )
