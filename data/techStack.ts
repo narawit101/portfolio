@@ -1,9 +1,15 @@
-import { TechStackCategory, TechStackItem } from '@/types'
+import { TechStackCategory } from '@/types'
 
 export const techStackCategories: TechStackCategory[] = [
     {
-        title: 'Front-End',
-        description: 'Interactive interfaces, responsive layouts, and rich client-side experiences.',
+        title: {
+            th: 'งานหน้าบ้าน (Front-End)',
+            en: 'Front-End',
+        },
+        description: {
+            th: 'พัฒนาอินเทอร์เฟซที่โต้ตอบได้ รองรับหลายขนาดหน้าจอ และสร้างประสบการณ์ผู้ใช้ที่ลื่นไหล',
+            en: 'Interactive interfaces, responsive layouts, and rich client-side experiences.',
+        },
         accent: 'from-primary/50 via-primary/25 to-primary-400/20',
         items: [
             { name: 'HTML', img: 'https://myporfolio-orcin.vercel.app/static/media/5352-html5_102567%20(1).df69503917a05a968e58.png' },
@@ -18,8 +24,14 @@ export const techStackCategories: TechStackCategory[] = [
         ],
     },
     {
-        title: 'Back-End',
-        description: 'API design, business logic, and server-side orchestration.',
+        title: {
+            th: 'งานหลังบ้าน (Back-End)',
+            en: 'Back-End',
+        },
+        description: {
+            th: 'ออกแบบ API พัฒนาธุรกิจลอจิก และจัดการการทำงานฝั่งเซิร์ฟเวอร์อย่างเป็นระบบ',
+            en: 'API design, business logic, and server-side orchestration.',
+        },
         accent: 'from-primary/50 via-primary/25 to-primary-400/20',
         items: [
             { name: 'Node.js', img: 'https://bizidea.co.th/uploads/media/8d5e51c2c64f0014c503eb38568480ce.png' },
@@ -27,8 +39,14 @@ export const techStackCategories: TechStackCategory[] = [
         ],
     },
     {
-        title: 'Database Management',
-        description: 'Relational and in-memory data storage systems.',
+        title: {
+            th: 'การจัดการฐานข้อมูล',
+            en: 'Database Management',
+        },
+        description: {
+            th: 'ดูแลข้อมูลทั้งแบบเชิงสัมพันธ์และแบบ in-memory เพื่อรองรับการทำงานของระบบ',
+            en: 'Relational and in-memory data storage systems.',
+        },
         accent: 'from-primary/50 via-primary/25 to-primary-400/20',
         items: [
             { name: 'PostgreSQL', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Postgresql_elephant.svg/960px-Postgresql_elephant.svg.png' },
@@ -38,8 +56,14 @@ export const techStackCategories: TechStackCategory[] = [
         ],
     },
     {
-        title: 'UI / Design',
-        description: 'Wireframing, prototyping, and polished user interactions.',
+        title: {
+            th: 'UI / ดีไซน์',
+            en: 'UI / Design',
+        },
+        description: {
+            th: 'ออกแบบ wireframe, prototype และรายละเอียดการโต้ตอบเพื่อประสบการณ์ใช้งานที่ดี',
+            en: 'Wireframing, prototyping, and polished user interactions.',
+        },
         accent: 'from-primary/50 via-primary/25 to-primary-400/20',
         items: [
             { name: 'Figma', img: 'https://cdn.sanity.io/images/599r6htc/regionalized/46a76c802176eb17b04e12108de7e7e0f3736dc6-1024x1024.png' },
@@ -49,8 +73,14 @@ export const techStackCategories: TechStackCategory[] = [
         ],
     },
     {
-        title: 'Tools',
-        description: 'Version control and containerized workflows.',
+        title: {
+            th: 'เครื่องมือพัฒนา',
+            en: 'Tools',
+        },
+        description: {
+            th: 'จัดการเวอร์ชันโค้ดและ workflow แบบ container เพื่อให้ทีมทำงานได้ต่อเนื่อง',
+            en: 'Version control and containerized workflows.',
+        },
         accent: 'from-primary/50 via-primary/25 to-primary-400/20',
         items: [
             { name: 'Git', img: 'https://avatars.githubusercontent.com/u/18133?s=280&v=4' },
@@ -58,8 +88,14 @@ export const techStackCategories: TechStackCategory[] = [
         ],
     },
     {
-        title: 'Cloud & Deployment',
-        description: 'Cloud hosting, serverless workloads, and edge delivery.',
+        title: {
+            th: 'คลาวด์และการดีพลอย',
+            en: 'Cloud & Deployment',
+        },
+        description: {
+            th: 'โฮสต์แอปบนคลาวด์ จัดการงานแบบ serverless และส่งมอบผ่าน edge ให้ตอบสนองเร็ว',
+            en: 'Cloud hosting, serverless workloads, and edge delivery.',
+        },
         accent: 'from-primary/50 via-primary/25 to-primary-400/20',
         items: [
             { name: 'Vercel', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqwNwDUq_S0U6wDzS60c45kVK5zpxF-03wsQ&s' },

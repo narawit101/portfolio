@@ -1,6 +1,5 @@
 import React from 'react'
 
-// Component สำหรับปุ่มเลื่อนซ้าย-ขวาบนรูปภาพ (Carousel)
 export function CarouselNav({
     onPrev,
     onNext,
@@ -13,18 +12,20 @@ export function CarouselNav({
     return (
         <>
             <button
+                type="button"
                 onClick={onPrev}
-                className={`absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/50 text-white flex items-center justify-center opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all hover:bg-primary ${className}`}
+                className={`theme-floating-control absolute left-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full opacity-100 transition-all hover:border-primary hover:bg-primary hover:text-white sm:left-3 sm:h-10 sm:w-10 sm:opacity-0 sm:group-hover:opacity-100 ${className}`}
             >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4 sm:w-5 sm:h-5">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="h-4 w-4 sm:h-5 sm:w-5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
                 </svg>
             </button>
             <button
+                type="button"
                 onClick={onNext}
-                className={`absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/50 text-white flex items-center justify-center opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all hover:bg-primary ${className}`}
+                className={`theme-floating-control absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full opacity-100 transition-all hover:border-primary hover:bg-primary hover:text-white sm:right-3 sm:h-10 sm:w-10 sm:opacity-0 sm:group-hover:opacity-100 ${className}`}
             >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4 sm:w-5 sm:h-5">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="h-4 w-4 sm:h-5 sm:w-5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                 </svg>
             </button>
@@ -32,7 +33,6 @@ export function CarouselNav({
     )
 }
 
-// Component สำหรับ dot pagination ของ Carousel (รองรับตัวนับหน้า)
 export function CarouselDotsNav({
     currentIndex,
     total,
@@ -46,11 +46,11 @@ export function CarouselDotsNav({
     showCounter?: boolean;
     className?: string;
 }) {
-    const spacingClass = showCounter ? 'px-3 py-2' : 'px-2.5 py-1';
+    const spacingClass = showCounter ? 'px-3 py-2' : 'px-2.5 py-1'
 
     return (
         <div
-            className={`absolute bottom-4 left-1/2 -translate-x-1/2 ${spacingClass} rounded-full border border-white/15 bg-black/45 backdrop-blur-md shadow-[0_8px_24px_rgba(0,0,0,0.35)] opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300 ${className}`}
+            className={`theme-floating-control absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full ${spacingClass} opacity-100 transition-opacity duration-300 sm:opacity-0 sm:group-hover:opacity-100 ${className}`}
             onClick={(e) => e.stopPropagation()}
         >
             <div className={`flex ${showCounter ? 'flex-col items-center gap-1.5' : 'items-center gap-1.5'}`}>
@@ -64,13 +64,13 @@ export function CarouselDotsNav({
                                 onSelect(i)
                             }}
                             aria-label={`Go to image ${i + 1}`}
-                            className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${i === currentIndex ? 'bg-primary w-4' : 'bg-white/75 w-1.5'}`}
+                            className={`h-1.5 cursor-pointer rounded-full transition-all duration-300 ${i === currentIndex ? 'w-4 bg-primary' : 'w-1.5 bg-(--theme-text-muted)'}`}
                         />
                     ))}
                 </div>
 
                 {showCounter && (
-                    <span className="text-[11px] font-medium tracking-[0.18em] text-gray-300">
+                    <span className="theme-text-body text-[11px] font-medium tracking-[0.18em]">
                         {currentIndex + 1} / {total}
                     </span>
                 )}
@@ -79,7 +79,6 @@ export function CarouselDotsNav({
     )
 }
 
-// Component สำหรับปุ่มเลื่อนหน้า (Pagination)
 export function PaginationNav({
     currentPage,
     totalPages,
@@ -97,7 +96,7 @@ export function PaginationNav({
     className?: string;
     loop?: boolean;
 }) {
-    const defaultLayoutClass = layout === 'center' ? 'mt-10 justify-center gap-4' : 'mt-3 justify-end gap-2 text-gray-400';
+    const defaultLayoutClass = layout === 'center' ? 'mt-10 justify-center gap-4' : 'mt-3 justify-end gap-2'
 
     return (
         <div className={`flex items-center ${defaultLayoutClass} ${className}`}>
@@ -105,14 +104,14 @@ export function PaginationNav({
                 <>
                     <NavButton onClick={onPrev} disabled={!loop && currentPage <= 0} direction="left" />
                     <NavButton onClick={onNext} disabled={!loop && currentPage >= totalPages - 1} direction="right" />
-                    <span className="text-xs uppercase tracking-[0.3em] ml-1">
+                    <span className="theme-text-muted ml-1 text-xs uppercase tracking-[0.3em]">
                         {currentPage + 1} / {totalPages}
                     </span>
                 </>
             ) : (
                 <>
                     <NavButton onClick={onPrev} disabled={!loop && currentPage <= 0} direction="left" />
-                    <span className="text-sm font-medium tracking-[0.2em] text-gray-400">
+                    <span className="theme-text-muted text-sm font-medium tracking-[0.2em]">
                         {currentPage + 1} / {totalPages}
                     </span>
                     <NavButton onClick={onNext} disabled={!loop && currentPage >= totalPages - 1} direction="right" />
@@ -128,12 +127,12 @@ function NavButton({ onClick, disabled, direction }: { onClick: () => void; disa
             type="button"
             onClick={onClick}
             disabled={disabled}
-            className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-white/10 bg-white/5 text-white transition-colors hover:border-primary-400 hover:bg-primary/15 disabled:opacity-40 disabled:cursor-not-allowed"
+            className="theme-floating-control flex h-9 w-9 items-center justify-center rounded-full transition-colors hover:border-primary hover:bg-primary/15 sm:h-10 sm:w-10 disabled:cursor-not-allowed disabled:opacity-40"
         >
             {direction === 'left' ? (
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 sm:w-5 sm:h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-4 w-4 sm:h-5 sm:w-5"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
             ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 sm:w-5 sm:h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-4 w-4 sm:h-5 sm:w-5"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
             )}
         </button>
     )

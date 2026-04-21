@@ -10,12 +10,329 @@
 
 :root {
   --primary-rgb: 249 115 22;
+  --theme-bg: #0a0a12;
+  --theme-bg-rgb: 10 10 18;
+  --theme-nav: rgba(10, 10, 18, 0.92);
+  --theme-surface: rgba(18, 18, 26, 0.92);
+  --theme-surface-solid: #12121a;
+  --theme-surface-card: rgba(16, 16, 23, 0.72);
+  --theme-surface-soft: rgba(255, 255, 255, 0.03);
+  --theme-surface-soft-strong: rgba(255, 255, 255, 0.05);
+  --theme-terminal: #11111a;
+  --theme-text: #ffffff;
+  --theme-text-body: #d1d5db;
+  --theme-text-muted: #9ca3af;
+  --theme-text-faint: #6b7280;
+  --theme-border: rgba(255, 255, 255, 0.08);
+  --theme-border-strong: rgba(249, 115, 22, 0.22);
+  --theme-divider: rgba(249, 115, 22, 0.18);
+  --theme-shadow: 0 35px 120px rgba(0, 0, 0, 0.35);
+  --theme-shadow-strong: 0 35px 130px rgba(0, 0, 0, 0.55);
+  --theme-toggle-panel: rgba(14, 14, 24, 0.82);
+  --theme-toggle-track: rgba(255, 255, 255, 0.06);
+  --theme-toggle-icon: #7f8da5;
+  --theme-toggle-icon-active: #ffffff;
+  --theme-toggle-thumb: linear-gradient(
+    180deg,
+    #ffd4ae 0%,
+    #f59a52 55%,
+    #d86c2c 100%
+  );
+  --theme-contact-icon-filter: brightness(0) saturate(100%) invert(100%);
+  --theme-contact-icon-opacity: 0.94;
+  --hero-image-opacity: 0.2;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+html[data-theme="light"] {
+  color-scheme: light;
+  --theme-bg: #f6efe6;
+  --theme-bg-rgb: 246 239 230;
+  --theme-nav: rgba(246, 239, 230, 0.88);
+  --theme-surface: rgba(255, 250, 244, 0.94);
+  --theme-surface-solid: #fffaf3;
+  --theme-surface-card: rgba(255, 252, 247, 0.92);
+  --theme-surface-soft: rgba(255, 255, 255, 0.72);
+  --theme-surface-soft-strong: rgba(255, 255, 255, 0.92);
+  --theme-terminal: #fffaf2;
+  --theme-text: #1f1a15;
+  --theme-text-body: #4b3e31;
+  --theme-text-muted: #7a6a5d;
+  --theme-text-faint: #9e8d7d;
+  --theme-border: rgba(86, 68, 52, 0.13);
+  --theme-border-strong: rgba(249, 115, 22, 0.24);
+  --theme-divider: rgba(176, 116, 59, 0.28);
+  --theme-shadow: 0 25px 70px rgba(120, 91, 58, 0.14);
+  --theme-shadow-strong: 0 32px 92px rgba(120, 91, 58, 0.22);
+  --theme-toggle-panel: rgba(255, 250, 244, 0.92);
+  --theme-toggle-track: rgba(221, 202, 181, 0.34);
+  --theme-toggle-icon: #9e8d7d;
+  --theme-toggle-icon-active: #d86c2c;
+  --theme-toggle-thumb: linear-gradient(
+    180deg,
+    #fff3e5 0%,
+    #f6b16c 58%,
+    #dd7a30 100%
+  );
+  --theme-contact-icon-filter: brightness(0) saturate(100%);
+  --theme-contact-icon-opacity: 1;
+  --hero-image-opacity: 0.12;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
   font-family: "Kanit", sans-serif;
-  background-color: #0a0a12;
-  color: white;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgb(var(--primary-rgb) / 0.1),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at bottom left,
+      rgb(var(--primary-rgb) / 0.08),
+      transparent 28%
+    ),
+    var(--theme-bg);
+  color: var(--theme-text);
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease;
+}
+
+a,
+button {
+  transition:
+    color 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+img {
+  display: block;
+}
+
+.theme-page {
+  color: var(--theme-text);
+}
+
+.hero-bg-image {
+  display: block;
+}
+
+html[data-theme="light"] .hero-bg-image {
+  display: none;
+}
+
+.theme-nav-surface {
+  background-color: var(--theme-nav);
+  border-bottom: 1px solid var(--theme-border);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.theme-nav-link:hover {
+  color: var(--color-primary-400);
+  background-color: rgb(var(--primary-rgb) / 0.08);
+}
+
+.theme-nav-link:focus-visible {
+  outline: 2px solid rgb(var(--primary-rgb) / 0.4);
+  outline-offset: 2px;
+}
+
+.theme-divider-line {
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--theme-divider),
+    transparent
+  );
+}
+
+.theme-panel {
+  background-color: var(--theme-surface);
+  border: 1px solid var(--theme-border);
+}
+
+.theme-panel-solid {
+  background-color: var(--theme-surface-solid);
+  border: 1px solid var(--theme-border);
+}
+
+.theme-card {
+  background-color: var(--theme-surface-card);
+  border: 1px solid var(--theme-border);
+  box-shadow: var(--theme-shadow);
+}
+
+.theme-panel-hover:hover {
+  border-color: var(--theme-border-strong);
+}
+
+.theme-card-hover:hover {
+  border-color: var(--theme-border-strong);
+  box-shadow: var(--theme-shadow-strong);
+}
+
+.theme-soft {
+  background-color: var(--theme-surface-soft);
+}
+
+.theme-soft-strong {
+  background-color: var(--theme-surface-soft-strong);
+}
+
+.hero-secondary-button {
+  border: 1px solid var(--theme-border);
+  background-color: var(--theme-surface-soft);
+  color: var(--theme-text);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+}
+
+.hero-secondary-button:hover {
+  border-color: rgb(var(--primary-rgb) / 0.28);
+  background-color: var(--theme-surface-soft-strong);
+}
+
+html[data-theme="light"] .hero-secondary-button {
+  border-color: rgba(31, 26, 21, 0.12);
+  background-color: rgba(255, 250, 244, 0.92);
+  color: #2f251d;
+  box-shadow: 0 12px 30px rgba(120, 91, 58, 0.1);
+}
+
+html[data-theme="light"] .hero-secondary-button:hover {
+  border-color: rgba(249, 115, 22, 0.35);
+  background-color: #ffffff;
+}
+
+.theme-terminal {
+  background-color: var(--theme-terminal);
+  border: 1px solid var(--theme-border);
+}
+
+.theme-floating-control {
+  background-color: var(--theme-surface);
+  border: 1px solid var(--theme-border);
+  color: var(--theme-text);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(16px);
+}
+
+.theme-text-body {
+  color: var(--theme-text-body);
+}
+
+.theme-text-muted {
+  color: var(--theme-text-muted);
+}
+
+.theme-text-faint {
+  color: var(--theme-text-faint);
+}
+
+.theme-contact-icon {
+  filter: var(--theme-contact-icon-filter);
+  opacity: var(--theme-contact-icon-opacity);
+}
+
+.theme-toggle-wrapper {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 60;
+}
+
+.theme-toggle-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.75rem 0.55rem;
+  border-radius: 1.5rem;
+  border: 1px solid var(--theme-border);
+  background: var(--theme-toggle-panel);
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(18px);
+}
+
+.theme-toggle-icon {
+  width: 1.05rem;
+  height: 1.05rem;
+  color: var(--theme-toggle-icon);
+  opacity: 0.9;
+  transition: color 0.25s ease, transform 0.25s ease, opacity 0.25s ease;
+}
+
+.theme-toggle-icon.is-active {
+  color: var(--theme-toggle-icon-active);
+  opacity: 1;
+  transform: scale(1.06);
+}
+
+.theme-toggle-button {
+  position: relative;
+  display: block;
+  width: 2.1rem;
+  height: 4.55rem;
+  border-radius: 999px;
+  border: 1px solid var(--theme-border);
+  background: var(--theme-toggle-track);
+  overflow: hidden;
+}
+
+.theme-toggle-button:focus-visible {
+  outline: 2px solid rgb(var(--primary-rgb) / 0.6);
+  outline-offset: 4px;
+}
+
+.theme-toggle-rail {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgb(var(--primary-rgb) / 0.12) 0%,
+    transparent 48%,
+    rgb(var(--primary-rgb) / 0.08) 100%
+  );
+}
+
+.theme-toggle-thumb {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 999px;
+  background: var(--theme-toggle-thumb);
+  box-shadow:
+    0 8px 18px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.42);
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.35s ease;
+}
+
+.theme-toggle-thumb--light {
+  transform: translate(-50%, 0.3rem);
+}
+
+.theme-toggle-thumb--dark {
+  transform: translate(-50%, 2.7rem);
+}
+
+::selection {
+  background: rgb(var(--primary-rgb) / 0.22);
+  color: var(--theme-text);
 }
 
 .terminal-type {
@@ -26,7 +343,7 @@ body {
   max-width: var(--typing-width);
   white-space: nowrap;
   overflow: hidden;
-  border-right: 2px solid rgba(255, 255, 255, 0.55);
+  border-right: 2px solid var(--theme-text-muted);
   animation:
     terminalTyping 4.2s steps(var(--typing-steps), end) infinite,
     terminalCaret 0.8s step-end infinite;
@@ -55,7 +372,33 @@ body {
   }
 
   50% {
-    border-right-color: rgba(255, 255, 255, 0.55);
+    border-right-color: var(--theme-text-muted);
+  }
+}
+
+@media (max-width: 640px) {
+  .theme-toggle-wrapper {
+    right: 1rem;
+    bottom: 1rem;
+  }
+
+  .theme-toggle-panel {
+    padding: 0.65rem 0.5rem;
+    gap: 0.62rem;
+  }
+
+  .theme-toggle-button {
+    width: 1.95rem;
+    height: 4.2rem;
+  }
+
+  .theme-toggle-thumb {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+
+  .theme-toggle-thumb--dark {
+    transform: translate(-50%, 2.45rem);
   }
 }
 
@@ -63,5 +406,9 @@ body {
   .terminal-type {
     width: var(--typing-width);
     animation: none;
+  }
+
+  .theme-toggle-thumb {
+    transition: none;
   }
 }

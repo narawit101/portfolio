@@ -1,7 +1,14 @@
+export type Lang = 'th' | 'en'
+
+export type LocalizedText = {
+    th: string
+    en: string
+}
+
 export interface Project {
     id: number
-    head: string
-    description: string
+    head: LocalizedText
+    description: LocalizedText
     pictures: string[]
     tags?: string[]
 }
@@ -12,8 +19,8 @@ export type TechStackItem = {
 }
 
 export type TechStackCategory = {
-    title: string
-    description: string
+    title: LocalizedText
+    description: LocalizedText
     accent: string
     items: TechStackItem[]
 }

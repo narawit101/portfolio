@@ -1,21 +1,11 @@
-import Navbar from '@/components/navbar'
-import TechStackSection from '@/components/TechStackSection'
-import HeroSection from '@/components/HeroSection'
-import ProjectsSection from '@/components/ProjectsSection'
-import ContactSection from '@/components/ContactSection'
-import FooterSection from '@/components/FooterSection'
+import { cookies } from 'next/headers'
+import PageClient from '@/app/page-client'
+import { Lang } from '@/types'
 
-export default function Page() {
-  return (
-    <>
-      <Navbar />
-      <main className="min-h-screen bg-[#0a0a12] text-white overflow-x-hidden">
-        <HeroSection />
-        <TechStackSection />
-        <ProjectsSection />
-        <ContactSection />
-        <FooterSection />
-      </main>
-    </>
-  )
+export default async function Page() {
+  const cookieStore = await cookies()
+  const savedLang = cookieStore.get('portfolio-lang')?.value
+  const initialLang: Lang = savedLang === 'en' || savedLang === 'th' ? savedLang : 'th'
+
+  return <PageClient initialLang={initialLang} />
 }
