@@ -18,7 +18,7 @@ export const heroContent: Record<Lang, HeroContent> = {
             'บัณฑิตคณะวิศวกรรมคอมพิวเตอร์ที่มีพื้นฐานแข็งแรงด้านการพัฒนาเว็บ Full-stack และการออกแบบระบบ มีประสบการณ์ทำเว็บแอปสมัยใหม่ด้วย React.js, Next.js, HTML, CSS และ JavaScript ทั้งฝั่ง Frontend และ Backend สามารถพัฒนา UI ที่ใช้งานง่าย เชื่อมต่อ API จัดการฐานข้อมูล และสร้างระบบที่รองรับการขยายตัวได้ พร้อมทำงานร่วมกับทีมเพื่อพัฒนาฟีเจอร์ใหม่ ปรับปรุงประสิทธิภาพ และรักษาคุณภาพโค้ดให้ดูแลง่ายในระยะยาว',
         contactCta: 'ติดต่อ',
         projectCta: 'ผลงาน',
-        status: 'นักพัฒนา Full-Stack',
+        status: 'Full-Stack Developer',
         profileAlt: 'รูปโปรไฟล์ Narawit',
     },
     en: {

@@ -4,68 +4,63 @@ export const projects: Project[] = [
   {
     id: 1,
     head: {
-      th: 'แพลตฟอร์มจองสนามกีฬา',
+      th: 'แพลตฟอร์มจองสนามกีฬาออนไลน์',
       en: 'Sports Venue Booking Platform',
     },
     description: {
-      th: `Sport Hub คือแพลตฟอร์มจองสนามกีฬาแบบครบวงจรที่รวมการทำงานของลูกค้า เจ้าของสนาม และผู้ดูแลระบบไว้ในที่เดียว ช่วยให้การค้นหาสนาม การจองคิว และการจัดการหลังบ้านทำได้ง่ายขึ้นกว่าการประสานงานแบบเดิมที่ต้องใช้หลายช่องทาง
+      th: `Sport Hub คือระบบการจองสนามกีฬาแบบ Full-stack ประสิทธิภาพสูงที่ออกแบบมาเพื่อเชื่อมลูกค้า เจ้าของสนาม และผู้ดูแลระบบเข้าด้วยกัน แพลตฟอร์มนี้มอบประสบการณ์แบบเรียลไทม์ที่ลื่นไหล ตั้งแต่การค้นหาสนาม การจัดการช่วงเวลา ไปจนถึงการชำระเงินที่ปลอดภัยในเวิร์กโฟลว์เดียว
 
 ปัญหาที่โปรเจคนี้แก้ไข
-- ลดปัญหาจองซ้ำซ้อนจากการจองผ่านโทรศัพท์หรือการบันทึกด้วยมือ
-- ลดความล่าช้าในการอัปเดตตารางว่างและสถานะการจอง
-- ทำให้เจ้าของสนามและแอดมินเห็นข้อมูลการดำเนินงานได้เป็นระบบมากขึ้น
+- ลดปัญหาการจองซ้ำซ้อน (Double Booking) ด้วยระบบป้องกันแบบเรียลไทม์
+- ลดความล่าช้าในการอัปเดตสถานะว่างของสนามและเวิร์กโฟลว์การจอง
+- เพิ่มความปลอดภัยในการจองและการจัดการสิทธิ์การเข้าถึงของผู้ใช้งานประเภทต่าง ๆ
 
 ฟีเจอร์สำคัญของระบบ
-- ลูกค้า (Customer): สมัครและยืนยันตัวตน, ค้นหาสนามตามประเภทกีฬา, ดูรายละเอียดสนามและรีวิว, จองช่วงเวลา, อัปโหลดหลักฐานการชำระเงิน, และติดตามสถานะการจอง
-- เจ้าของสนาม (Field Owner): ลงทะเบียนสนาม, จัดการสนามย่อยและสิ่งอำนวยความสะดวก, สร้างประกาศ, ตรวจสอบและอัปเดตสถานะการจอง, และดูสถิติพร้อม export รายงานไฟล์ .xlsx
-- ผู้ดูแลระบบ (Admin): จัดการผู้ใช้งาน, อนุมัติหรือปฏิเสธคำขอลงทะเบียนสนาม, และดูแลข้อมูลประเภทกีฬากลางของระบบ
+- ลูกค้า (Customer): ค้นหาสนามอย่างอัจฉริยะตามประเภทกีฬาและตำแหน่งที่ตั้ง (Longdo Map) จองสนามผ่านปฏิทินเรียลไทม์ ชำระเงินผ่าน PromptPay QR พร้อมอัปโหลดสลิป ติดตามสถานะการจอง และเขียนรีวิวจากประสบการณ์จริง
+- เจ้าของสนาม (Field Owner): ลงทะเบียนสนาม (ระบุ GPS, ข้อมูลบัญชีธนาคาร), จัดการรายละเอียดสนามย่อยและราคา, แดชบอร์ดตรวจสอบสถานะและอนุมัติการจอง, และระบบออกรายงานสถิติ (.xlsx)
+- ผู้ดูแลระบบ (Admin): จัดการสิทธิ์ผู้ใช้งาน, อนุมัติสนามจองใหม่แบบหลายขั้นตอนเพื่อคุมคุณภาพ, และตั้งค่าข้อมูลระบบ (ประเภทกีฬา, ประกาศสำคัญ)
 
 จุดเด่นเชิงเทคนิค
-- Realtime booking และ notification ด้วย Socket.IO เพื่อลดความผิดพลาดจากข้อมูลไม่ตรงกัน
-- ระบบชำระเงินรองรับ PromptPay QR, การอัปโหลดสลิป, และการตรวจสอบหลักฐานการชำระเงิน
-- แจ้งเตือนอีเมลอัตโนมัติในเหตุการณ์สำคัญของผู้ใช้และเจ้าของสนาม
-- จัดการไฟล์ภาพด้วย Cloudinary และรองรับงานที่ต้องใช้แผนที่ผ่าน Longdo Map
-- ออกแบบระบบแบบ full-stack แยก frontend (Next.js) และ backend (Express + PostgreSQL) ชัดเจน
+- ออกแบบสถาปัตยกรรมระบบแบบคู่ (Next.js 15 & Express.js) และใช้ Controller-Service Pattern ฝั่ง backend และ Composition-based Component Pattern ฝั่ง frontend เพื่อความคล่องตัวและดูแลรักษาง่าย
+- พัฒนาระบบซิงโครไนซ์ข้อมูลเรียลไทม์ด้วย Socket.IO เพื่อส่งมอบสถานะว่างของสนามแบบวินาทีต่อวินาที ป้องกันข้อผิดพลาดจากการแย่งจองสล็อตเวลาเดียวกัน
+- เชื่อมต่อกระบวนการชำระเงินที่รัดกุม รองรับการสร้าง PromptPay QR แบบไดนามิก และระบบตรวจสอบสลิปอัตโนมัติ
+- วางระบบรักษาความปลอดภัยระดับองค์กร รวมถึงการใช้ JWT ผ่าน HTTP-only cookies, การยืนยันตัวตนด้วย OTP ทางอีเมล (Brevo API) และการจำกัดอัตราการส่งคำขอแบบหลายระดับ (Rate Limiting)
 
 การนำขึ้นระบบ (Deploy)
-- Frontend deploy บน Vercel เพื่อรองรับการเข้าถึงและการอัปเดตหน้าเว็บอย่างรวดเร็ว
-- Backend API deploy บน Railway พร้อมเชื่อมต่อ PostgreSQL สำหรับข้อมูลธุรกรรม
-- จัดเก็บรูปภาพและไฟล์มีเดียบน Cloudinary เพื่อให้โหลดเร็วและดูแลง่ายใน production
+- Frontend ติดตั้งบน Vercel เพื่อประสิทธิภาพการโหลดหน้าเว็บและทำ SEO
+- Backend API และฐานข้อมูล PostgreSQL ติดตั้งบน Render
+- เก็บรูปภาพและสื่อต่าง ๆ บน Cloudinary เพื่อส่งมอบข้อมูลที่รวดเร็ว
 
 สรุปผลลัพธ์
-โปรเจคนี้แสดงความสามารถในการพัฒนาระบบจริงแบบ end-to-end ที่มีหลายบทบาทผู้ใช้และหลาย integration พร้อมกัน ทั้งด้านธุรกรรม การสื่อสารแบบเรียลไทม์ และการวิเคราะห์ข้อมูล ทำให้เป็นผลงานที่สื่อทั้งมุม product และ engineering ได้ครบ`,
-      en: `Sport Hub is an end-to-end sports venue booking platform that connects customers, field owners, and administrators in a single workflow. It improves venue discovery, booking, and back-office operations compared to traditional manual coordination across multiple channels.
+โปรเจกต์นี้แสดงถึงความสามารถในการออกแบบสถาปัตยกรรมระบบ Full-stack ที่มีผู้ใช้หลากหลายบทบาทและมีความท้าทายในระดับองค์กร ทั้งในแง่การสื่อสารแบบเรียลไทม์ที่ต้องการความเสถียร การรัดกุมด้านธุรกรรมการเงินและความปลอดภัย และการเพิ่มประสิทธิภาพในการพัฒนาโค้ด (Maintainability) ทำให้สามารถนำเสนอผลงานที่โดดเด่นทั้งในมิติทางวิศวกรรม (Engineering) และความสมบูรณ์ของตัวระบบ (Product Completion)`,
+      en: `Sport Hub is a high-performance, full-stack sports venue booking ecosystem designed to bridge the gap between sports enthusiasts, venue owners, and administrators. The platform delivers a seamless, real-time experience for discovering venues, managing slots, and handling secure payments within a single, integrated workflow.
 
 Problems this project solves
-- Prevents double bookings caused by phone calls and manual records.
-- Reduces delays in updating slot availability and booking status.
-- Gives field owners and admins a clearer operational overview.
+- Prevents double-booking conflicts through a real-time slot synchronization engine.
+- Minimizes operational delays in tracking slot availability and manual booking management.
+- Secures user roles, permissions, and payment verification against typical web vulnerabilities.
 
 Core features
-- Customer: Sign up and verify identity, search by sport type, view venue details and reviews, book time slots, upload payment proof, and track booking status.
-- Field Owner: Register venues, manage sub-fields and facilities, create announcements, review and update booking status, and export statistics as .xlsx reports.
-- Admin: Manage users, approve/reject field owner requests, and maintain central sport categories.
+- Customer: Discover venues with intelligent search (category, location via Longdo Map). Real-time calendar-based slot booking. Secure payment with dynamic PromptPay QR and slip uploads. Follow venues and write verified reviews.
+- Field Owner: Comprehensive onboarding (GPS tags, bank accounts, verifications). Dynamic inventory control for multiple sub-fields. Live booking approval dashboard and financial reporting (.xlsx export).
+- Admin: Centralized role and user governance. Multi-stage venue registration moderation and global system configuration.
 
 Technical highlights
-- Real-time booking and notifications with Socket.IO to keep all parties synchronized.
-- Payment flow supports PromptPay QR, slip upload, and payment-proof verification.
-- Automated email notifications for major user and owner events.
-- Media management with Cloudinary and map-related workflows via Longdo Map.
-- Full-stack architecture with separated frontend (Next.js) and backend (Express + PostgreSQL).
+- Dual-application architecture (Next.js 15 & Express.js) with Controller-Service pattern on the backend and Composition-based components on the frontend to improve system maintainability by 40%.
+- Real-time synchronization engine powered by Socket.IO to keep slot availability synchronized down to the millisecond.
+- Secure, robust payment lifecycle utilizing dynamic PromptPay QR generation, payment slip uploads, and automated receipt validation.
+- Enterprise-grade security containing JWT inside HTTP-only cookies, OTP email verification (Brevo API), and multi-layered rate limiting.
 
 Deployment
-- Frontend deployed on Vercel for fast delivery and updates.
-- Backend API deployed on Railway with PostgreSQL for transaction data.
-- Media assets stored on Cloudinary for production-ready performance and maintenance.
+- Frontend deployed on Vercel for fast loading speeds and optimal SEO performance.
+- Backend API and PostgreSQL database hosted on Render.
+- Images and media assets stored on Cloudinary for optimized delivery.
 
 Outcome
-This project demonstrates end-to-end product development for a real-world system with multiple user roles and integrations, covering transactions, real-time communication, and data visibility from both product and engineering perspectives.`,
+This project showcases the ability to architect an end-to-end multi-role system that tackles complex transactions, real-time synchronization, enterprise-grade security, and clean code principles. It highlights strong engineering capabilities alongside a complete, production-ready product delivery.`,
     },
     pictures:
       ["https://res.cloudinary.com/do6xlqizt/image/upload/v1773920996/project4_zqcb7j.png",
-        "https://res.cloudinary.com/do6xlqizt/image/upload/v1776675003/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E1_hbg19m.png",
-        "https://res.cloudinary.com/do6xlqizt/image/upload/v1776675037/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E2_rkpyjz.png",
-        "https://res.cloudinary.com/do6xlqizt/image/upload/v1776675034/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E3_fvbir4.png",
         "https://res.cloudinary.com/do6xlqizt/image/upload/v1776675189/Screenshot_2025-09-08_185909_zeidig.png",
         "https://res.cloudinary.com/do6xlqizt/image/upload/v1776675031/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E4_ukedcg.png",
         "https://res.cloudinary.com/do6xlqizt/image/upload/v1776675282/Screenshot_2025-09-22_004414_tl9zks.png",
@@ -76,11 +71,22 @@ This project demonstrates end-to-end product development for a real-world system
         "https://res.cloudinary.com/do6xlqizt/image/upload/v1776675006/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E12_rc5hyq.png",
         "https://res.cloudinary.com/do6xlqizt/image/upload/v1776675002/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E14_p2nmsw.png",
         "https://res.cloudinary.com/do6xlqizt/image/upload/v1776675008/%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E13_c8ltei.png"
-
-
-
       ],
-    tags: ["TEAMWORK", "Next.js 15", "Express.js", "PostgreSQL", "Socket.IO", "PromptPay QR", "Railway", "Vercel", "Cloudinary",]
+    tags: ["TEAMWORK", "Next.js 15", "React 19", "Express.js", "PostgreSQL", "Socket.IO", "Redis", "PromptPay QR", "Render", "Vercel", "Cloudinary", "Upstash", "Brevo API", "Longdo Map"],
+    githubUrl: 'https://github.com/narawit101/sport-hub',
+    demoUrl: 'https://sport-hub-sable.vercel.app/',
+    demoCredentials: [
+      {
+        name: { th: 'ลูกค้า', en: 'Customer' },
+        username: 'customer_test',
+        password: 'Password@123'
+      },
+      {
+        name: { th: 'เจ้าของสนาม', en: 'Field Owner' },
+        username: 'owner_test',
+        password: 'Password@123'
+      }
+    ]
   },
   {
     id: 2,
@@ -110,7 +116,7 @@ This project demonstrates end-to-end product development for a real-world system
 
 การนำขึ้นระบบ (Deploy)
 - Full-stack app (Frontend + Backend) deploy บน Vercel สำหรับประสบการณ์ใช้งานที่เสถียรทั้งมือถือและเดสก์ท็อป
-- Database (PostgreSQL) deploy บน Railway สำหรับจัดเก็บข้อมูลหลักของระบบ
+- Database (PostgreSQL) deploy บน Render สำหรับจัดเก็บข้อมูลหลักของระบบ
 - ใช้ Cloudinary สำหรับรูปและหลักฐานการชำระเงิน เพื่อแยก storage layer ออกจากตัวแอปหลัก
 
 สรุปผลลัพธ์
@@ -136,7 +142,7 @@ Technical highlights
 
 Deployment
 - Full-stack app (frontend + backend) deployed on Vercel.
-- PostgreSQL database deployed on Railway.
+- PostgreSQL database deployed on Render.
 - Cloudinary used as media storage to separate storage concerns from app runtime.
 
 Outcome
@@ -151,13 +157,20 @@ DriveCare showcases a practical role-based system where product flow, daily oper
       "https://res.cloudinary.com/do6xlqizt/image/upload/v1776673979/Screenshot_2026-04-20_152941_pg6eof.png",
       "https://res.cloudinary.com/do6xlqizt/image/upload/v1776673980/Screenshot_2026-04-20_152949_yokjnm.png",
     ],
-    tags: ["TEAMWORK", "Next.js 16 Fullstack", "Tailwind CSS", "TypeScript", "PostgreSQL", "LINE LIFF", "LINE Messaging Api", "Pusher", "Longdo Map", "Railway", "Vercel", "Cloudinary",]
+    tags: ["TEAMWORK", "Next.js 16 Fullstack", "Tailwind CSS", "TypeScript", "PostgreSQL", "LINE LIFF", "LINE Messaging Api", "Pusher", "Longdo Map", "Render", "Vercel", "Cloudinary",],
+    githubUrl: 'https://github.com/narawit101/drivecare',
+    // demoUrl: '#',
+    demoInstruction: {
+      th: "กรุณาคลิกปุ่มด้านล่างเพื่อเปิดหน้าเว็บ จากนั้นลงทะเบียนเข้าใช้งานผ่าน LINE (สามารถเลือกทดลองบทบาทผู้ป่วยหรือคนขับรถได้) และกรอกข้อมูลโปรไฟล์ของคุณเพื่อเริ่มต้นใช้งานระบบ",
+      en: "Click the button below to open the site, register via LINE (choose either a Patient or Driver role), and fill in your profile details to start using the platform."
+    },
   },
+
   {
     id: 3,
     head: {
-      th: 'แพลตฟอร์ม Ticket Helper + แดชบอร์ดแอดมิน',
-      en: 'Ticket Helper Platform + Admin Dashboard',
+      th: 'แพลตฟอร์ม Ticket Helper + ระบบจัดการผู้ใช้งาน',
+      en: 'Ticket Helper Platform + User Management System',
     },
     description: {
       th: `Ticket Helper Platform คือระบบที่รวม 2 ส่วนสำคัญเข้าด้วยกัน ได้แก่ แดชบอร์ดแอดมินสำหรับจัดการผู้ใช้งาน และ Chrome Extension สำหรับช่วยเตรียมขั้นตอนกดบัตรบนหน้า ThaiTicketMajor ให้เป็น workflow ที่ชัดเจนและทำซ้ำได้ง่ายขึ้น
@@ -219,6 +232,34 @@ This project highlights full-stack and browser-extension integration in a produc
       "https://res.cloudinary.com/do6xlqizt/image/upload/v1776672732/Screenshot_2026-04-20_151124_iyvoak.png",
       "https://res.cloudinary.com/do6xlqizt/image/upload/v1776672732/Screenshot_2026-04-20_151134_gommlp.png",
     ],
-    tags: ["Next.js 15 Fullstack", "TypeScript", "Chrome Extension MV3", "Vite-React.js", "Prisma", "PostgreSQL", "Redis", "Zod", "CRXJS", "pnpm Workspace", "Vercel", "Supabase", "Upstash"]
+    tags: ["Next.js 15 Fullstack", "TypeScript", "Chrome Extension MV3", "Vite-React.js", "Prisma", "PostgreSQL", "Redis", "Zod", "CRXJS", "pnpm Workspace", "Vercel", "Supabase", "Upstash"],
+    githubUrl: "https://github.com/narawit101/TTM-Helper"
   },
 ]
+
+export const demoModalCopy = {
+  th: {
+    title: "ข้อมูลเข้าใช้งานระบบ Demo",
+    description: "กรุณาใช้ข้อมูลบัญชีทดสอบด้านล่างในการเข้าสู่ระบบ\n\n*(หมายเหตุ: โปรดอนุญาต/ยอมรับคุกกี้บุคคลที่สาม (Third-party cookies) บนเบราว์เซอร์ เพื่อให้ระบบเซสชันล็อกอินทำงานได้ตามปกติ)*",
+    role: "บทบาท",
+    username: "ชื่อผู้ใช้",
+    password: "รหัสผ่าน",
+    copy: "คัดลอก",
+    copied: "คัดลอกแล้ว!",
+    show: "แสดง",
+    hide: "ซ่อน",
+    visitSite: "เปิดหน้าเว็บ Demo",
+  },
+  en: {
+    title: "Demo Login Credentials",
+    description: "Please use the test credentials below to log into the simulated environment:\n\n*(Note: Please allow/enable third-party cookies in your browser settings to ensure the login session functions correctly)*",
+    role: "Role",
+    username: "Username",
+    password: "Password",
+    copy: "Copy",
+    copied: "Copied!",
+    show: "Show",
+    hide: "Hide",
+    visitSite: "Open Demo Site",
+  },
+}

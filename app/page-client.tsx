@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from 'react'
 import ThemeToggle from '@/components/ThemeToggle'
+import LangToggle from '@/components/LangToggle'
 import Navbar from '@/components/navbar'
-import TechStackSection from '@/components/TechStackSection'
 import HeroSection from '@/components/HeroSection'
+import ExperienceSection from '@/components/ExperienceSection'
+import TechStackSection from '@/components/TechStackSection'
 import ProjectsSection from '@/components/ProjectsSection'
 import ContactSection from '@/components/ContactSection'
 import FooterSection from '@/components/FooterSection'
@@ -26,12 +28,16 @@ export default function PageClient({ initialLang }: { initialLang: Lang }) {
       <Navbar lang={lang} onLangChange={setLang} />
       <main className="theme-page min-h-screen overflow-x-hidden transition-colors duration-300">
         <HeroSection lang={lang} />
+        <ExperienceSection lang={lang} />
         <TechStackSection lang={lang} />
         <ProjectsSection lang={lang} />
         <ContactSection lang={lang} />
         <FooterSection lang={lang} />
       </main>
-      <ThemeToggle />
+      <div className="control-dock-wrapper">
+        <LangToggle lang={lang} onLangChange={setLang} />
+        <ThemeToggle />
+      </div>
     </>
   )
 }

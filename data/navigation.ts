@@ -7,7 +7,7 @@ export type NavigationItem = {
 }
 
 export const siteBrand: LocalizedText = {
-    th: 'พอร์ตโฟลิโอ',
+    th: 'Portfolio',
     en: 'Portfolio',
 }
 
@@ -16,6 +16,11 @@ export const navigationItems: NavigationItem[] = [
         id: 'section-hero',
         href: '#section-hero',
         label: { th: 'หน้าแรก', en: 'Home' },
+    },
+    {
+        id: 'section-experience',
+        href: '#section-experience',
+        label: { th: 'ประวัติ', en: 'Resume' },
     },
     {
         id: 'section-stack',

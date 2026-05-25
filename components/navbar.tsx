@@ -25,10 +25,6 @@ export default function Navbar({ lang, onLangChange }: NavbarProps) {
         document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
     }
 
-    const toggleLanguage = (nextLang: Lang) => {
-        onLangChange(nextLang)
-    }
-
     return (
         <nav className={`fixed top-0 z-50 w-full transition-all duration-300 ${scrolled ? 'theme-nav-surface' : 'border-b border-transparent bg-transparent'}`}>
             <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -47,29 +43,6 @@ export default function Navbar({ lang, onLangChange }: NavbarProps) {
                             {item.label[lang]}
                         </button>
                     ))}
-                    <div className="ml-2 inline-flex items-center gap-1 rounded-full border border-(--theme-border) bg-(--theme-surface-soft) p-1">
-                        <span className="flex h-6 w-6 items-center justify-center rounded-full text-(--theme-text-faint)" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8">
-                                <path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z" />
-                                <path d="M3 12h18" />
-                                <path d="M12 3c2.5 2.5 3.9 5.7 3.9 9s-1.4 6.5-3.9 9c-2.5-2.5-3.9-5.7-3.9-9S9.5 5.5 12 3Z" />
-                            </svg>
-                        </span>
-                        <button
-                            type="button"
-                            onClick={() => toggleLanguage('th')}
-                            className={`rounded-full px-2.5 py-1 text-xs font-semibold transition-colors ${lang === 'th' ? 'bg-primary text-white shadow-[0_0_24px_rgb(var(--primary-rgb)/0.18)]' : 'theme-text-muted hover:text-(--theme-text)'}`}
-                        >
-                            TH
-                        </button>
-                        <button
-                            type="button"
-                            onClick={() => toggleLanguage('en')}
-                            className={`rounded-full px-2.5 py-1 text-xs font-semibold transition-colors ${lang === 'en' ? 'bg-primary text-white shadow-[0_0_24px_rgb(var(--primary-rgb)/0.18)]' : 'theme-text-muted hover:text-(--theme-text)'}`}
-                        >
-                            EN
-                        </button>
-                    </div>
                 </div>
 
                 <button
@@ -99,29 +72,6 @@ export default function Navbar({ lang, onLangChange }: NavbarProps) {
                             {item.label[lang]}
                         </button>
                     ))}
-                    <div className="mt-2 inline-flex w-fit items-center gap-1 rounded-full border border-(--theme-border) bg-(--theme-surface-soft) p-1">
-                        <span className="flex h-6 w-6 items-center justify-center rounded-full text-(--theme-text-faint)" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8">
-                                <path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z" />
-                                <path d="M3 12h18" />
-                                <path d="M12 3c2.5 2.5 3.9 5.7 3.9 9s-1.4 6.5-3.9 9c-2.5-2.5-3.9-5.7-3.9-9S9.5 5.5 12 3Z" />
-                            </svg>
-                        </span>
-                        <button
-                            type="button"
-                            onClick={() => toggleLanguage('th')}
-                            className={`rounded-full px-3 py-1 text-xs font-semibold transition-colors ${lang === 'th' ? 'bg-primary text-white shadow-[0_0_24px_rgb(var(--primary-rgb)/0.18)]' : 'hover:text-(--theme-text)'}`}
-                        >
-                            TH
-                        </button>
-                        <button
-                            type="button"
-                            onClick={() => toggleLanguage('en')}
-                            className={`rounded-full px-3 py-1 text-xs font-semibold transition-colors ${lang === 'en' ? 'bg-primary text-white shadow-[0_0_24px_rgb(var(--primary-rgb)/0.18)]' : 'theme-text-muted hover:text-(--theme-text)'}`}
-                        >
-                            EN
-                        </button>
-                    </div>
                 </div>
             )}
         </nav>

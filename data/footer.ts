@@ -16,13 +16,13 @@ export const footerCopy: Record<Lang, FooterSectionCopy> = {
     th: {
         profileTitle: 'Narawit',
         profileDescription:
-            'ผมพัฒนาเว็บแอปที่ใช้งานได้จริง โดยเน้นประสบการณ์ผู้ใช้ ประสิทธิภาพ และคุณภาพโค้ดที่ดูแลต่อได้ง่าย',
+            'มุ่งมั่นพัฒนาเว็บแอปพลิเคชันประสิทธิภาพสูงที่ตอบโจทย์ผู้ใช้งานจริง โดยให้ความสำคัญกับโครงสร้างโค้ดที่สะอาด ปลอดภัย การทำงานที่รวดเร็ว และง่ายต่อการขยายระบบในระยะยาว',
         servicesTitle: 'บริการ',
         serviceLinks: [
-            'พัฒนาเว็บไซต์ด้วย Next.js',
-            'พัฒนาแดชบอร์ดและระบบหลังบ้าน',
-            'ออกแบบ REST API และโครงสร้างฐานข้อมูล',
-            'ปรับปรุง UX/UI และประสิทธิภาพการใช้งาน',
+            'พัฒนาเว็บแอปพลิเคชันด้วย Next.js',
+            'ออกแบบแดชบอร์ดและระบบจัดการหลังบ้าน',
+            'พัฒนา RESTful API และสถาปัตยกรรมฐานข้อมูล',
+            'ปรับปรุง UX/UI และเพิ่มประสิทธิภาพการประมวลผล',
         ],
         navigationTitle: 'เมนูนำทาง',
         contactTitle: 'ติดต่อ',
@@ -33,13 +33,13 @@ export const footerCopy: Record<Lang, FooterSectionCopy> = {
     en: {
         profileTitle: 'Narawit',
         profileDescription:
-            'I build practical web products with a strong focus on user experience, performance, and maintainable code.',
+            'Building high-performance, user-centric web applications with a commitment to clean architecture, robust security, optimal speed, and maintainable codebases.',
         servicesTitle: 'Services',
         serviceLinks: [
-            'Next.js website development',
-            'Admin dashboard and internal tools',
-            'REST API and database architecture',
-            'UX/UI refinement and optimization',
+            'Next.js Web Development',
+            'Custom Dashboards & Internal Tools',
+            'RESTful APIs & Database Design',
+            'UX/UI Refinement & Performance Optimization',
         ],
         navigationTitle: 'Navigation',
         contactTitle: 'Contact',

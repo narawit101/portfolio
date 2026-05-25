@@ -3,12 +3,12 @@ import { TechStackCategory } from '@/types'
 export const techStackCategories: TechStackCategory[] = [
     {
         title: {
-            th: 'งานหน้าบ้าน (Front-End)',
+            th: 'Front-End',
             en: 'Front-End',
         },
         description: {
-            th: 'พัฒนาอินเทอร์เฟซที่โต้ตอบได้ รองรับหลายขนาดหน้าจอ และสร้างประสบการณ์ผู้ใช้ที่ลื่นไหล',
-            en: 'Interactive interfaces, responsive layouts, and rich client-side experiences.',
+            th: 'พัฒนาอินเทอร์เฟซที่ตอบสนองรวดเร็ว รองรับการแสดงผลทุกหน้าจอ (Responsive) และสร้างประสบการณ์ผู้ใช้ที่ลื่นไหล',
+            en: 'Interactive user interfaces, responsive layouts, and rich client-side experiences.',
         },
         accent: 'from-primary/50 via-primary/25 to-primary-400/20',
         items: [
@@ -19,17 +19,17 @@ export const techStackCategories: TechStackCategory[] = [
             { name: 'React', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcR5U16C8yXgBpl7-Bc7Itjx3_LRl425zINA&s' },
             { name: 'Next.js', img: 'https://images-cdn.openxcell.com/wp-content/uploads/2024/07/24154156/dango-inner-2.webp' },
             { name: 'Tailwind CSS', img: 'https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg' },
-            { name: 'DaisyUI', img: 'https://img.daisyui.com/images/daisyui/daisyui-logo-192.png' },
-            { name: 'Ant Design', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKBKbgGZthcVsW4vVOTAZOKzOpXDLfC8PMrw&s' },
+            // { name: 'DaisyUI', img: 'https://img.daisyui.com/images/daisyui/daisyui-logo-192.png' },
+            // { name: 'Ant Design', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKBKbgGZthcVsW4vVOTAZOKzOpXDLfC8PMrw&s' },
         ],
     },
     {
         title: {
-            th: 'งานหลังบ้าน (Back-End)',
+            th: 'Back-End',
             en: 'Back-End',
         },
         description: {
-            th: 'ออกแบบ API พัฒนาธุรกิจลอจิก และจัดการการทำงานฝั่งเซิร์ฟเวอร์อย่างเป็นระบบ',
+            th: 'ออกแบบ API, พัฒนาตรรกะการประมวลผล (Business Logic) และจัดการระบบฝั่งเซิร์ฟเวอร์อย่างมีประสิทธิภาพ',
             en: 'API design, business logic, and server-side orchestration.',
         },
         accent: 'from-primary/50 via-primary/25 to-primary-400/20',
@@ -44,7 +44,7 @@ export const techStackCategories: TechStackCategory[] = [
             en: 'Database Management',
         },
         description: {
-            th: 'ดูแลข้อมูลทั้งแบบเชิงสัมพันธ์และแบบ in-memory เพื่อรองรับการทำงานของระบบ',
+            th: 'จัดการระบบฐานข้อมูลทั้งแบบเชิงสัมพันธ์ (Relational) และแบบ In-Memory เพื่อประสิทธิภาพสูงสุดของระบบ',
             en: 'Relational and in-memory data storage systems.',
         },
         accent: 'from-primary/50 via-primary/25 to-primary-400/20',
@@ -61,13 +61,13 @@ export const techStackCategories: TechStackCategory[] = [
             en: 'UI / Design',
         },
         description: {
-            th: 'ออกแบบ wireframe, prototype และรายละเอียดการโต้ตอบเพื่อประสบการณ์ใช้งานที่ดี',
+            th: 'ออกแบบโครงร่าง (Wireframe), สร้างต้นแบบจำลอง (Prototype) และดีไซน์การโต้ตอบเพื่อประสบการณ์ผู้ใช้ที่ดีเยี่ยม',
             en: 'Wireframing, prototyping, and polished user interactions.',
         },
         accent: 'from-primary/50 via-primary/25 to-primary-400/20',
         items: [
             { name: 'Figma', img: 'https://cdn.sanity.io/images/599r6htc/regionalized/46a76c802176eb17b04e12108de7e7e0f3736dc6-1024x1024.png' },
-            { name: 'Google Stitch', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQ8lqH3YtA8Ne6VLVXSkP1JlwB5XZ3kBvhJQ&s' },
+            // { name: 'Google Stitch', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQ8lqH3YtA8Ne6VLVXSkP1JlwB5XZ3kBvhJQ&s' },
             // { name: 'Framer', img: 'https://cdn.worldvectorlogo.com/logos/framer-2.svg' },
             // { name: 'Accessibility', img: 'https://img.icons8.com/ios/512/accessibility.png' },
         ],
@@ -78,7 +78,7 @@ export const techStackCategories: TechStackCategory[] = [
             en: 'Tools',
         },
         description: {
-            th: 'จัดการเวอร์ชันโค้ดและ workflow แบบ container เพื่อให้ทีมทำงานได้ต่อเนื่อง',
+            th: 'ควบคุมเวอร์ชันของโค้ด (Version Control) และจัดการ Workflow แบบ Container เพื่อการทำงานร่วมกันที่ราบรื่น',
             en: 'Version control and containerized workflows.',
         },
         accent: 'from-primary/50 via-primary/25 to-primary-400/20',
@@ -93,7 +93,7 @@ export const techStackCategories: TechStackCategory[] = [
             en: 'Cloud & Deployment',
         },
         description: {
-            th: 'โฮสต์แอปบนคลาวด์ จัดการงานแบบ serverless และส่งมอบผ่าน edge ให้ตอบสนองเร็ว',
+            th: 'โฮสต์แอปพลิเคชันบนคลาวด์, จัดการระบบแบบ Serverless และกระจายข้อมูลผ่าน Edge Network เพื่อการเข้าถึงที่รวดเร็ว',
             en: 'Cloud hosting, serverless workloads, and edge delivery.',
         },
         accent: 'from-primary/50 via-primary/25 to-primary-400/20',
@@ -103,6 +103,7 @@ export const techStackCategories: TechStackCategory[] = [
             { name: 'Supabase', img: 'https://i.pinimg.com/474x/cb/03/e4/cb03e4961860f0271e6ac73e663f26fa.jpg' },
             { name: 'Upstash', img: 'https://upstash.com/icons/apple-touch-icon.png' },
             { name: 'Cloudinary', img: 'https://avatars.githubusercontent.com/u/1460763?s=280&v=4' },
+            { name: 'Render', img: 'https://cdn.pulse2.com/cdn/2025/01/Render-Logo.jpg' },
         ],
     },
 
