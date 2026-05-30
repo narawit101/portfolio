@@ -91,6 +91,7 @@ function ProjectCard({
               currentIndex={currentIndex}
               total={project.pictures.length}
               onSelect={setCurrentIndex}
+              className="sm:opacity-0 sm:group-hover:opacity-100"
             />
           </>
         )}
@@ -225,13 +226,17 @@ function DemoCredentialsModal({
     };
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", handleKeyDown);
+
+    const hideTimeouts = hideTimeoutsRef.current;
+    const closeTimeout = closeTimeoutRef.current;
+
     return () => {
       window.cancelAnimationFrame(raf);
-      if (closeTimeoutRef.current) {
-        clearTimeout(closeTimeoutRef.current);
+      if (closeTimeout) {
+        clearTimeout(closeTimeout);
       }
       // Clear all hide timeouts on unmount
-      Object.values(hideTimeoutsRef.current).forEach(clearTimeout);
+      Object.values(hideTimeouts).forEach(clearTimeout);
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", handleKeyDown);
     };

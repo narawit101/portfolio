@@ -108,19 +108,20 @@ This project showcases the ability to architect an end-to-end multi-role system 
 - ผู้ดูแลระบบ (Admin): อนุมัติคนขับ, มอบหมายงาน, ตรวจสอบสลิป, จัดการผู้ใช้งาน, และดู dashboard สำหรับ booking metrics และรายงานรายได้
 
 จุดเด่นเชิงเทคนิค
-- Realtime event ด้วย Pusher เพื่ออัปเดตสถานะงานและข้อมูลฝั่งปฏิบัติการ
-- เชื่อม LINE Messaging API สำหรับการแจ้งเตือนงานและสถานะสำคัญ
-- ใช้ Longdo Map ในการดูเส้นทางและงานที่เกี่ยวข้องกับตำแหน่ง
-- จัดการไฟล์รูปและหลักฐานผ่าน Cloudinary
-- พัฒนาแบบ type-safe ด้วย Next.js + TypeScript + PostgreSQL เพื่อให้ดูแลระบบระยะยาวได้ง่าย
+- พัฒนาแบบ Full-stack ด้วย Next.js 16 App Router และระบบ Route Handlers สำหรับ Serverless API endpoints
+- รองรับการเชื่อมโยงข้อมูลแบบเรียลไทม์ผ่าน Pusher และการแจ้งเตือนผู้ใช้ด้วย LINE Messaging API / LINE LIFF login
+- วางโครงสร้างแผนที่ ค้นหาตำแหน่งพิกัด และคำนวณเส้นทางด้วย Longdo Map API
+- เพิ่มประสิทธิภาพความเร็วในการโหลดข้อมูลด้วยระบบ Redis Caching บน Upstash เพื่อลดภาระการเข้าถึงฐานข้อมูลหลัก
+- จัดการความปลอดภัยด้วยระบบสิทธิ์การเข้าใช้งานตามบทบาท (Role-based auth) ร่วมกับ JWT
+- ออกแบบแดชบอร์ดสถิติสำหรับผู้ดูแลระบบ แสดงผลในรูปแบบกราฟแบบเรียลไทม์ด้วย Chart.js
 
 การนำขึ้นระบบ (Deploy)
-- Full-stack app (Frontend + Backend) deploy บน Vercel สำหรับประสบการณ์ใช้งานที่เสถียรทั้งมือถือและเดสก์ท็อป
-- Database (PostgreSQL) deploy บน Render สำหรับจัดเก็บข้อมูลหลักของระบบ
-- ใช้ Cloudinary สำหรับรูปและหลักฐานการชำระเงิน เพื่อแยก storage layer ออกจากตัวแอปหลัก
+- Full-stack app (Frontend + Backend) deploy บน Vercel เพื่อความเสถียรและการประมวลผลเซิร์ฟเวอร์เลสที่มีประสิทธิภาพ
+- ฐานข้อมูลหลัก PostgreSQL ใช้บริการของ Supabase สำหรับจัดเก็บข้อมูลระบบ
+- ระบบ Caching ใช้บริการของ Upstash Redis และแยกการจัดเก็บรูปภาพหลักฐานการชำระเงินไว้บน Cloudinary
 
 สรุปผลลัพธ์
-โปรเจคนี้แสดงความสามารถด้านการออกแบบระบบจริงที่มีหลายบทบาทผู้ใช้ (role-based workflow) และต้องประสานทั้งฝั่ง product, operation และ technical integration พร้อมกัน เหมาะกับงานที่ต้องการทั้งความแม่นยำของข้อมูลและประสบการณ์ใช้งานที่ลื่นไหล`,
+โปรเจกต์นี้แสดงความสามารถในการประสานผสานระหว่าง Next.js 16 APIs, Supabase, Upstash Redis caching, dynamic LINE Messaging integration และ Chart.js ในระบบจำลองผู้ใช้หลายบทบาทได้อย่างมั่นคงและเป็นมืออาชีพ`,
       en: `DriveCare is a medical transportation platform designed to connect patients, drivers, and administrators in a single workflow, from LINE-based login and booking to dispatching, live status updates, and payment verification.
 
 Problems this project solves
@@ -134,19 +135,20 @@ Core features
 - Admin: Approve drivers, assign jobs, verify payment slips, manage users, and monitor booking metrics and revenue dashboards.
 
 Technical highlights
-- Real-time events with Pusher for synchronized operational status.
-- LINE Messaging API integration for key booking and status notifications.
-- Longdo Map integration for route and location-aware tasks.
-- Cloudinary for media and payment-proof management.
-- Type-safe stack with Next.js + TypeScript + PostgreSQL for long-term maintainability.
+- Full-stack development using Next.js 16 App Router with Route Handlers for serverless API endpoints.
+- Real-time event synchronization using Pusher and automated notifications via LINE Messaging API & LINE LIFF.
+- Geospatial mapping, location search, and routing calculations integrated via Longdo Map API.
+- Optimized database querying performance using Upstash Redis caching layer.
+- Secured role-based access control (RBAC) powered by JWT-based authentication.
+- Designed admin analytical dashboards showcasing live booking metrics and revenue charts using Chart.js.
 
 Deployment
-- Full-stack app (frontend + backend) deployed on Vercel.
-- PostgreSQL database deployed on Render.
-- Cloudinary used as media storage to separate storage concerns from app runtime.
+- Full-stack app (frontend + backend APIs) deployed on Vercel.
+- Relational database hosted on Supabase (PostgreSQL).
+- Caching layer powered by Upstash Redis and media asset handling separated to Cloudinary.
 
 Outcome
-DriveCare showcases a practical role-based system where product flow, daily operations, and technical integration must work together with high data accuracy and smooth user experience.`,
+DriveCare showcases a practical role-based system where product flow, daily operations, and technical integration (Next.js serverless APIs, Supabase, Upstash Redis caching, Pusher, LINE, and Chart.js) must work together with high data accuracy and smooth user experience.`,
     },
     pictures: [
       "https://res.cloudinary.com/do6xlqizt/image/upload/v1776673862/image1_txylet.png",
@@ -157,84 +159,84 @@ DriveCare showcases a practical role-based system where product flow, daily oper
       "https://res.cloudinary.com/do6xlqizt/image/upload/v1776673979/Screenshot_2026-04-20_152941_pg6eof.png",
       "https://res.cloudinary.com/do6xlqizt/image/upload/v1776673980/Screenshot_2026-04-20_152949_yokjnm.png",
     ],
-    tags: ["TEAMWORK", "Next.js 16 Fullstack", "Tailwind CSS", "TypeScript", "PostgreSQL", "LINE LIFF", "LINE Messaging Api", "Pusher", "Longdo Map", "Render", "Vercel", "Cloudinary",],
+    tags: ["TEAMWORK", "Next.js 16", "React 19", "Tailwind CSS 4", "TypeScript", "PostgreSQL", "Supabase", "Upstash", "Redis", "Pusher", "Longdo Map", "LINE LIFF", "LINE Messaging Api", "Cloudinary", "Chart.js", "Vercel"],
     githubUrl: 'https://github.com/narawit101/drivecare',
-    // demoUrl: '#',
+    demoUrl: 'https://drivecare-ten.vercel.app/',
     demoInstruction: {
       th: "กรุณาคลิกปุ่มด้านล่างเพื่อเปิดหน้าเว็บ จากนั้นลงทะเบียนเข้าใช้งานผ่าน LINE (สามารถเลือกทดลองบทบาทผู้ป่วยหรือคนขับรถได้) และกรอกข้อมูลโปรไฟล์ของคุณเพื่อเริ่มต้นใช้งานระบบ",
       en: "Click the button below to open the site, register via LINE (choose either a Patient or Driver role), and fill in your profile details to start using the platform."
     },
   },
 
-  {
-    id: 3,
-    head: {
-      th: 'แพลตฟอร์ม Ticket Helper + ระบบจัดการผู้ใช้งาน',
-      en: 'Ticket Helper Platform + User Management System',
-    },
-    description: {
-      th: `Ticket Helper Platform คือระบบที่รวม 2 ส่วนสำคัญเข้าด้วยกัน ได้แก่ แดชบอร์ดแอดมินสำหรับจัดการผู้ใช้งาน และ Chrome Extension สำหรับช่วยเตรียมขั้นตอนกดบัตรบนหน้า ThaiTicketMajor ให้เป็น workflow ที่ชัดเจนและทำซ้ำได้ง่ายขึ้น
+  //   {
+  //     id: 3,
+  //     head: {
+  //       th: 'แพลตฟอร์ม Ticket Helper + ระบบจัดการผู้ใช้งาน',
+  //       en: 'Ticket Helper Platform + User Management System',
+  //     },
+  //     description: {
+  //       th: `Ticket Helper Platform คือระบบที่รวม 2 ส่วนสำคัญเข้าด้วยกัน ได้แก่ แดชบอร์ดแอดมินสำหรับจัดการผู้ใช้งาน และ Chrome Extension สำหรับช่วยเตรียมขั้นตอนกดบัตรบนหน้า ThaiTicketMajor ให้เป็น workflow ที่ชัดเจนและทำซ้ำได้ง่ายขึ้น
 
-ปัญหาที่โปรเจคนี้แก้ไข
-- ลดภาระการจัดการบัญชีผู้ใช้แบบแมนนวล โดยให้แอดมินควบคุมสิทธิ์ วันหมดอายุ และจำนวนอุปกรณ์ได้จากจุดเดียว
-- ลดขั้นตอนซ้ำๆ ของผู้ใช้งานที่ต้องกรอกข้อมูลจองบัตรหลายรอบ
-- เพิ่มความคุมได้ของระบบด้วยการบังคับหยุดใช้งานอัตโนมัติเมื่อบัญชีหมดอายุหรือเกินเงื่อนไขอุปกรณ์
+  // ปัญหาที่โปรเจคนี้แก้ไข
+  // - ลดภาระการจัดการบัญชีผู้ใช้แบบแมนนวล โดยให้แอดมินควบคุมสิทธิ์ วันหมดอายุ และจำนวนอุปกรณ์ได้จากจุดเดียว
+  // - ลดขั้นตอนซ้ำๆ ของผู้ใช้งานที่ต้องกรอกข้อมูลจองบัตรหลายรอบ
+  // - เพิ่มความคุมได้ของระบบด้วยการบังคับหยุดใช้งานอัตโนมัติเมื่อบัญชีหมดอายุหรือเกินเงื่อนไขอุปกรณ์
 
-ฟีเจอร์สำคัญของระบบ
-- ฝั่งแอดมิน (Admin Dashboard): ล็อกอินแอดมิน, จัดการผู้ใช้งานแบบ CRUD, ตั้งค่า expiry date และ device limit ต่อบัญชี, จัดการ session และ Redis cache invalidation
-- ฝั่งผู้ใช้งาน (Chrome Extension): ล็อกอินด้วยบัญชีที่ถูก provision พร้อม device key, ตั้งค่าจองผ่าน side panel, บันทึก draft การจอง, ระบบช่วยไล่ flow หน้าจองบน ThaiTicketMajor, รองรับ zone fallback, กลยุทธ์เลือกที่นั่งหลายแบบ, และ autofill ข้อมูลการจอง
-- การควบคุมสถานะ: มี status log แบบเรียลไทม์ใน extension และ forced stop/logout เมื่อสถานะบัญชีไม่พร้อมใช้งาน
+  // ฟีเจอร์สำคัญของระบบ
+  // - ฝั่งแอดมิน (Admin Dashboard): ล็อกอินแอดมิน, จัดการผู้ใช้งานแบบ CRUD, ตั้งค่า expiry date และ device limit ต่อบัญชี, จัดการ session และ Redis cache invalidation
+  // - ฝั่งผู้ใช้งาน (Chrome Extension): ล็อกอินด้วยบัญชีที่ถูก provision พร้อม device key, ตั้งค่าจองผ่าน side panel, บันทึก draft การจอง, ระบบช่วยไล่ flow หน้าจองบน ThaiTicketMajor, รองรับ zone fallback, กลยุทธ์เลือกที่นั่งหลายแบบ, และ autofill ข้อมูลการจอง
+  // - การควบคุมสถานะ: มี status log แบบเรียลไทม์ใน extension และ forced stop/logout เมื่อสถานะบัญชีไม่พร้อมใช้งาน
 
-จุดเด่นเชิงเทคนิค
-- สถาปัตยกรรม monorepo ด้วย pnpm workspace แยก apps/admin, apps/extension และ packages/shared
-- ฝั่งแอดมินใช้ Next.js full-stack + Prisma + PostgreSQL + Redis พร้อม validation ด้วย Zod
-- ฝั่ง extension ใช้ Chrome Manifest V3, CRXJS และ Vite เพื่อพัฒนา workflow บน browser
-- แชร์ TypeScript contracts ระหว่างแอดมินและ extension เพื่อลดความผิดพลาดของ API shape
+  // จุดเด่นเชิงเทคนิค
+  // - สถาปัตยกรรม monorepo ด้วย pnpm workspace แยก apps/admin, apps/extension และ packages/shared
+  // - ฝั่งแอดมินใช้ Next.js full-stack + Prisma + PostgreSQL + Redis พร้อม validation ด้วย Zod
+  // - ฝั่ง extension ใช้ Chrome Manifest V3, CRXJS และ Vite เพื่อพัฒนา workflow บน browser
+  // - แชร์ TypeScript contracts ระหว่างแอดมินและ extension เพื่อลดความผิดพลาดของ API shape
 
-การนำขึ้นระบบ (Deploy)
-- Admin Full-stack (Next.js UI + API) deploy บน Vercel เพื่อเข้าถึงและจัดการระบบได้สะดวก
-- ฐานข้อมูล PostgreSQL ใช้ Supabase และ Redis ใช้ Upstash สำหรับ cache และ session
-- ฝั่ง Chrome Extension build ด้วย Vite + CRXJS และจัดการ release เป็นแพ็กเกจแยกจากเว็บแอป
+  // การนำขึ้นระบบ (Deploy)
+  // - Admin Full-stack (Next.js UI + API) deploy บน Vercel เพื่อเข้าถึงและจัดการระบบได้สะดวก
+  // - ฐานข้อมูล PostgreSQL ใช้ Supabase และ Redis ใช้ Upstash สำหรับ cache และ session
+  // - ฝั่ง Chrome Extension build ด้วย Vite + CRXJS และจัดการ release เป็นแพ็กเกจแยกจากเว็บแอป
 
-สรุปผลลัพธ์
-โปรเจคนี้สะท้อนความสามารถในการพัฒนาระบบจริงที่ต้องเชื่อม full-stack web app กับ browser extension พร้อมบริหารสิทธิ์ผู้ใช้เชิงปฏิบัติการ ทำให้ผลงานชิ้นนี้โดดเด่นทั้งด้าน architecture, automation workflow และการดูแลระบบในระดับ production`,
-      en: `Ticket Helper Platform combines two core modules: an admin dashboard for account operations and a Chrome Extension that streamlines ThaiTicketMajor booking preparation into a repeatable workflow.
+  // สรุปผลลัพธ์
+  // โปรเจคนี้สะท้อนความสามารถในการพัฒนาระบบจริงที่ต้องเชื่อม full-stack web app กับ browser extension พร้อมบริหารสิทธิ์ผู้ใช้เชิงปฏิบัติการ ทำให้ผลงานชิ้นนี้โดดเด่นทั้งด้าน architecture, automation workflow และการดูแลระบบในระดับ production`,
+  //       en: `Ticket Helper Platform combines two core modules: an admin dashboard for account operations and a Chrome Extension that streamlines ThaiTicketMajor booking preparation into a repeatable workflow.
 
-Problems this project solves
-- Reduces manual account operations by centralizing permission, expiry, and device-limit controls.
-- Cuts repetitive booking-input steps for users.
-- Improves operational control with forced stop/logout when account rules are violated.
+  // Problems this project solves
+  // - Reduces manual account operations by centralizing permission, expiry, and device-limit controls.
+  // - Cuts repetitive booking-input steps for users.
+  // - Improves operational control with forced stop/logout when account rules are violated.
 
-Core features
-- Admin Dashboard: Admin login, full user CRUD, expiry date and device limit controls, session management, and Redis cache invalidation.
-- Chrome Extension: Provisioned account login with device key, side-panel booking setup, booking draft support, guided booking flow for ThaiTicketMajor, zone fallback, multi-strategy seat selection, and autofill.
-- Control layer: Real-time status logs inside extension and forced stop/logout when account status is invalid.
+  // Core features
+  // - Admin Dashboard: Admin login, full user CRUD, expiry date and device limit controls, session management, and Redis cache invalidation.
+  // - Chrome Extension: Provisioned account login with device key, side-panel booking setup, booking draft support, guided booking flow for ThaiTicketMajor, zone fallback, multi-strategy seat selection, and autofill.
+  // - Control layer: Real-time status logs inside extension and forced stop/logout when account status is invalid.
 
-Technical highlights
-- Monorepo architecture with pnpm workspace across apps/admin, apps/extension, and packages/shared.
-- Admin stack: Next.js full-stack + Prisma + PostgreSQL + Redis with Zod validation.
-- Extension stack: Chrome Manifest V3, CRXJS, and Vite for browser workflow automation.
-- Shared TypeScript contracts between admin and extension to reduce API shape mismatch.
+  // Technical highlights
+  // - Monorepo architecture with pnpm workspace across apps/admin, apps/extension, and packages/shared.
+  // - Admin stack: Next.js full-stack + Prisma + PostgreSQL + Redis with Zod validation.
+  // - Extension stack: Chrome Manifest V3, CRXJS, and Vite for browser workflow automation.
+  // - Shared TypeScript contracts between admin and extension to reduce API shape mismatch.
 
-Deployment
-- Admin full-stack (Next.js UI + API) deployed on Vercel.
-- PostgreSQL on Supabase and Redis on Upstash for cache/session workloads.
-- Chrome Extension built with Vite + CRXJS and released as a separate package.
+  // Deployment
+  // - Admin full-stack (Next.js UI + API) deployed on Vercel.
+  // - PostgreSQL on Supabase and Redis on Upstash for cache/session workloads.
+  // - Chrome Extension built with Vite + CRXJS and released as a separate package.
 
-Outcome
-This project highlights full-stack and browser-extension integration in a production-minded system, covering architecture, workflow automation, and operational user control at scale.`,
-    },
-    pictures: [
-      "https://res.cloudinary.com/do6xlqizt/image/upload/v1776672735/Screenshot_2026-04-20_151039_k2f4uw.png",
-      "https://res.cloudinary.com/do6xlqizt/image/upload/v1776672732/Screenshot_2026-04-20_151012_q8vzxp.png",
-      "https://res.cloudinary.com/do6xlqizt/image/upload/v1776672731/Screenshot_2026-04-20_151052_o6nryt.png",
-      "https://res.cloudinary.com/do6xlqizt/image/upload/v1776672924/Screenshot_2026-04-20_151113_jdmygd.png",
-      "https://res.cloudinary.com/do6xlqizt/image/upload/v1776672732/Screenshot_2026-04-20_151124_iyvoak.png",
-      "https://res.cloudinary.com/do6xlqizt/image/upload/v1776672732/Screenshot_2026-04-20_151134_gommlp.png",
-    ],
-    tags: ["Next.js 15 Fullstack", "TypeScript", "Chrome Extension MV3", "Vite-React.js", "Prisma", "PostgreSQL", "Redis", "Zod", "CRXJS", "pnpm Workspace", "Vercel", "Supabase", "Upstash"],
-    githubUrl: "https://github.com/narawit101/TTM-Helper"
-  },
+  // Outcome
+  // This project highlights full-stack and browser-extension integration in a production-minded system, covering architecture, workflow automation, and operational user control at scale.`,
+  //     },
+  //     pictures: [
+  //       "https://res.cloudinary.com/do6xlqizt/image/upload/v1776672735/Screenshot_2026-04-20_151039_k2f4uw.png",
+  //       "https://res.cloudinary.com/do6xlqizt/image/upload/v1776672732/Screenshot_2026-04-20_151012_q8vzxp.png",
+  //       "https://res.cloudinary.com/do6xlqizt/image/upload/v1776672731/Screenshot_2026-04-20_151052_o6nryt.png",
+  //       "https://res.cloudinary.com/do6xlqizt/image/upload/v1776672924/Screenshot_2026-04-20_151113_jdmygd.png",
+  //       "https://res.cloudinary.com/do6xlqizt/image/upload/v1776672732/Screenshot_2026-04-20_151124_iyvoak.png",
+  //       "https://res.cloudinary.com/do6xlqizt/image/upload/v1776672732/Screenshot_2026-04-20_151134_gommlp.png",
+  //     ],
+  //     tags: ["Next.js 15 Fullstack", "TypeScript", "Chrome Extension MV3", "Vite-React.js", "Prisma", "PostgreSQL", "Redis", "Zod", "CRXJS", "pnpm Workspace", "Vercel", "Supabase", "Upstash"],
+  //     githubUrl: "https://github.com/narawit101/TTM-Helper"
+  //   },
 ]
 
 export const demoModalCopy = {
