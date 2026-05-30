@@ -137,7 +137,7 @@ Since there is no relational SQL or NoSQL database, updating the application's d
     - `data/techStack.ts` (For technical capabilities)
     - `data/experience.ts` (For employment/education timeline)
 2.  **Add/Modify Entry:** Insert your item conforming to its type schema.
-    - _Example: Appending a project in `data/projects.ts`:_
+    - _Example: Appending a project in `data/projects.ts` (showing full schema with demo credentials):_
     ```typescript
     {
       id: 5,
@@ -153,7 +153,20 @@ Since there is no relational SQL or NoSQL database, updating the application's d
         'https://res.cloudinary.com/.../img1.png',
         'https://res.cloudinary.com/.../img2.png'
       ],
-      tags: ['React', 'Node.js', 'PostgreSQL']
+      tags: ['React', 'Node.js', 'PostgreSQL'],
+      githubUrl: 'https://github.com/username/project',
+      demoUrl: 'https://project-demo.vercel.app',
+      demoInstruction: {
+        th: 'คำแนะนำขั้นตอนการลองใช้งาน...',
+        en: 'Instructions on how to test the demo...'
+      },
+      demoCredentials: [
+        {
+          name: { th: 'ผู้ใช้ทดสอบ', en: 'Test User' },
+          username: 'demo_user',
+          password: 'Password@123'
+        }
+      ]
     }
     ```
 3.  **Validate Compilation:** Ensure typescript does not throw errors due to missing fields.
