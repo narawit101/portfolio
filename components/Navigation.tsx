@@ -46,35 +46,46 @@ export function CarouselDotsNav({
     showCounter?: boolean;
     className?: string;
 }) {
-    const spacingClass = showCounter ? 'px-3 py-2' : 'px-2.5 py-1'
+    if (total <= 1) return null
+
+    const useTextBadge = total > 6
 
     return (
         <div
-            className={`theme-floating-control absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full ${spacingClass} opacity-100 transition-opacity duration-300 sm:opacity-0 sm:group-hover:opacity-100 ${className}`}
+            className={`absolute bottom-4 left-1/2 -translate-x-1/2 z-10 opacity-100 transition-opacity duration-300 sm:opacity-0 sm:group-hover:opacity-100 ${className}`}
             onClick={(e) => e.stopPropagation()}
         >
-            <div className={`flex ${showCounter ? 'flex-col items-center gap-1.5' : 'items-center gap-1.5'}`}>
-                <div className="flex gap-1.5">
-                    {Array.from({ length: total }).map((_, i) => (
-                        <button
-                            key={i}
-                            type="button"
-                            onClick={(e) => {
-                                e.stopPropagation()
-                                onSelect(i)
-                            }}
-                            aria-label={`Go to image ${i + 1}`}
-                            className={`h-1.5 cursor-pointer rounded-full transition-all duration-300 ${i === currentIndex ? 'w-4 bg-primary' : 'w-1.5 bg-(--theme-text-muted)'}`}
-                        />
-                    ))}
-                </div>
-
-                {showCounter && (
-                    <span className="theme-text-body text-[11px] font-medium tracking-[0.18em]">
+            {useTextBadge ? (
+                <div className="flex items-center rounded-full bg-black/60 px-3 py-1 text-white shadow-md backdrop-blur-md border border-white/10">
+                    <span className="text-[11px] font-medium tracking-[0.15em] select-none">
                         {currentIndex + 1} / {total}
                     </span>
-                )}
-            </div>
+                </div>
+            ) : (
+                <div className="flex items-center gap-1.5 rounded-full bg-black/60 px-2.5 py-1.5 shadow-md backdrop-blur-md border border-white/10">
+                    <div className="flex gap-1.5">
+                        {Array.from({ length: total }).map((_, i) => (
+                            <button
+                                key={i}
+                                type="button"
+                                onClick={(e) => {
+                                    e.stopPropagation()
+                                    onSelect(i)
+                                }}
+                                aria-label={`Go to image ${i + 1}`}
+                                className={`h-1.5 cursor-pointer rounded-full transition-all duration-300 ${
+                                    i === currentIndex ? 'w-4 bg-primary' : 'w-1.5 bg-white/40 hover:bg-white/80'
+                                }`}
+                            />
+                        ))}
+                    </div>
+                    {showCounter && (
+                        <span className="ml-1 border-l border-white/20 pl-2 text-[10px] font-medium tracking-[0.12em] text-white/90 select-none">
+                            {currentIndex + 1} / {total}
+                        </span>
+                    )}
+                </div>
+            )}
         </div>
     )
 }
