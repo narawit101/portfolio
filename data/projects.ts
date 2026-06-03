@@ -75,7 +75,7 @@ This project showcases the ability to architect an end-to-end multi-role system 
     tags: ["TEAMWORK", "Next.js 15", "React 19", "Express.js", "PostgreSQL", "Socket.IO", "Redis", "PromptPay QR", "Render", "Vercel", "Cloudinary", "Upstash", "Brevo API", "Longdo Map"],
     githubUrl: 'https://github.com/narawit101/sport-hub',
     demoUrl: 'https://sport-hub-sable.vercel.app/',
-    demoCredentials: [
+    demoTabs: [
       {
         name: { th: 'ลูกค้า', en: 'Customer' },
         username: 'customer_test',
@@ -163,9 +163,77 @@ DriveCare showcases a practical role-based system where product flow, daily oper
     githubUrl: 'https://github.com/narawit101/drivecare',
     demoUrl: 'https://drivecare-ten.vercel.app/',
     demoInstruction: {
-      th: "กรุณาคลิกปุ่มด้านล่างเพื่อเปิดหน้าเว็บ จากนั้นลงทะเบียนเข้าใช้งานผ่าน LINE (สามารถเลือกทดลองบทบาทผู้ป่วยหรือคนขับรถได้) และกรอกข้อมูลโปรไฟล์ของคุณเพื่อเริ่มต้นใช้งานระบบ",
-      en: "Click the button below to open the site, register via LINE (choose either a Patient or Driver role), and fill in your profile details to start using the platform."
+      th: "กรุณาคลิกปุ่มด้านล่างเพื่อเปิดหน้าเว็บ จากนั้นทำตามขั้นตอนการเข้าใช้งานระบบในแต่ละบทบาทดังนี้เพื่อเริ่มต้นทดลองใช้งาน",
+      en: "Click the button below to open the site, then follow the instructions for each role below to start trying out the platform."
     },
+    demoTabs: [
+      {
+        name: { th: 'สำหรับผู้ใช้ทั่วไป', en: 'For General Users' },
+        steps: [
+          {
+            title: { th: 'เข้าสู่ระบบด้วย LINE & ลงทะเบียน', en: 'Login with LINE & Register' },
+            detail: {
+              th: 'ล็อกอินง่าย ๆ ผ่าน LINE จากนั้นกรอกข้อมูลพื้นฐานอย่างชื่อจริง ที่อยู่ปัจจุบัน และกรอกข้อมูลสุขภาพเพื่อเตรียมพร้อมก่อนการจอง',
+              en: 'Log in easily via LINE, then fill in basic information such as real name, current address, and health profile to prepare before booking.'
+            }
+          },
+          {
+            title: { th: 'ทำการจองและแนบสลิปชำระเงิน', en: 'Book & Attach Payment Slip' },
+            detail: {
+              th: 'เลือกโรงพยาบาลปลายทาง ระบุวันเวลาที่รับ และทำการโอนเงินพร้อมแนบสลิปผ่านทางหน้าเว็บเพื่อรอการอนุมัติรับงาน',
+              en: 'Select the destination hospital, specify pickup date/time, and transfer funds while attaching the slip on the web interface to await job approval.'
+            }
+          },
+          {
+            title: { th: 'ตรวจสอบข้อมูลคนขับ & เดินทาง', en: 'Verify Driver & Transit' },
+            detail: {
+              th: 'เมื่อคนขับรับงานจองแล้ว ระบบจะแสดงข้อมูลประวัติคนขับ ยานพาหนะ และช่วยอัปเดตการแจ้งเตือนสถานะเมื่อคนขับเดินทางมารับคุณ',
+              en: 'Once the driver accepts the booking, the system displays their profile, vehicle details, and sends live status alerts as they head to pick you up.'
+            }
+          },
+          {
+            title: { th: 'เปิดรับแจ้งเตือนผ่าน LINE OA', en: 'Enable LINE OA Notifications' },
+            detail: {
+              th: 'แนะแนวให้กดเพิ่มเพื่อนกับระบบ LINE Official Account เพื่อรับข้อความแจ้งเตือนสถานะความคืบหน้าของงานโดยไม่ต้องเปิดหน้าจอเว็บค้างไว้',
+              en: 'Add the LINE Official Account as a friend to receive status updates without having to keep the website open.'
+            }
+          }
+        ]
+      },
+      {
+        name: { th: 'สำหรับพาร์ทเนอร์คนขับ', en: 'For Partner Drivers' },
+        steps: [
+          {
+            title: { th: 'ส่งรูปเอกสารสมัครพาร์ทเนอร์', en: 'Submit Partner Documents' },
+            detail: {
+              th: 'ลงทะเบียนพร้อมอัปโหลดภาพใบขับขี่ บัตรประชาชน รูปรถยนต์ และ พ.ร.บ. เพื่อส่งให้ผู้ดูแลระบบตรวจสอบคุณสมบัติความปลอดภัยและอนุมัติเปิดสิทธิ์',
+              en: 'Register and upload driver license, national ID card, vehicle photo, and compulsory motor insurance for admin safety verification and approval.'
+            }
+          },
+          {
+            title: { th: 'เลือกรับงานจองจราจรทางการแพทย์', en: 'Choose Medical Transit Jobs' },
+            detail: {
+              th: 'เข้าไปยังหน้าแดชบอร์ดค้นหางานเพื่อตรวจสอบคิวงานที่ยังไม่มีคนขับรับ แล้วทำรายการเลือกรับงานจองตามพื้นที่และความสะดวก',
+              en: 'Visit the job search dashboard to check unassigned bookings, then select transit tasks based on location and convenience.'
+            }
+          },
+          {
+            title: { th: 'กดอัปเดตสถานะการรับส่งจริง', en: 'Update Real-time Transit Status' },
+            detail: {
+              th: 'ระหว่างดำเนินงาน ให้กดปุ่มรายงานความคืบหน้า (กำลังไปรับ -> รับผู้ป่วย -> ถึงโรงพยาบาล -> รอรับกลับ -> ถึงบ้าน) เพื่อส่งแจ้งเตือนให้ผู้ป่วยรับทราบแบบ Real-time',
+              en: 'During operation, tap the progress update buttons (Heading to pick up -> Picked up -> Arrived at hospital -> Waiting to return -> Returned home) to notify patients in real-time.'
+            }
+          },
+          {
+            title: { th: 'ตรวจสอบสถิติกำไรและประวัติงาน', en: 'Track Profits & Job History' },
+            detail: {
+              th: 'ประวัติการปิดคิวงานเดินทางรวมถึงรายงานปัญหาที่เคยแจ้ง จะถูกบันทึกไว้ในหน้าแดชบอร์ดเพื่อให้ตรวจสอบข้อมูลย้อนหลังได้ตลอดเวลา',
+              en: 'Trip completion logs and reported issue history are saved on the dashboard for your review at any time.'
+            }
+          }
+        ]
+      }
+    ],
   },
 
   //   {

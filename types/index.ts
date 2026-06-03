@@ -5,10 +5,16 @@ export type LocalizedText = {
     en: string
 }
 
-export interface CredentialRole {
+export interface DemoStep {
+    title: LocalizedText
+    detail: LocalizedText
+}
+
+export interface DemoTab {
     name: LocalizedText
     username?: string
     password?: string
+    steps?: DemoStep[]
 }
 
 export interface Project {
@@ -19,7 +25,7 @@ export interface Project {
     tags?: string[]
     githubUrl?: string
     demoUrl?: string
-    demoCredentials?: CredentialRole[]
+    demoTabs?: DemoTab[]
     demoInstruction?: LocalizedText
 }
 

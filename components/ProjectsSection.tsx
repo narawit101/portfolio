@@ -199,6 +199,7 @@ function DemoCredentialsModal({
   lang,
 }: DemoCredentialsModalProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const [activeTabIdx, setActiveTabIdx] = useState(0);
   const [copiedField, setCopiedField] = useState<string | null>(null);
   const [showPasswords, setShowPasswords] = useState<Record<number, boolean>>(
     {},
@@ -275,6 +276,7 @@ function DemoCredentialsModal({
   };
 
   const text = demoModalCopy[lang];
+  const activeTab = project.demoTabs?.[activeTabIdx];
 
   return (
     <div
@@ -323,24 +325,33 @@ function DemoCredentialsModal({
               : text.description}
           </p>
 
-          <div className="space-y-4">
-            {project.demoCredentials?.map((cred, index) => {
-              const userKey = `user-${index}`;
-              const passKey = `pass-${index}`;
-              const isPasswordVisible = !!showPasswords[index];
+          {project.demoTabs && project.demoTabs.length > 1 && (
+            <div className="flex border-b border-(--theme-border)/50 mb-2 gap-2">
+              {project.demoTabs.map((tab, index) => {
+                const isActive = index === activeTabIdx;
+                return (
+                  <button
+                    key={index}
+                    onClick={() => setActiveTabIdx(index)}
+                    className={`flex-1 pb-3 text-sm font-semibold border-b-2 text-center transition-all duration-200 cursor-pointer ${
+                      isActive
+                        ? "border-primary text-primary"
+                        : "border-transparent text-(--theme-text-muted) hover:text-(--theme-text)"
+                    }`}
+                  >
+                    {tab.name[lang]}
+                  </button>
+                );
+              })}
+            </div>
+          )}
 
-              return (
-                <div
-                  key={index}
-                  className="rounded-xl border border-(--theme-border) bg-(--theme-surface-soft) p-4 space-y-3"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold tracking-wider text-primary uppercase">
-                      {cred.name[lang]}
-                    </span>
-                  </div>
-
-                  {cred.username && (
+          {activeTab && (
+            <div className="space-y-4 pt-2">
+              {/* Credentials type */}
+              {(activeTab.username || activeTab.password) && (
+                <div className="rounded-xl border border-(--theme-border) bg-(--theme-surface-soft) p-4 space-y-3">
+                  {activeTab.username && (
                     <div className="space-y-1">
                       <span className="text-[11px] text-(--theme-text-faint) block uppercase tracking-wider">
                         {text.username}
@@ -349,14 +360,14 @@ function DemoCredentialsModal({
                         <input
                           type="text"
                           readOnly
-                          value={cred.username}
+                          value={activeTab.username}
                           className="w-full rounded-md border border-(--theme-border) bg-(--theme-bg) px-3 py-1.5 text-xs text-(--theme-text) focus:outline-none"
                         />
                         <button
-                          onClick={() => handleCopy(cred.username!, userKey)}
+                          onClick={() => handleCopy(activeTab.username!, `user-${activeTabIdx}`)}
                           className="cursor-pointer flex shrink-0 items-center gap-1.5 rounded-md bg-primary/10 hover:bg-primary/20 border border-primary/20 px-3 py-1.5 text-xs font-semibold text-primary transition-all duration-200"
                         >
-                          {copiedField === userKey ? (
+                          {copiedField === `user-${activeTabIdx}` ? (
                             <>
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -396,30 +407,30 @@ function DemoCredentialsModal({
                     </div>
                   )}
 
-                  {cred.password && (
+                  {activeTab.password && (
                     <div className="space-y-1">
                       <span className="text-[11px] text-(--theme-text-faint) block uppercase tracking-wider">
                         {text.password}
                       </span>
                       <div className="flex items-center gap-2">
                         <input
-                          type={isPasswordVisible ? "text" : "password"}
+                          type={showPasswords[activeTabIdx] ? "text" : "password"}
                           readOnly
-                          value={cred.password}
+                          value={activeTab.password}
                           className="w-full rounded-md border border-(--theme-border) bg-(--theme-bg) px-3 py-1.5 text-xs text-(--theme-text) focus:outline-none"
                         />
                         <button
                           onClick={() =>
                             handleShowAndCopyPassword(
-                              index,
-                              cred.password,
-                              passKey,
+                              activeTabIdx,
+                              activeTab.password,
+                              `pass-${activeTabIdx}`,
                             )
                           }
                           className="cursor-pointer flex shrink-0 items-center gap-1.5 rounded-md bg-primary/10 hover:bg-primary/20 border border-primary/20 px-3 py-1.5 text-xs font-semibold text-primary transition-all duration-200"
                           title={`${text.show} & ${text.copy}`}
                         >
-                          {copiedField === passKey ? (
+                          {copiedField === `pass-${activeTabIdx}` ? (
                             <>
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -464,9 +475,33 @@ function DemoCredentialsModal({
                     </div>
                   )}
                 </div>
-              );
-            })}
-          </div>
+              )}
+
+              {/* Steps/Flowchart type */}
+              {activeTab.steps && activeTab.steps.length > 0 && (
+                <div className="space-y-3.5">
+                  {activeTab.steps.map((step, stepIdx) => (
+                    <div
+                      key={stepIdx}
+                      className="flex gap-4 rounded-xl border border-(--theme-border) bg-(--theme-surface-soft) p-4 transition-all duration-300 hover:border-primary/30 hover:bg-primary/5 hover:translate-x-0.5"
+                    >
+                      <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary border border-primary/20">
+                        {stepIdx + 1}
+                      </div>
+                      <div className="space-y-1">
+                        <h4 className="text-sm font-bold text-(--theme-text)">
+                          {step.title[lang]}
+                        </h4>
+                        <p className="text-xs text-(--theme-text-body) leading-relaxed">
+                          {step.detail[lang]}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         <div className="flex flex-col gap-2 p-5 border-t border-(--theme-border)">
@@ -743,10 +778,10 @@ export default function ProjectsSection({ lang }: { lang: Lang }) {
   const hasPagination = totalPages > 1;
 
   const handleDemoClick = (project: Project) => {
-    const hasCredentials =
-      project.demoCredentials && project.demoCredentials.length > 0;
+    const hasTabs =
+      project.demoTabs && project.demoTabs.length > 0;
     const hasInstructions = !!project.demoInstruction;
-    if (hasCredentials || hasInstructions) {
+    if (hasTabs || hasInstructions) {
       setDemoProject(project);
     } else if (project.demoUrl) {
       window.open(project.demoUrl, "_blank");
