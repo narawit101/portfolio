@@ -236,75 +236,75 @@ DriveCare showcases a practical role-based system where product flow, daily oper
     ],
   },
 
-  //   {
-  //     id: 3,
-  //     head: {
-  //       th: 'แพลตฟอร์ม Ticket Helper + ระบบจัดการผู้ใช้งาน',
-  //       en: 'Ticket Helper Platform + User Management System',
-  //     },
-  //     description: {
-  //       th: `Ticket Helper Platform คือระบบที่รวม 2 ส่วนสำคัญเข้าด้วยกัน ได้แก่ แดชบอร์ดแอดมินสำหรับจัดการผู้ใช้งาน และ Chrome Extension สำหรับช่วยเตรียมขั้นตอนกดบัตรบนหน้า ThaiTicketMajor ให้เป็น workflow ที่ชัดเจนและทำซ้ำได้ง่ายขึ้น
+  {
+    id: 3,
+    head: {
+      th: 'แพลตฟอร์ม Ticket Helper + ระบบจัดการผู้ใช้งาน',
+      en: 'Ticket Helper Platform + User Management System',
+    },
+    description: {
+      th: `Ticket Helper Platform คือระบบที่รวม 2 ส่วนสำคัญเข้าด้วยกัน ได้แก่ แดชบอร์ดแอดมินสำหรับจัดการผู้ใช้งาน และ Chrome Extension สำหรับช่วยเตรียมขั้นตอนกดบัตรบนหน้า ThaiTicketMajor ให้เป็น workflow ที่ชัดเจนและทำซ้ำได้ง่ายขึ้น
 
-  // ปัญหาที่โปรเจคนี้แก้ไข
-  // - ลดภาระการจัดการบัญชีผู้ใช้แบบแมนนวล โดยให้แอดมินควบคุมสิทธิ์ วันหมดอายุ และจำนวนอุปกรณ์ได้จากจุดเดียว
-  // - ลดขั้นตอนซ้ำๆ ของผู้ใช้งานที่ต้องกรอกข้อมูลจองบัตรหลายรอบ
-  // - เพิ่มความคุมได้ของระบบด้วยการบังคับหยุดใช้งานอัตโนมัติเมื่อบัญชีหมดอายุหรือเกินเงื่อนไขอุปกรณ์
+  ปัญหาที่โปรเจคนี้แก้ไข
+  - ลดภาระการจัดการบัญชีผู้ใช้แบบแมนนวล โดยให้แอดมินควบคุมสิทธิ์ วันหมดอายุ และจำนวนอุปกรณ์ได้จากจุดเดียว
+  - ลดขั้นตอนซ้ำๆ ของผู้ใช้งานที่ต้องกรอกข้อมูลจองบัตรหลายรอบ
+  - เพิ่มความคุมได้ของระบบด้วยการบังคับหยุดใช้งานอัตโนมัติเมื่อบัญชีหมดอายุหรือเกินเงื่อนไขอุปกรณ์
 
-  // ฟีเจอร์สำคัญของระบบ
-  // - ฝั่งแอดมิน (Admin Dashboard): ล็อกอินแอดมิน, จัดการผู้ใช้งานแบบ CRUD, ตั้งค่า expiry date และ device limit ต่อบัญชี, จัดการ session และ Redis cache invalidation
-  // - ฝั่งผู้ใช้งาน (Chrome Extension): ล็อกอินด้วยบัญชีที่ถูก provision พร้อม device key, ตั้งค่าจองผ่าน side panel, บันทึก draft การจอง, ระบบช่วยไล่ flow หน้าจองบน ThaiTicketMajor, รองรับ zone fallback, กลยุทธ์เลือกที่นั่งหลายแบบ, และ autofill ข้อมูลการจอง
-  // - การควบคุมสถานะ: มี status log แบบเรียลไทม์ใน extension และ forced stop/logout เมื่อสถานะบัญชีไม่พร้อมใช้งาน
+  ฟีเจอร์สำคัญของระบบ
+  - ฝั่งแอดมิน (Admin Dashboard): ล็อกอินแอดมิน, จัดการผู้ใช้งานแบบ CRUD, ตั้งค่า expiry date และ device limit ต่อบัญชี, จัดการ session และ Redis cache invalidation
+  - ฝั่งผู้ใช้งาน (Chrome Extension): ล็อกอินด้วยบัญชีที่ถูก provision พร้อม device key, ตั้งค่าจองผ่าน side panel, บันทึก draft การจอง, ระบบช่วยไล่ flow หน้าจองบน ThaiTicketMajor, รองรับ zone fallback, กลยุทธ์เลือกที่นั่งหลายแบบ, และ autofill ข้อมูลการจอง
+  - การควบคุมสถานะ: มี status log แบบเรียลไทม์ใน extension และ forced stop/logout เมื่อสถานะบัญชีไม่พร้อมใช้งาน
 
-  // จุดเด่นเชิงเทคนิค
-  // - สถาปัตยกรรม monorepo ด้วย pnpm workspace แยก apps/admin, apps/extension และ packages/shared
-  // - ฝั่งแอดมินใช้ Next.js full-stack + Prisma + PostgreSQL + Redis พร้อม validation ด้วย Zod
-  // - ฝั่ง extension ใช้ Chrome Manifest V3, CRXJS และ Vite เพื่อพัฒนา workflow บน browser
-  // - แชร์ TypeScript contracts ระหว่างแอดมินและ extension เพื่อลดความผิดพลาดของ API shape
+  จุดเด่นเชิงเทคนิค
+  - สถาปัตยกรรม monorepo ด้วย pnpm workspace แยก apps/admin, apps/extension และ packages/shared
+  - ฝั่งแอดมินใช้ Next.js full-stack + Prisma + PostgreSQL + Redis พร้อม validation ด้วย Zod
+  - ฝั่ง extension ใช้ Chrome Manifest V3, CRXJS และ Vite เพื่อพัฒนา workflow บน browser
+  - แชร์ TypeScript contracts ระหว่างแอดมินและ extension เพื่อลดความผิดพลาดของ API shape
 
-  // การนำขึ้นระบบ (Deploy)
-  // - Admin Full-stack (Next.js UI + API) deploy บน Vercel เพื่อเข้าถึงและจัดการระบบได้สะดวก
-  // - ฐานข้อมูล PostgreSQL ใช้ Supabase และ Redis ใช้ Upstash สำหรับ cache และ session
-  // - ฝั่ง Chrome Extension build ด้วย Vite + CRXJS และจัดการ release เป็นแพ็กเกจแยกจากเว็บแอป
+  การนำขึ้นระบบ (Deploy)
+  - Admin Full-stack (Next.js UI + API) deploy บน Vercel เพื่อเข้าถึงและจัดการระบบได้สะดวก
+  - ฐานข้อมูล PostgreSQL ใช้ Supabase และ Redis ใช้ Upstash สำหรับ cache และ session
+  - ฝั่ง Chrome Extension build ด้วย Vite + CRXJS และจัดการ release เป็นแพ็กเกจแยกจากเว็บแอป
 
-  // สรุปผลลัพธ์
-  // โปรเจคนี้สะท้อนความสามารถในการพัฒนาระบบจริงที่ต้องเชื่อม full-stack web app กับ browser extension พร้อมบริหารสิทธิ์ผู้ใช้เชิงปฏิบัติการ ทำให้ผลงานชิ้นนี้โดดเด่นทั้งด้าน architecture, automation workflow และการดูแลระบบในระดับ production`,
-  //       en: `Ticket Helper Platform combines two core modules: an admin dashboard for account operations and a Chrome Extension that streamlines ThaiTicketMajor booking preparation into a repeatable workflow.
+  สรุปผลลัพธ์
+  โปรเจคนี้สะท้อนความสามารถในการพัฒนาระบบจริงที่ต้องเชื่อม full-stack web app กับ browser extension พร้อมบริหารสิทธิ์ผู้ใช้เชิงปฏิบัติการ ทำให้ผลงานชิ้นนี้โดดเด่นทั้งด้าน architecture, automation workflow และการดูแลระบบในระดับ production`,
+      en: `Ticket Helper Platform combines two core modules: an admin dashboard for account operations and a Chrome Extension that streamlines ThaiTicketMajor booking preparation into a repeatable workflow.
 
-  // Problems this project solves
-  // - Reduces manual account operations by centralizing permission, expiry, and device-limit controls.
-  // - Cuts repetitive booking-input steps for users.
-  // - Improves operational control with forced stop/logout when account rules are violated.
+  Problems this project solves
+  - Reduces manual account operations by centralizing permission, expiry, and device-limit controls.
+  - Cuts repetitive booking-input steps for users.
+  - Improves operational control with forced stop/logout when account rules are violated.
 
-  // Core features
-  // - Admin Dashboard: Admin login, full user CRUD, expiry date and device limit controls, session management, and Redis cache invalidation.
-  // - Chrome Extension: Provisioned account login with device key, side-panel booking setup, booking draft support, guided booking flow for ThaiTicketMajor, zone fallback, multi-strategy seat selection, and autofill.
-  // - Control layer: Real-time status logs inside extension and forced stop/logout when account status is invalid.
+  Core features
+  - Admin Dashboard: Admin login, full user CRUD, expiry date and device limit controls, session management, and Redis cache invalidation.
+  - Chrome Extension: Provisioned account login with device key, side-panel booking setup, booking draft support, guided booking flow for ThaiTicketMajor, zone fallback, multi-strategy seat selection, and autofill.
+  - Control layer: Real-time status logs inside extension and forced stop/logout when account status is invalid.
 
-  // Technical highlights
-  // - Monorepo architecture with pnpm workspace across apps/admin, apps/extension, and packages/shared.
-  // - Admin stack: Next.js full-stack + Prisma + PostgreSQL + Redis with Zod validation.
-  // - Extension stack: Chrome Manifest V3, CRXJS, and Vite for browser workflow automation.
-  // - Shared TypeScript contracts between admin and extension to reduce API shape mismatch.
+  Technical highlights
+  - Monorepo architecture with pnpm workspace across apps/admin, apps/extension, and packages/shared.
+  - Admin stack: Next.js full-stack + Prisma + PostgreSQL + Redis with Zod validation.
+  - Extension stack: Chrome Manifest V3, CRXJS, and Vite for browser workflow automation.
+  - Shared TypeScript contracts between admin and extension to reduce API shape mismatch.
 
-  // Deployment
-  // - Admin full-stack (Next.js UI + API) deployed on Vercel.
-  // - PostgreSQL on Supabase and Redis on Upstash for cache/session workloads.
-  // - Chrome Extension built with Vite + CRXJS and released as a separate package.
+  Deployment
+  - Admin full-stack (Next.js UI + API) deployed on Vercel.
+  - PostgreSQL on Supabase and Redis on Upstash for cache/session workloads.
+  - Chrome Extension built with Vite + CRXJS and released as a separate package.
 
-  // Outcome
-  // This project highlights full-stack and browser-extension integration in a production-minded system, covering architecture, workflow automation, and operational user control at scale.`,
-  //     },
-  //     pictures: [
-  //       "https://res.cloudinary.com/do6xlqizt/image/upload/v1776672735/Screenshot_2026-04-20_151039_k2f4uw.png",
-  //       "https://res.cloudinary.com/do6xlqizt/image/upload/v1776672732/Screenshot_2026-04-20_151012_q8vzxp.png",
-  //       "https://res.cloudinary.com/do6xlqizt/image/upload/v1776672731/Screenshot_2026-04-20_151052_o6nryt.png",
-  //       "https://res.cloudinary.com/do6xlqizt/image/upload/v1776672924/Screenshot_2026-04-20_151113_jdmygd.png",
-  //       "https://res.cloudinary.com/do6xlqizt/image/upload/v1776672732/Screenshot_2026-04-20_151124_iyvoak.png",
-  //       "https://res.cloudinary.com/do6xlqizt/image/upload/v1776672732/Screenshot_2026-04-20_151134_gommlp.png",
-  //     ],
-  //     tags: ["Next.js 15 Fullstack", "TypeScript", "Chrome Extension MV3", "Vite-React.js", "Prisma", "PostgreSQL", "Redis", "Zod", "CRXJS", "pnpm Workspace", "Vercel", "Supabase", "Upstash"],
-  //     githubUrl: "https://github.com/narawit101/TTM-Helper"
-  //   },
+  Outcome
+  This project highlights full-stack and browser-extension integration in a production-minded system, covering architecture, workflow automation, and operational user control at scale.`,
+    },
+    pictures: [
+      "https://res.cloudinary.com/do6xlqizt/image/upload/v1776672735/Screenshot_2026-04-20_151039_k2f4uw.png",
+      "https://res.cloudinary.com/do6xlqizt/image/upload/v1776672732/Screenshot_2026-04-20_151012_q8vzxp.png",
+      "https://res.cloudinary.com/do6xlqizt/image/upload/v1776672731/Screenshot_2026-04-20_151052_o6nryt.png",
+      "https://res.cloudinary.com/do6xlqizt/image/upload/v1776672924/Screenshot_2026-04-20_151113_jdmygd.png",
+      "https://res.cloudinary.com/do6xlqizt/image/upload/v1776672732/Screenshot_2026-04-20_151124_iyvoak.png",
+      "https://res.cloudinary.com/do6xlqizt/image/upload/v1776672732/Screenshot_2026-04-20_151134_gommlp.png",
+    ],
+    tags: ["Next.js 15 Fullstack", "TypeScript", "Chrome Extension MV3", "Vite-React.js", "Prisma", "PostgreSQL", "Redis", "Zod", "CRXJS", "pnpm Workspace", "Vercel", "Supabase", "Upstash"],
+    githubUrl: "https://github.com/narawit101/TTM-Helper"
+  },
 ]
 
 export const demoModalCopy = {
