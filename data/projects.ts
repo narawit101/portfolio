@@ -239,11 +239,11 @@ DriveCare showcases a practical role-based system where product flow, daily oper
   {
     id: 3,
     head: {
-      th: 'แพลตฟอร์ม Ticket Helper + ระบบจัดการผู้ใช้งาน',
-      en: 'Ticket Helper Platform + User Management System',
+      th: 'Ticket Helper (ระบบช่วยจองตั๋วคอนเสิร์ต thaiticketmajor.com) + ระบบจัดการผู้ใช้งาน',
+      en: 'Ticket Helper + Concert Ticket Booking System + User Management System',
     },
     description: {
-      th: `Ticket Helper Platform คือระบบที่รวม 2 ส่วนสำคัญเข้าด้วยกัน ได้แก่ แดชบอร์ดแอดมินสำหรับจัดการผู้ใช้งาน และ Chrome Extension สำหรับช่วยเตรียมขั้นตอนกดบัตรบนหน้า ThaiTicketMajor ให้เป็น workflow ที่ชัดเจนและทำซ้ำได้ง่ายขึ้น
+      th: `Ticket Helper คือระบบที่รวม 2 ส่วนสำคัญเข้าด้วยกัน ได้แก่ แดชบอร์ดแอดมินสำหรับจัดการผู้ใช้งาน และ Chrome Extension สำหรับช่วยเตรียมขั้นตอนกดบัตรบนหน้า ThaiTicketMajor ให้เป็น workflow ที่ชัดเจนและทำซ้ำได้ง่ายขึ้น
 
   ปัญหาที่โปรเจคนี้แก้ไข
   - ลดภาระการจัดการบัญชีผู้ใช้แบบแมนนวล โดยให้แอดมินควบคุมสิทธิ์ วันหมดอายุ และจำนวนอุปกรณ์ได้จากจุดเดียว
