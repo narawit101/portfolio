@@ -240,7 +240,7 @@ DriveCare showcases a practical role-based system where product flow, daily oper
     id: 3,
     head: {
       th: 'Ticket Helper (ระบบช่วยจองตั๋วคอนเสิร์ต thaiticketmajor.com) + ระบบจัดการผู้ใช้งาน',
-      en: 'Ticket Helper + Concert Ticket Booking System + User Management System',
+      en: 'Ticket Helper (Concert Ticket Booking System thaiticketmajor.com) + User Management System',
     },
     description: {
       th: `Ticket Helper คือระบบที่รวม 2 ส่วนสำคัญเข้าด้วยกัน ได้แก่ แดชบอร์ดแอดมินสำหรับจัดการผู้ใช้งาน และ Chrome Extension สำหรับช่วยเตรียมขั้นตอนกดบัตรบนหน้า ThaiTicketMajor ให้เป็น workflow ที่ชัดเจนและทำซ้ำได้ง่ายขึ้น
