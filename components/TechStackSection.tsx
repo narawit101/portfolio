@@ -6,6 +6,7 @@ import { Lang, TechStackCategory } from "@/types";
 import { TechStackItem } from "@/types";
 
 import { PaginationNav } from "./Navigation";
+import { useTheme } from "@/components/theme";
 
 const sectionCopy: Record<Lang, { title: string; subtitle: string }> = {
   th: {
@@ -18,16 +19,21 @@ const sectionCopy: Record<Lang, { title: string; subtitle: string }> = {
   },
 };
 
-const TechStackTile = ({ item }: { item: TechStackItem }) => (
-  <div className="theme-panel theme-panel-hover flex flex-col items-center gap-2 rounded-2xl px-3 py-4 text-center transition-all">
-    <div className="theme-soft flex h-12 w-12 items-center justify-center rounded-full">
-      <img src={item.img} alt={item.name} className="w-8 h-8 object-contain" />
+const TechStackTile = ({ item }: { item: TechStackItem }) => {
+  const { theme } = useTheme();
+  const imgSrc = typeof item.img === "string" ? item.img : item.img[theme];
+  
+  return (
+    <div className="theme-panel theme-panel-hover flex flex-col items-center gap-2 rounded-2xl px-3 py-4 text-center transition-all">
+      <div className="theme-soft flex h-12 w-12 items-center justify-center rounded-full">
+        <img src={imgSrc} alt={item.name} className="w-8 h-8 object-contain" />
+      </div>
+      <span className="text-[11px] font-semibold tracking-wide text-(--theme-text)">
+        {item.name}
+      </span>
     </div>
-    <span className="text-[11px] font-semibold tracking-wide text-(--theme-text)">
-      {item.name}
-    </span>
-  </div>
-);
+  );
+};
 
 const ITEMS_PER_PAGE = 8;
 

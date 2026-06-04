@@ -32,12 +32,10 @@
   --theme-toggle-track: rgba(255, 255, 255, 0.06);
   --theme-toggle-icon: #7f8da5;
   --theme-toggle-icon-active: #ffffff;
-  --theme-toggle-thumb: linear-gradient(
-    180deg,
-    #ffd4ae 0%,
-    #f59a52 55%,
-    #d86c2c 100%
-  );
+  --theme-toggle-thumb: linear-gradient(180deg,
+      #ffd4ae 0%,
+      #f59a52 55%,
+      #d86c2c 100%);
   --theme-contact-icon-filter: brightness(0) saturate(100%) invert(49%) sepia(91%) saturate(1637%) hue-rotate(352deg) brightness(98%) contrast(101%);
   --theme-contact-icon-opacity: 0.94;
   --hero-image-opacity: 0.2;
@@ -72,12 +70,10 @@ html[data-theme="light"] {
   --theme-toggle-track: rgba(221, 202, 181, 0.34);
   --theme-toggle-icon: #9e8d7d;
   --theme-toggle-icon-active: #d86c2c;
-  --theme-toggle-thumb: linear-gradient(
-    180deg,
-    #fff3e5 0%,
-    #f6b16c 58%,
-    #dd7a30 100%
-  );
+  --theme-toggle-thumb: linear-gradient(180deg,
+      #fff3e5 0%,
+      #f6b16c 58%,
+      #dd7a30 100%);
   --theme-contact-icon-filter: brightness(0) saturate(100%) invert(49%) sepia(91%) saturate(1637%) hue-rotate(352deg) brightness(98%) contrast(101%);
   --theme-contact-icon-opacity: 1;
   --hero-image-opacity: 0.12;
@@ -90,16 +86,12 @@ html[data-theme="light"] {
 body {
   font-family: "Kanit", sans-serif;
   background:
-    radial-gradient(
-      circle at top right,
+    radial-gradient(circle at top right,
       rgb(var(--primary-rgb) / 0.1),
-      transparent 32%
-    ),
-    radial-gradient(
-      circle at bottom left,
+      transparent 32%),
+    radial-gradient(circle at bottom left,
       rgb(var(--primary-rgb) / 0.08),
-      transparent 28%
-    ),
+      transparent 28%),
     var(--theme-bg);
   color: var(--theme-text);
   transition:
@@ -150,12 +142,10 @@ html[data-theme="light"] .hero-bg-image {
 }
 
 .theme-divider-line {
-  background: linear-gradient(
-    to right,
-    transparent,
-    var(--theme-divider),
-    transparent
-  );
+  background: linear-gradient(to right,
+      transparent,
+      var(--theme-divider),
+      transparent);
 }
 
 .theme-panel {
@@ -324,12 +314,10 @@ html[data-theme="light"] .hero-secondary-button:hover {
 .theme-toggle-rail {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgb(var(--primary-rgb) / 0.12) 0%,
-    transparent 48%,
-    rgb(var(--primary-rgb) / 0.08) 100%
-  );
+  background: linear-gradient(180deg,
+      rgb(var(--primary-rgb) / 0.12) 0%,
+      transparent 48%,
+      rgb(var(--primary-rgb) / 0.08) 100%);
 }
 
 .theme-toggle-thumb {
@@ -376,6 +364,7 @@ html[data-theme="light"] .hero-secondary-button:hover {
 }
 
 @keyframes terminalTyping {
+
   0%,
   12% {
     width: 0;
@@ -392,6 +381,7 @@ html[data-theme="light"] .hero-secondary-button:hover {
 }
 
 @keyframes terminalCaret {
+
   from,
   to {
     border-right-color: transparent;
@@ -453,6 +443,7 @@ html[data-theme="light"] .hero-secondary-button:hover {
   background-color: #f97316 !important;
   color: #ffffff !important;
 }
+
 .btn-demo-primary:hover {
   background-color: #ea580c !important;
 }
@@ -474,8 +465,11 @@ html[data-theme="light"] .project-card {
 .scrollbar-none::-webkit-scrollbar {
   display: none;
 }
+
 /* Hide scrollbar for IE, Edge and Firefox */
 .scrollbar-none {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }

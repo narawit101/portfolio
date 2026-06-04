@@ -31,7 +31,7 @@ export interface Project {
 
 export type TechStackItem = {
     name: string
-    img: string
+    img: string | { light: string; dark: string }
 }
 
 export type TechStackCategory = {

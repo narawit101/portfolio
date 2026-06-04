@@ -45,6 +45,10 @@ To keep the codebase maintainable and type-safe, adhere to these coding patterns
 - **Tailwind Styles:** Use Tailwind classes rather than inline styles. Refer directly to variables (e.g., `text-(--theme-text)`, `bg-(--theme-bg)`) or Tailwind theme classes (`text-primary`, `border-primary`).
 - **Animations:** Use CSS transitions coupled with standard Tailwind utility classes (e.g., `transition-all duration-300 origin-center`).
 
+### 🎨 2.4. Brand Icons
+
+- **Use thesvg.org CDN:** All brand and tech logos/icons (such as in `data/techStack.ts` or projects configurations) must be sourced from thesvg.org using its standard SVG CDN path format: `https://thesvg.org/icons/{slug}/default.svg` (e.g., `https://thesvg.org/icons/react/default.svg`). Avoid using random external PNG/JPG search URLs.
+
 ---
 
 ## ❌ 3. Never Do

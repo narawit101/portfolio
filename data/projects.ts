@@ -78,7 +78,7 @@ This project showcases the ability to architect an end-to-end multi-role system 
         "https://res.cloudinary.com/do6xlqizt/image/upload/v1780559289/screencapture-sport-hub-sable-vercel-app-manage-user-2026-06-04-14_35_40_xucu4z.png",
         "https://res.cloudinary.com/do6xlqizt/image/upload/v1780559292/screencapture-sport-hub-sable-vercel-app-manage-sport-type-2026-06-04-14_35_55_ppdup1.png",
       ],
-    tags: ["TEAMWORK", "Next.js 15", "React 19", "Express.js", "PostgreSQL", "Socket.IO", "Redis", "PromptPay QR", "Render", "Vercel", "Cloudinary", "Upstash", "Brevo API", "Longdo Map"],
+    tags: ["Team Project", "Next.js 15", "React 19", "Express.js", "PostgreSQL", "Socket.IO", "Redis", "PromptPay QR", "Render", "Vercel", "Cloudinary", "Upstash", "Brevo API", "Longdo Map"],
     githubUrl: 'https://github.com/narawit101/sport-hub',
     demoUrl: 'https://sport-hub-sable.vercel.app/',
     demoTabs: [
@@ -174,7 +174,7 @@ DriveCare showcases a practical role-based system where product flow, daily oper
       "https://res.cloudinary.com/do6xlqizt/image/upload/v1780560580/screencapture-drivecare-ten-vercel-app-admin-manager-users-2026-06-04-15_02_06_ufoaxo.png",
 
     ],
-    tags: ["TEAMWORK", "Next.js 16", "React 19", "Tailwind CSS 4", "TypeScript", "PostgreSQL", "Supabase", "Upstash", "Redis", "Pusher", "Longdo Map", "LINE LIFF", "LINE Messaging Api", "Cloudinary", "Chart.js", "Vercel"],
+    tags: ["Team Project", "Next.js 16", "React 19", "Tailwind CSS 4", "TypeScript", "PostgreSQL", "Supabase", "Upstash", "Redis", "Pusher", "Longdo Map", "LINE LIFF", "LINE Messaging Api", "Cloudinary", "Chart.js", "Vercel"],
     githubUrl: 'https://github.com/narawit101/drivecare',
     demoUrl: 'https://drivecare-ten.vercel.app/',
     demoInstruction: {
@@ -319,6 +319,70 @@ DriveCare showcases a practical role-based system where product flow, daily oper
     ],
     tags: ["Next.js 15 Fullstack", "TypeScript", "Chrome Extension MV3", "Vite-React.js", "Prisma", "PostgreSQL", "Redis", "Zod", "CRXJS", "pnpm Workspace", "Vercel", "Supabase", "Upstash"],
     githubUrl: "https://github.com/narawit101/TTM-Helper"
+  },
+  {
+    id: 4,
+    head: {
+      th: 'ระบบควบคุมและประมวลผลบ้านอัจฉริยะและประตูระบายน้ำ (DPI Dashboard)',
+      en: 'DPI Smart Home & Dam Gate Control System (DPI Dashboard)',
+    },
+    description: {
+      th: `DPI Smart Home & Dam Gate Control System คือระบบควบคุมและตรวจสอบสภาพแวดล้อมบ้านอัจฉริยะร่วมกับการจัดการน้ำในเขื่อนแบบบูรณาการ ทำงานเชื่อมต่อกันระหว่างฮาร์ดแวร์ Edge Microcontrollers (ESP32/Arduino) ผ่าน PHP API เพื่อบันทึกฐานข้อมูล MySQL และรายงานผลความปลอดภัยและการทำงานบน Dashboard (HTML/CSS/JS) แบบเรียลไทม์
+
+ปัญหาที่โปรเจกต์นี้แก้ไข
+- ขาดความเสถียรและระบบจัดการข้อมูลสิ่งแวดล้อมในบ้านแบบเรียลไทม์
+- แก้ปัญหาความไม่ปลอดภัยในชีวิตและทรัพย์สินจากภัยธรรมชาติ (เช่น แผ่นดินไหว น้ำท่วม หรือสภาวะมืดเกินไป) โดยมีระบบแจ้งเตือนและควบคุมอัตโนมัติ
+- ปรับปรุงการควบคุมประตูกั้นน้ำของเขื่อนให้ตอบสนองโดยทันทีตามความสูงระดับน้ำ เพื่อป้องกันอุทกภัย
+
+ฟีเจอร์สำคัญของระบบ
+- ระบบรายงานสภาพแวดล้อมเรียลไทม์: แสดงผลอุณหภูมิ ความชื้น ระดับน้ำ ความเข้มแสง และแรงสั่นสะเทือน
+- ระบบควบคุมแบบสองโหมด (Dual-Mode):
+  - โหมดควบคุมด้วยตนเอง (Manual): ผู้ใช้ควบคุมการเปิด-ปิดไฟ LED และมุมของเซอร์โวมอเตอร์ประตูระบายน้ำได้โดยตรงจากหน้าเว็บ
+  - โหมดเซ็นเซอร์อัตโนมัติ (Sensor): ระบบฮาร์ดแวร์จะตัดสินใจทำงานเองอัตโนมัติ (เช่น สั่งเปิดประตูระบายน้ำเมื่อน้ำสูงเกิน 20 ซม. หรือสั่งปิดไฟเมื่อห้องสว่างเพียงพอ)
+- ระบบแจ้งเตือนภัยแบบมีเสียงและเอฟเฟกต์หน้าเว็บ: บัซเซอร์บนบอร์ดจะส่งสัญญาณเสียงเตือนถี่เมื่อจับแรงสั่นสะเทือนรุนแรงได้ และบนหน้าเว็บ Dashboard จะสั่นสะเทือนเตือนความปลอดภัยด้วยแอนิเมชัน (.shake) รวมถึงมีเอฟเฟกต์ไฟกะพริบ (.blinking) เมื่อแสงมืดเกินไป
+- กราฟแนวโน้มข้อมูลทางประวัติศาสตร์: แสดงผลกราฟเส้นย้อนหลัง 20 รายการล่าสุดของทุกเซ็นเซอร์แบบเรียลไทม์ด้วย Chart.js
+
+จุดเด่นเชิงเทคนิค
+- การสถาปัตยกรรมระบบ 3 ชั้น (Three-Tier Architecture): เชื่อมต่อ Edge Hardware (ESP32 / Arduino), PHP API Gateway, และเว็บแอปพลิเคชันฝั่ง Client ได้อย่างลงตัว
+- พัฒนาระบบเฟิร์มแวร์ ESP32 (C++) เพื่อประมวลผลข้อมูลเซ็นเซอร์ร่วมกับ Ultrasonic, Servo, LDR, DHT11 และ Vibration Sensors ส่งข้อมูลในรูปแบบ JSON ไปยัง PHP API ที่มีการตรวจสอบความปลอดภัยด้วย API Key Header (api_key: DPI)
+- ออกแบบโครงสร้าง Arduino เพื่อดึงเวลาจาก RTC DS1307 และแสดงผลแบบวินาทีต่อวินาทีบนจอ LiquidCrystal I2C
+- พัฒนาระบบ API endpoints ฝั่ง backend ด้วย PHP เพื่อควบคุม LED และ Servo ผ่านสถานะไฟล์บนดิสก์และส่งผลกลับไปยังฮาร์ดแวร์ได้อย่างรวดเร็ว
+- ออกแบบ Responsive UI Dashboard ที่มีความสวยงาม ทันสมัย รองรับ CSS Transitions และแอนิเมชันตรวจจับภัยพิบัติแบบไดนานิก
+
+สรุปผลลัพธ์
+โปรเจกต์นี้นำเสนอทักษะความสามารถด้าน Internet of Things (IoT) และ Embedded Systems การเชื่อมโยงฮาร์ดแวร์ระดับไมโครคอนโทรลเลอร์เข้ากับเว็บแอปพลิเคชันและฐานข้อมูลผ่าน REST API การจัดการเรื่องเวลา (Real-time tracking) การประมวลผลแบบ Sensor-based และการสร้าง Dashboard ที่มีความสวยงามและมีประสิทธิภาพสูง`,
+      en: `DPI Smart Home & Dam Gate Control System is an integrated IoT smart home and dam water management platform. It seamlessly connects edge hardware microcontrollers (ESP32/Arduino) with a relational database (MySQL) via a PHP backend API, providing real-time data visualization and status controls on a responsive web dashboard.
+
+Problems this project solves
+- Addresses the lack of real-time monitoring and environmental data logging in residential areas.
+- Mitigates safety risks from natural hazards (e.g., earthquakes, floods, or blackout conditions) by triggering instant alarms and automated overrides.
+- Prevents regional flooding by dynamically controlling dam gate structures based on ultrasonic water level readings.
+
+Core features
+- Real-time Environmental Monitoring: Instantly tracks and displays Temperature, Humidity, Water Level, Light intensity, and Vibration metrics.
+- Dual-Mode Operation Control:
+  - Manual Mode: Operators can directly toggle the LED light bulb or command the Dam Gate (Servo motor) from the web interface.
+  - Sensor (Auto) Mode: Hardware automates activities based on environmental criteria (e.g., dam gate sweeps open if water rises beyond 20 cm, and lights turn off when daylight is sufficient).
+- Multi-channel Threat Notifications: Active hardware buzzer triggers sirens upon detecting anomalies, combined with interactive dashboard visual warnings (e.g., .shake animations for earthquake alerts and .blinking notices for low-light conditions).
+- Historical Data Analytics: Visualizes trend graphs representing the 20 most recent telemetry logs for all sensors using Chart.js.
+
+Technical highlights
+- Three-Tier Architecture: Integrates Edge Microcontrollers, a PHP API Gateway middleware, and JavaScript client dashboards.
+- Embedded Firmware Engineering: Programmed ESP32 firmware (C++) to capture telemetry from LDR, DHT11, Ultrasonic, and Vibration sensors, sending payload requests secured via header validations (api_key: DPI).
+- Real-time Clock Scheduling: Programmed secondary microcontroller firmware with RTC DS1307 and LiquidCrystal I2C screen integration to show exact timestamps.
+- Disk-based State Control: Created optimized PHP backend routes using read/write overrides on state files to manage hardware execution paths with minimal latency.
+- Responsive Modern Dashboard: Designed an interface with high-contrast layouts, custom CSS transitions, responsive Grid systems, and dynamic warning classes.
+
+Outcome
+This project highlights strong capabilities in Internet of Things (IoT) and Embedded Systems engineering. It demonstrates the ability to connect edge microcontroller hardware to modern web applications and relational databases via secure APIs, implement automated sensor-driven control logics, and design premium, user-friendly monitoring dashboards.`
+    },
+    pictures: [
+      "https://res.cloudinary.com/do6xlqizt/image/upload/v1780563747/screencapture-127-0-0-1-5500-miniproject-iot-smart-home-mini-project-iot-frontend-pages-dashboard-demo-html-2026-06-04-15_58_25_hb6vsx.png",
+      "https://res.cloudinary.com/do6xlqizt/image/upload/v1780563750/Screenshot_2026-06-04_160039_as636q.png",
+      "https://res.cloudinary.com/do6xlqizt/image/upload/v1780563748/project2_eywuzc.jpg",
+    ],
+    tags: ['Team Project', 'ESP32', 'Arduino', 'C++', 'PHP', 'MySQL', 'Chart.js', 'HTML', 'CSS', 'JavaScript', 'IoT', 'Embedded Systems'],
+    githubUrl: 'https://github.com/narawit101/miniproject-iot-smart-home/'
   },
 ]
 
