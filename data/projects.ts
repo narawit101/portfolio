@@ -384,6 +384,77 @@ This project highlights strong capabilities in Internet of Things (IoT) and Embe
     tags: ['Team Project', 'ESP32', 'Arduino', 'C++', 'PHP', 'MySQL', 'Chart.js', 'HTML', 'CSS', 'JavaScript', 'IoT', 'Embedded Systems'],
     githubUrl: 'https://github.com/narawit101/miniproject-iot-smart-home/'
   },
+  {
+    id: 5,
+    head: {
+      th: 'บอร์ดสนทนาออนไลน์ DPI Thread Forum',
+      en: 'DPI Thread Forum - Web Discussion Board System',
+    },
+    description: {
+      th: `DPI Thread Forum คือระบบบอร์ดสนทนาออนไลน์แบบหลายหน้า (Multi-page Web Discussion Board) ที่พัฒนาขึ้นด้วย PHP และ MySQL (PDO) เพื่อให้ผู้ใช้งานสามารถตั้งกระทู้ แลกเปลี่ยนความคิดเห็น และมีส่วนร่วมกับชุมชนได้อย่างราบรื่น ภายใต้โครงสร้างการจัดเส้นทางแบบศูนย์กลาง (Central Router) และสถาปัตยกรรมคอนเทนเนอร์ด้วย Docker
+
+ปัญหาที่โปรเจกต์นี้แก้ไข
+- ขาดความเสถียรและระบบจัดการข้อมูลการแลกเปลี่ยนเรียนรู้ในองค์กรอย่างเป็นระบบ
+- ความไม่สะดวกในการกรองและค้นหากระทู้สนทนาตามหมวดหมู่ความสนใจ
+- การตั้งค่าสิทธิ์และความปลอดภัยของผู้ใช้งานในการดูแลจัดการบอร์ดโดยแอดมิน
+
+ฟีเจอร์สำคัญของระบบ
+- ผู้ใช้งานทั่วไป (General User): สมัครสมาชิกและเข้าสู่ระบบด้วยเซสชันที่ปลอดภัย, เลือกกรองกระทู้ตามหมวดหมู่ด้วย Category Swiper Slider, ค้นหากระทู้ด้วยคีย์เวิร์ด, ตั้งกระทู้ใหม่พร้อมแนบรูปภาพ, กดไลก์กระทู้ (AJAX Fetch API), และเขียนคอมเมนต์แสดงความเห็น
+- ผู้ดูแลระบบ (Administrator): จัดการบัญชีผู้ใช้งาน (แก้ไขข้อมูลผู้ใช้, ปรับสิทธิ์เป็นแอดมิน/ผู้ใช้ทั่วไป, หรือลบบัญชี), จัดการหมวดหมู่กระทู้ (เพิ่ม/ลบหมวดหมู่ และแก้ไขไอคอน), และจัดการประกาศระบบ (Announcements) ในพื้นที่แถบข้าง (Sidebar Widget)
+- การจัดการข้อมูล: ข้อมูลประกาศและสถิติสำคัญถูกจัดเก็บและเรียกใช้งานผ่านฐานข้อมูลเชิงสัมพันธ์ MySQL อย่างเป็นระบบ
+
+จุดเด่นเชิงเทคนิค
+- ออกแบบสถาปัตยกรรม Single Entry Point ด้วย PHP Central Router (index.php) ในการควบคุมเส้นทางการร้องขอทั้งหมดของแอปพลิเคชัน
+- ใช้ PDO Prepared Statements ในการติดต่อสื่อสารฐานข้อมูลเพื่อป้องกันช่องโหว่ SQL Injection 100%
+- ป้องกันช่องโหว่ XSS (Cross-Site Scripting) โดยการแปลงอักขระพิเศษด้วย htmlspecialchars() ก่อนแสดงผล
+- พัฒนาระบบแสดงหมวดหมู่แบบสไลเดอร์ที่ตอบสนองแบบไดนามิกโดยใช้ Swiper.js
+- ปรับปรุงการทำงานของระบบประเมินความพึงพอใจและกดไลก์กระทู้ให้เป็นแบบ Asynchronous ด้วย Fetch API เพื่อประสบการณ์ใช้งานที่ลื่นไหล
+- พัฒนาการใช้งานและทดสอบระบบบนสภาพแวดล้อม Docker (Nginx, PHP-FPM, MySQL, phpMyAdmin) เพื่อให้ง่ายต่อการติดตั้งและคงเส้นคงวาของสภาพแวดล้อม (Consistency)
+
+การนำขึ้นระบบ (Deploy)
+- ระบบถูกจำลองการทำงานและพัฒนาผ่าน Docker Compose (Nginx + PHP-FPM 8.2 + MySQL 8.0 + phpMyAdmin)
+- โครงสร้างฐานข้อมูลถูกเตรียมในรูปแบบ db.sql เพื่อนำเข้าอัตโนมัติบนฐานข้อมูล MySQL`,
+      en: `DPI Thread Forum is a multi-page web discussion board forum application built with PHP and MySQL (PDO). The platform allows users to register, log in, create discussion threads, write comments, like posts, and interact with the community under a structured Central Router architecture and containerized runtime environment.
+
+Problems this project solves
+- Addresses the lack of a structured, secure platform for organization-wide discussion and knowledge sharing.
+- Prevents inconvenient navigation by allowing users to filter and search threads dynamically.
+- Eliminates administrative difficulties in managing categories, users, and global announcements.
+
+Core features
+- General User: Secure registration and login validation with session management, category filtering via Swiper slider, keyword thread search, thread creation with optional image uploads, asynchronous thread likes (AJAX Fetch API), and comments section.
+- Administrator: User management console (edit profiles, toggle roles User/Admin, delete accounts), category management (add, delete, update icons), and global announcements management shown in the sidebar widget.
+- Data Management: Dynamic administrative announcements and user interaction telemetry stored and fetched from MySQL databases.
+
+Technical highlights
+- Implemented a Single Entry Point (index.php) Central Router architecture to govern all application traffic.
+- Secured database communication using PDO Prepared Statements to prevent SQL Injection vulnerabilities completely.
+- Protected user interface against XSS (Cross-Site Scripting) by escaping variables with htmlspecialchars() before rendering.
+- Created an interactive and responsive category slider component integrated using Swiper.js.
+- Optimized user experience by shifting the thread like system to asynchronous AJAX (Fetch API) requests.
+- Streamlined configuration and deployment using Docker container services (Nginx, PHP-FPM 8.2, MySQL 8.0, and phpMyAdmin).
+
+Deployment
+- Configured and run entirely inside Docker containers via Docker Compose.
+- Maintained a pre-seeded db.sql database initialization script that automatically imports into MySQL on service startup.`
+    },
+    pictures: [
+      'https://res.cloudinary.com/do6xlqizt/image/upload/v1781239505/Screenshot_2026-06-12_113553_rt0iuz.png',
+      'https://res.cloudinary.com/do6xlqizt/image/upload/v1781239324/screencapture-localhost-8080-index-php-2026-06-12-11_37_55_ltca5t.png',
+      'https://res.cloudinary.com/do6xlqizt/image/upload/v1781239320/screencapture-localhost-8080-index-php-2026-06-12-11_38_04_xr2s80.png',
+      'https://res.cloudinary.com/do6xlqizt/image/upload/v1781239549/screencapture-localhost-8080-index-php-2026-06-12-11_36_05_tkluru.png',
+      'https://res.cloudinary.com/do6xlqizt/image/upload/v1781239569/screencapture-localhost-8080-index-php-2026-06-12-11_36_43_jk5azx.png',
+      'https://res.cloudinary.com/do6xlqizt/image/upload/v1781239600/screencapture-localhost-8080-index-php-2026-06-12-11_36_49_p8ontv.png',
+      'https://res.cloudinary.com/do6xlqizt/image/upload/v1781239621/screencapture-localhost-8080-index-php-2026-06-12-11_36_57_dlqa6o.png',
+      'https://res.cloudinary.com/do6xlqizt/image/upload/v1781239636/screencapture-localhost-8080-index-php-2026-06-12-11_37_08_f8n0cl.png',
+      'https://res.cloudinary.com/do6xlqizt/image/upload/v1781239654/screencapture-localhost-8080-index-php-2026-06-12-11_37_17_sa2npf.png',
+      'https://res.cloudinary.com/do6xlqizt/image/upload/v1781239673/screencapture-localhost-8080-index-php-2026-06-12-11_37_26_zv56pd.png',
+      'https://res.cloudinary.com/do6xlqizt/image/upload/v1781239677/screencapture-localhost-8080-index-php-2026-06-12-11_37_35_lx3lom.png',
+    ],
+    tags: ['Team Project', 'Docker', 'PHP 8.2', 'MySQL 8.0', 'Nginx', 'HTML5', 'Vanilla CSS', 'JavaScript', 'AJAX', 'Fetch API', 'Swiper.js', 'SweetAlert2'],
+    githubUrl: 'https://github.com/narawit101/miniproject-Thread',
+
+  },
 ]
 
 export const demoModalCopy = {

@@ -41,6 +41,12 @@ export const techStackCategories: TechStackCategory[] = [
                     dark: 'https://thesvg.org/icons/expressdotjs/dark.svg',
                 },
             },
+            {
+                name: 'PHP', img: {
+                    light: 'https://thesvg.org/icons/php/light.svg',
+                    dark: 'https://thesvg.org/icons/php/dark.svg'
+                }
+            },
         ],
     },
     {
