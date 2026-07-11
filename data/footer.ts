@@ -16,13 +16,13 @@ export const footerCopy: Record<Lang, FooterSectionCopy> = {
     th: {
         profileTitle: 'Narawit',
         profileDescription:
-            'มุ่งมั่นพัฒนาเว็บแอปพลิเคชันประสิทธิภาพสูงที่ตอบโจทย์ผู้ใช้งานจริง โดยให้ความสำคัญกับโครงสร้างโค้ดที่สะอาด ปลอดภัย การทำงานที่รวดเร็ว และง่ายต่อการขยายระบบในระยะยาว',
+            'ผมให้บริการพัฒนาเว็บไซต์และ Web Application ที่ตอบโจทย์การใช้งานจริง โดยให้ความสำคัญกับการออกแบบที่ใช้งานง่าย ความรวดเร็ว ความปลอดภัย และโครงสร้างระบบที่สามารถต่อยอดได้ในอนาคต พร้อมดูแลตั้งแต่เริ่มต้นจนเว็บไซต์พร้อมใช้งาน',
         servicesTitle: 'บริการ',
         serviceLinks: [
-            'พัฒนาเว็บแอปพลิเคชันด้วย Next.js',
-            'ออกแบบแดชบอร์ดและระบบจัดการหลังบ้าน',
-            'พัฒนา RESTful API และสถาปัตยกรรมฐานข้อมูล',
-            'ปรับปรุง UX/UI และเพิ่มประสิทธิภาพการประมวลผล',
+            'เว็บไซต์แนะนำบริษัท & Landing Page',
+            'เว็บแอปพลิเคชัน & ระบบจัดการหลังบ้าน',
+            'พัฒนา API & ออกแบบฐานข้อมูล',
+            'ดูแลแบบ Full-Cycle (วางแผน-ดีพลอย)',
         ],
         navigationTitle: 'เมนูนำทาง',
         contactTitle: 'ติดต่อ',
@@ -33,13 +33,13 @@ export const footerCopy: Record<Lang, FooterSectionCopy> = {
     en: {
         profileTitle: 'Narawit',
         profileDescription:
-            'Building high-performance, user-centric web applications with a commitment to clean architecture, robust security, optimal speed, and maintainable codebases.',
+            'I deliver website and web application development services designed for real-world usability, prioritizing user-friendly design, high performance, robust security, and future-proof system architecture, with end-to-end support from concept to launch.',
         servicesTitle: 'Services',
         serviceLinks: [
-            'Next.js Web Development',
-            'Custom Dashboards & Internal Tools',
-            'RESTful APIs & Database Design',
-            'UX/UI Refinement & Performance Optimization',
+            'Company Profiles & Landing Pages',
+            'Web Applications & Admin Systems',
+            'API Development & Database Design',
+            'Full-Cycle Support (Planning to Launch)',
         ],
         navigationTitle: 'Navigation',
         contactTitle: 'Contact',

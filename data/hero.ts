@@ -15,7 +15,7 @@ export const heroContent: Record<Lang, HeroContent> = {
         greeting: 'สวัสดี, ผม',
         name: 'Narawit Soiaudom',
         description:
-            'บัณฑิตคณะวิศวกรรมคอมพิวเตอร์ที่มีพื้นฐานแข็งแรงด้านการพัฒนาเว็บ Full-stack และการออกแบบระบบ มีประสบการณ์ทำเว็บแอปสมัยใหม่ด้วย React.js, Next.js, HTML, CSS และ JavaScript ทั้งฝั่ง Frontend และ Backend สามารถพัฒนา UI ที่ใช้งานง่าย เชื่อมต่อ API จัดการฐานข้อมูล และสร้างระบบที่รองรับการขยายตัวได้ พร้อมทำงานร่วมกับทีมเพื่อพัฒนาฟีเจอร์ใหม่ ปรับปรุงประสิทธิภาพ และรักษาคุณภาพโค้ดให้ดูแลง่ายในระยะยาว',
+            'ผมให้บริการพัฒนาเว็บไซต์และ Web Application ตามความต้องการของลูกค้า ตั้งแต่เว็บไซต์แนะนำบริษัท (Company Profile), Landing Page, Portfolio ไปจนถึงระบบที่มีฐานข้อมูลและระบบจัดการหลังบ้าน โดยใช้ React.js, Next.js, Node.js และ PostgreSQL พร้อมดูแลตั้งแต่การวางแผน พัฒนา ทดสอบ และนำเว็บไซต์ขึ้นใช้งานจริง เพื่อให้ได้เว็บไซต์ที่สวยงาม ใช้งานง่าย รองรับทุกอุปกรณ์ และพร้อมต่อยอดในอนาคต',
         contactCta: 'ติดต่อ',
         projectCta: 'ผลงาน',
         status: 'Full-Stack Developer',
@@ -25,7 +25,7 @@ export const heroContent: Record<Lang, HeroContent> = {
         greeting: 'Hi, I am',
         name: 'Narawit Soiaudom',
         description:
-            'I am a Computer Engineering graduate with a strong foundation in full-stack web development and system design. I have hands-on experience building modern web applications with React.js, Next.js, HTML, CSS, and JavaScript across both frontend and backend. I can craft user-friendly interfaces, integrate APIs, manage databases, and build scalable products, while collaborating with teams to ship features, improve performance, and maintain clean, maintainable code.',
+            'I provide custom website and web application development services tailored to client requirements, ranging from Company Profiles, Landing Pages, and Portfolios to database-driven systems with administrative backends. Using React.js, Next.js, Node.js, and PostgreSQL, I manage the entire lifecycle—from planning, development, and testing to deployment—ensuring beautiful, user-friendly, fully responsive, and future-proof websites.',
         contactCta: 'Contact Me',
         projectCta: 'View Projects',
         status: 'Full-Stack Developer',
