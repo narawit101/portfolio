@@ -4,6 +4,189 @@ export const projects: Project[] = [
   {
     id: 1,
     head: {
+      th: 'TicketWar - แพลตฟอร์มห้องแชทวอร์รูมกดบัตรคอนเสิร์ตแบบเรียลไทม์',
+      en: 'TicketWar - Realtime Concert Ticket War Room & Live Chat Platform',
+    },
+    description: {
+      th: `TicketWar คือแพลตฟอร์มห้องแชทวอร์รูมกดบัตรคอนเสิร์ตแบบเรียลไทม์ (Real-time Concert Ticket War Room & Live Chat Platform) ที่ออกแบบตาม Spotify Design System เพื่อช่วยให้กลุ่มเพื่อนหรือทีมกดบัตรวางแผนเป้าหมายที่นั่ง กำจัดปัญหาการจองซ้ำซ้อน ส่งสัญญาณเสียงแจ้งเตือนด่วน แชร์หลักฐานการชำระเงินและไฟล์บัตร (PDF/Image) และติดตามความคืบหน้าแบบวินาทีต่อวินาทีในช่วงเวลาแย่งชิงบัตร (Ticket Drop)
+
+ปัญหาที่โปรเจกต์นี้แก้ไข
+- ขจัดปัญหาการสื่อสารที่ล่าช้าและกระจัดกระจายในแชตกลุ่มทั่วไป (เช่น LINE หรือ Discord) ซึ่งทำให้เกิดการแย่งหรือจองที่นั่งซ้ำซ้อนกัน
+- แก้ปัญหาความสับสนในกรอบเวลาชำระเงิน (10-15 นาที) โดยสมาชิกทุกคนเห็นสถานะการชำระเงินแบบสดทันที พร้อมแผนสำรอง (Contingency Plan) หากโซนเป้าหมายหลุด
+- แก้ปัญหาความยุ่งยากในการสรุปยอดและเคลียร์ค่าใช้จ่ายหลังจบการกดบัตร ด้วยระบบคลังหลักฐานและบันทึกประวัติการทำรายการย้อนหลัง (Audit Trail)
+
+ฟีเจอร์สำคัญของระบบ
+- ระบบติดตามเป้าหมายที่นั่งแบบเร่งด่วน (Fast-Action Seat Target Tracker): ปรับเปลี่ยนสถานะได้ในคลิกเดียว (ว่าง -> รอชำระเงิน -> เสร็จสิ้น), คำนวณจำนวนบัตรที่ได้เทียบกับที่ต้องการแบบเรียลไทม์ และบันทึกกลยุทธ์สำรองโซนถัดไป
+- ห้องแชตวอร์รูมและปุ่มแจ้งเตือนเสียงฉุกเฉิน (Realtime War Room Chat & Urgent Audio Alerts): สื่อสารสองทางผ่าน Socket.io และส่งสัญญาณเสียง Web Audio API (ได้บัตรแล้ว, คิวหลุด, ขอกำลังเสริม) เจาะทะลุช่วงเวลาเร่งด่วนโดยไม่ต้องสลับจอ
+- ระบบแชร์หลักฐานมัลติมีเดีย (Proof Sharing & Lightbox): รองรับการอัปโหลดรูปภาพพร้อม Lightbox และไฟล์เอกสาร PDF พร้อมระบบดาวน์โหลด แยกโฟลเดอร์จัดเก็บบน Cloudinary และจำกัดขนาดไฟล์ไม่เกิน 3.5 MB เพื่อประสิทธิภาพสูงสุดบน Vercel Serverless
+- การจัดการวงจรชีวิตห้อง (Room Lifecycle Management): แชร์ห้องผ่านลิงก์และ QR Code ในคลิกเดียว พร้อมตัวเลือกปิดห้องแบบ "เก็บถาวร (Archive)" เพื่อดูประวัติค่าใช้จ่าย หรือ "ลบทิ้งถาวร (Purge)" เพื่อความเป็นส่วนตัว
+
+จุดเด่นเชิงเทคนิค
+- สถาปัตยกรรมระบบแบบ Decoupled Full-stack ผสาน Next.js 16 (React 19 + App Router + Turbopack) ฝั่งเว็บแอปพลิเคชัน และ Node.js + Socket.io Server แบบ Standalone เป็นรีเลย์เรียลไทม์ ปราศจากคอขวดฐานข้อมูล
+- ใช้ฐานข้อมูล PostgreSQL (Supabase) ผ่าน Prisma ORM รองรับทั้ง Transaction Connection Pooler (พอร์ต 6543) และ Direct Migration (พอร์ต 5432) พร้อม Bounded Queries (take: 100)
+- เสริมประสิทธิภาพด้วยแคช Redis (ioredis) สำหรับแดชบอร์ดและข้อมูลห้อง ให้การตอบสนองระดับ Sub-millisecond พร้อมระบบ Fail-Open Fallback กลับสู่ฐานข้อมูลหลักอย่างไร้รอยต่อหาก Redis ไม่พร้อมใช้งาน
+- ออกแบบ UI ตาม Spotify Design System (Content-First Darkness) ใช้โทนสีมืดสบายตา (#121212) ตัดด้วย Spotify Green (#1ed760) และจัดระเบียบคอมโพเนนต์แบบ Deep Modules พร้อมปฏิบัติตามมาตรฐาน Tailwind CSS v4 Canonical Classes อย่างเคร่งครัด
+
+การนำขึ้นระบบ (Deploy)
+- เว็บแอปพลิเคชัน Next.js ติดตั้งบน Vercel (Hobby Tier) พร้อมระบบป้องกัน Request Body Limit ฝั่ง Client
+- ระบบ WebSocket Relay ติดตั้งบน Render Web Service พร้อม Exponential Reconnection Backoff รองรับ Cold Start
+- ฐานข้อมูล PostgreSQL ติดตั้งบน Supabase และระบบจัดเก็บไฟล์รูปภาพ/PDF จัดเก็บบน Cloudinary
+
+สรุปผลลัพธ์
+โปรเจกต์นี้แสดงถึงศักยภาพการออกแบบสถาปัตยกรรมระบบเรียลไทม์ขั้นสูงที่รับมือกับสถานการณ์ทราฟฟิกพุ่งสูง (High-concurrency & High-stress) การผสานเทคโนโลยี Next.js 16, Socket.io, Redis Cache และการควบคุมระบบความปลอดภัยของข้อมูลธุรกรรม พร้อมส่งมอบประสบการณ์ผู้ใช้ระดับพรีเมียมด้วยมาตรฐาน Spotify Design System`,
+      en: `TicketWar is a real-time concert ticketing war room and live chat platform engineered according to the Spotify Design System (Content-First Darkness). It empowers friend groups and ticketing teams to plan seat targets, eliminate duplicate booking conflicts, broadcast instant synthetic audio shoutouts, share payment proofs/PDF tickets, and track acquisition progress live during high-stakes ticket drops.
+
+Problems this project solves
+- Eliminates delayed and scattered communication in generic group chats (LINE, WhatsApp, Discord) that lead to seat collisions and duplicate bookings.
+- Solves checkout panic and payment window timeouts (10-15 minute limits) by providing instant live payment status and backup zone fallback plans.
+- Streamlines post-sale settlement and financial reconciliation by centralizing ticket proofs, receipts, and a transparent audit trail of who modified what.
+
+Core features
+- Fast-Action Seat Target Tracker: 1-click status toggles (Available -> Pending Payment -> Completed), real-time quota calculations (Secured vs Needed), and instant contingency strategy notes.
+- Realtime War Room Chat & Urgent Audio Alerts: Bi-directional low-latency messaging powered by Socket.io, complemented by synthetic Web Audio API shoutouts (Got It!, Queue Dropped!, Need Backup!) that penetrate intense queuing sessions.
+- Proof Sharing & Lightbox Viewing: Seamless sharing of ticket images with lightbox preview and PDF document cards with direct download, organized into separated Cloudinary folders and guarded with 3.5 MB client-side limits for serverless safety.
+- Room Lifecycle Management: 1-click invite link and QR code generation, with post-event closure modes: Read-only "Archive" for reviewing prices and receipts, or "Purge" for complete privacy.
+
+Technical highlights
+- Decoupled full-stack architecture combining Next.js 16 (React 19 + App Router + Turbopack) with a standalone Node.js + Socket.io relay server, avoiding database write bottlenecks during rapid chat updates.
+- PostgreSQL (Supabase) managed via Prisma ORM, engineered for serverless environments with Transaction Connection Pooling (port 6543) and bounded queries (take: 100).
+- Sub-millisecond Redis caching layer (ioredis) for Lobby Dashboard and Room Metadata with event-driven invalidation and fail-open resilience fallback to PostgreSQL.
+- Spotify Design System (Content-First Darkness) utilizing deep dark palettes (#121212) with Spotify Green accents (#1ed760), deep reusable component modules, and strict compliance with Tailwind CSS v4 canonical classes.
+
+Deployment
+- Next.js frontend deployed on Vercel with client-side upload compression guarding serverless payload limits.
+- Standalone Socket.io relay service hosted on Render with exponential reconnection backoff handling cold starts.
+- Relational database hosted on Supabase (PostgreSQL) and media assets stored across segregated Cloudinary folders.
+
+Outcome
+TicketWar demonstrates advanced full-stack engineering in high-stress, real-time distributed environments. It showcases mastery in sub-second WebSocket communication, Redis caching resilience, Prisma ORM transaction pooling, and a production-grade UI crafted with the Spotify Design System.`
+    },
+    pictures: [
+      "https://res.cloudinary.com/do6xlqizt/image/upload/v1794125022/screencapture-ticket-war-ten-vercel-app-2026-11-08-14_55_25_sj93zi.png",
+      "https://res.cloudinary.com/do6xlqizt/image/upload/v1794125020/screencapture-ticket-war-ten-vercel-app-login-2026-11-08-14_58_38_jzy3wt.png", "https://res.cloudinary.com/do6xlqizt/image/upload/v1794125022/screencapture-ticket-war-ten-vercel-app-rooms-cbde8482-ddd1-49ac-b79e-3022dcc4ce72-2026-11-08-14_56_37_y2clhy.png", "https://res.cloudinary.com/do6xlqizt/image/upload/v1794125021/screencapture-ticket-war-ten-vercel-app-2026-11-08-14_57_36_zflh1p.png", "https://res.cloudinary.com/do6xlqizt/image/upload/v1794125022/screencapture-ticket-war-ten-vercel-app-rooms-cbde8482-ddd1-49ac-b79e-3022dcc4ce72-2026-11-08-14_56_55_het0pv.png"
+    ],
+    tags: [
+      "Next.js 16",
+      "React 19",
+      "Tailwind CSS v4",
+      "TypeScript",
+      "Node.js",
+      "Socket.IO",
+      "PostgreSQL",
+      "Supabase",
+      "Prisma ORM",
+      "Redis",
+      "Cloudinary",
+      "Web Audio API",
+      "Vercel",
+      "Render"
+    ],
+    githubUrl: "https://github.com/narawit101/TicketWar"
+  },
+  {
+    id: 2,
+    head: {
+      th: "LELE' Ticket - ระบบบัตรสมาชิกสะสมแต้มและสิทธิ์ลัดคิวกดบัตรคอนเสิร์ต (#เลอเล่อรับกดบัตร)",
+      en: "LELE' Ticket - Digital Loyalty & Queue Pass Management System",
+    },
+    description: {
+      th: `LELE' Ticket คือระบบบัตรสมาชิกดิจิทัล (Digital Loyalty), ระบบแลกรับของรางวัล และตรวจสอบรีวิวหลักฐานเพื่อรับสิทธิ์ลัดคิว ที่พัฒนาขึ้นสำหรับบริการรับกดบัตรคอนเสิร์ตชั้นนำ #เลอเล่อรับกดบัตร แพลตฟอร์มนี้เชื่อมโยงการยืนยันตัวตนของลูกค้าผ่าน LINE LIFF เข้ากับเวิร์กโฟลว์การรีวิวผลงานบนแพลตฟอร์ม X (Twitter) การแลกคูปองสิทธิ์ลัดคิว และระบบตรวจสอบความถูกต้องหลังบ้านของทีมงานได้อย่างปลอดภัยและไร้รอยต่อ
+
+ปัญหาที่โปรเจกต์นี้แก้ไข
+- ขจัดความล่าช้าและความผิดพลาดจากการจดแต้มและนับสถิติรีวิวของลูกค้าผ่าน Spreadsheet ด้วยมือ
+- ป้องกันการแอบอ้างหรือใช้สิทธิ์คูปองส่วนลดและสิทธิ์ลัดคิวซ้ำซ้อน ด้วยระบบโค้ดคูปองเฉพาะตัว (Unique Pass Code) แบบใช้ครั้งเดียว
+- ลดขั้นตอนความยุ่งยากในการลงทะเบียนและเข้าใช้งานของแฟนคลับ โดยเข้าสู่ระบบได้ทันทีผ่านเบราว์เซอร์ใน LINE โดยไม่ต้องจำรหัสผ่านแยก
+
+ฟีเจอร์สำคัญของระบบ
+- พอร์ทัลลูกค้าผ่าน LINE LIFF (Customer LIFF & Web Portal):
+  - บัตรสมาชิกดิจิทัล (Digital Member Card): แสดงระดับสมาชิก (Tier Badge: Bronze, Silver, Gold, Platinum, Diamond) คำนวณจากยอดแต้มสะสมตลอดชีพ พร้อมปุ่มคัดลอก Member ID และระบุบัญชี X (Twitter)
+  - กระเป๋าคูปองสิทธิ์ลัดคิว (Fast Track Pass Wallet): จัดเก็บคูปองรางวัลที่แลกมาพร้อมตัวกรองสถานะ (ทั้งหมด, พร้อมใช้งาน, ใช้แล้ว) และปุ่ม Deep-link ตรงสู่ DM ร้านค้าบน X ได้ในคลิกเดียว
+  - แคตตาล็อกแลกของรางวัล & โค้ดพิเศษ (Reward Catalog & Special Code): เลือกรหัสของรางวัลและป้อนโค้ดกิจกรรมพิเศษ (เช่น SUMMER2026) เพื่อรับแต้มโบนัสได้ทันที
+  - ระบบส่งหลักฐานรีวิว (Review Submission Flow): แนบรูปภาพแคปหน้าจอการรีวิวผลงานบน X ติดแฮชแท็ก #เลอเล่อรับกดบัตร เพื่อส่งให้แอดมินตรวจสอบ
+  - บัญชีประวัติแต้มโปร่งใส (Activity Ledger): ตรวจสอบประวัติการได้รับและตัดแต้มแบบ FinTech Style ชัดเจน แม่นยำ
+- แดชบอร์ดผู้ดูแลระบบระดับองค์กร (Admin Management Dashboard /admin):
+  - ศูนย์ตรวจรับรองรีวิว (Review Verification Center): ตรวจสอบรูปภาพหลักฐานและลิงก์ทวีต อนุมัติแต้มหรือปฏิเสธแบบอัตโนมัติด้วย Prisma Transactions
+  - ระบบตรวจและตัดสิทธิ์คูปอง (Pass Verification & Invalidation): ตรวจค้นคูปองที่ลูกค้านำมาแสดงใน DM และกดใช้งานเพื่อตัดสิทธิ์ทันที
+  - การจัดการสมาชิกและระดับ VIP: ค้นหาสมาชิกตามชื่อหรือชื่อผู้ใช้ X, ปรับแต้มสะสมเข้า-ออก (Adjust Stamps) และปรับระดับสมาชิกพิเศษ (Adjust Tier VIP Override)
+  - ระบบความปลอดภัยแอดมิน: แยกสิทธิ์ตามบทบาท (DEV, OWNER, STAFF) เข้ารหัสรหัสผ่านด้วย bcrypt พร้อมระบบบังคับเปลี่ยนรหัสผ่านในการเข้าใช้งานครั้งแรก (PasswordCriteriaChecklist)
+
+จุดเด่นเชิงเทคนิค
+- พัฒนาแบบ Full-stack ด้วย Next.js 16 App Router, React 19 และ Tailwind CSS v4 ภายใต้สถาปัตยกรรมความเร็วสูงร่วมกับ Turbopack
+- ออกแบบการเชื่อมต่อ LINE LIFF SDK แบบ Resilient Singleton เพื่อป้องกันปัญหา Invalid Authorization Code เมื่อเกิด Redirect และเคลียร์ Parameter ใน URL อัตโนมัติด้วย window.history.replaceState
+- จัดการฐานข้อมูลเชิงสัมพันธ์ PostgreSQL ผ่าน Prisma ORM โดยทุกการทำธุรกรรมแต้ม (Point Ledger) และการอนุมัติรีวิวถูกควบคุมด้วย Atomic Operations (prisma.$transaction()) 100% เพื่อป้องกันปัญหา Data Inconsistency
+- พัฒนาระบบตารางข้อมูลแอดมินกลาง (AdminDataTable<T>) ครอบคลุม 100% ของหน้าหลังบ้าน พร้อมระบบค้นหาแบบ Debounced 300ms, Sorting Chevrons, Pulse Skeleton Loading และ Server/Client Pagination ในตัว
+- แสดงผลวันเวลาตามปฏิทินไทยและโซนเวลา Asia/Bangkok แบบ Zero-dependency ด้วยมาตรฐาน Web Platform Intl.DateTimeFormat (formatThaiDateTime)
+
+การนำขึ้นระบบ (Deploy)
+- สถาปัตยกรรม Next.js Full-stack App Deploy บน Vercel เชื่อมต่อ API Route Handlers แบบ Serverless
+- ฐานข้อมูล PostgreSQL ติดตั้งบน Supabase และระบบจัดเก็บรูปภาพรีวิว/อวาตาร์จัดเก็บบน Cloudinary ผ่าน Next.js Image Optimization
+
+สรุปผลลัพธ์
+LELE' Ticket เป็นกรณีศึกษาที่โดดเด่นของการประยุกต์ใช้เทคโนโลยี Web สมัยใหม่ (Next.js 16 + LINE LIFF + Prisma) เข้ากับธุรกิจบริการรับกดบัตรคอนเสิร์ตจริง ช่วยเปลี่ยนการทำงานแบบแมนนวลให้กลายเป็นระบบอัตโนมัติที่โปร่งใส ยกระดับความน่าเชื่อถือของแบรนด์ และสร้างประสบการณ์การสะสมแต้มที่ราบรื่นให้กับแฟนคลับนับพันคน`,
+      en: `LELE' Ticket is a digital loyalty rewards, reward exchange, and social review verification platform custom-built for the premier concert ticket booking concierge service #เลอเล่อรับกดบัตร. The system seamlessly connects customer authentication via LINE LIFF with X (Twitter) social review workflows, fast-track queue pass redemptions, and an auditable administrative verification center.
+
+Problems this project solves
+- Eliminates manual spreadsheet tracking of loyalty points, review submissions, and booking records prone to human errors.
+- Prevents voucher fraud and duplicate discounts with single-use, cryptographically generated pass codes (Unique Pass Codes).
+- Removes customer onboarding friction by enabling instant LINE in-app browser authentication without requiring separate credentials.
+
+Core features
+- Customer Portal via LINE LIFF:
+  - Digital Member Card: Real-time Member Tier badge (Bronze, Silver, Gold, Platinum, Diamond) calculated from lifetime points, copyable Member ID, and connected X (Twitter) profile handle.
+  - Fast Track Pass Wallet: Unified voucher wallet with status filters (ALL, ACTIVE, USED) and 1-tap deep links to the shop's X DM for immediate booking redemption.
+  - Reward Catalog & Special Code Redemption: Browse redemption tiers and claim promotional campaign codes (e.g., SUMMER2026) for instant point top-ups.
+  - Review Submission Flow: Upload screenshot proof and links of concert booking reviews posted on X using the #เลอเล่อรับกดบัตร hashtag.
+  - FinTech Activity Ledger: High-contrast, clean audit feed displaying point accruals and deductions with zero redundant approved records.
+- Enterprise Admin Management Dashboard (/admin):
+  - Review Verification Center: Inspect proof media and tweet URLs with one-click atomic approval/rejection powered by Prisma transactions.
+  - Pass Verification & Invalidation: Look up voucher codes submitted by customers in X DMs and flag passes as used in real-time.
+  - Member & Tier Management: Search users by name or X handle, execute point additions/deductions (Adjust Stamps), and set manual VIP tier overrides (Adjust Tier).
+  - Multi-tier Role Security: Role-based access control (DEV, OWNER, STAFF) secured with bcrypt password hashes, JWT sessions, and enforced first-time password rotation (PasswordCriteriaChecklist).
+
+Technical highlights
+- Full-stack architecture engineered with Next.js 16 App Router, React 19, and Tailwind CSS v4 with sub-second Turbopack compilation.
+- Resilient LINE LIFF singleton architecture (initLiff) with automatic OAuth query parameter cleanup via window.history.replaceState, completely eliminating token exchange mismatch errors.
+- PostgreSQL database managed via Prisma ORM, enforcing strict atomic integrity across all point ledger mutations and review approvals with prisma.$transaction().
+- Reusable Admin Chassis: Unified AdminDataTable<T> driving 100% of management views with typed ColumnDef, 300ms debounced search filtering (AdminFilterBar), sorting chevrons, and pulse skeleton loading.
+- Zero-dependency Thai Buddhist era and Bangkok timezone formatting natively handled by Intl.DateTimeFormat (formatThaiDateTime).
+
+Deployment
+- Full-stack Next.js application deployed on Vercel utilizing serverless Route Handlers.
+- PostgreSQL relational database hosted on Supabase, with customer screenshots and avatars stored and optimized via Cloudinary and Next.js Image Optimization.
+
+Outcome
+LELE' Ticket showcases modern full-stack web engineering (Next.js 16, LINE LIFF, Prisma, PostgreSQL) applied to a live concierge business. It automated labor-intensive manual operations, fortified transaction trust with tamper-resistant audit ledgers, and delivered a delightful, mobile-first loyalty experience for thousands of concertgoers.`
+    },
+    pictures: [
+      "https://res.cloudinary.com/do6xlqizt/image/upload/v1794125792/l_jdrbp7.png",
+      "https://res.cloudinary.com/do6xlqizt/image/upload/v1794125770/Screenshot_2026-11-08_151002_zz0oyu.png",
+      "https://res.cloudinary.com/do6xlqizt/image/upload/v1794125938/screencapture-localhost-3000-2026-11-08-15_12_28_hjqjil.png",
+      "https://res.cloudinary.com/do6xlqizt/image/upload/v1794125824/screencapture-localhost-3000-2026-11-08-15_14_09_je9ucq.png",
+      "https://res.cloudinary.com/do6xlqizt/image/upload/v1794125936/screencapture-localhost-3000-2026-11-08-15_12_40_fkrjet.png",
+      "https://res.cloudinary.com/do6xlqizt/image/upload/v1794125798/screencapture-localhost-3000-admin-2026-11-08-15_14_45_pgz3o3.png",
+      "https://res.cloudinary.com/do6xlqizt/image/upload/v1794125798/screencapture-localhost-3000-admin-2026-11-08-15_14_35_mdhces.png",
+      "https://res.cloudinary.com/do6xlqizt/image/upload/v1794125796/screencapture-localhost-3000-admin-2026-11-08-15_15_06_fi7owv.png",
+      "https://res.cloudinary.com/do6xlqizt/image/upload/v1794125793/screencapture-localhost-3000-admin-2026-11-08-15_15_16_xwdndm.png",
+    ],
+    tags: [
+      "Next.js 16",
+      "React 19",
+      "Tailwind CSS v4",
+      "TypeScript",
+      "Prisma ORM",
+      "PostgreSQL",
+      "Supabase",
+      "LINE LIFF",
+      "Cloudinary",
+      "Turbopack",
+      "JWT Auth",
+      "Vercel"
+    ],
+    githubUrl: "https://github.com/narawit101/lele_coupon"
+  },
+  {
+    id: 3,
+    head: {
       th: 'แพลตฟอร์มจองสนามกีฬาออนไลน์',
       en: 'Sports Venue Booking Platform',
     },
@@ -95,7 +278,7 @@ This project showcases the ability to architect an end-to-end multi-role system 
     ]
   },
   {
-    id: 2,
+    id: 4,
     head: {
       th: 'แพลตฟอร์มขนส่งช่วยเหลือผู้ป่วยและคนขับรถรับส่ง',
       en: 'DriveCare Medical Transport Platform',
@@ -321,7 +504,7 @@ DriveCare showcases a practical role-based system where product flow, daily oper
   //   githubUrl: "https://github.com/narawit101/TTM-Helper"
   // },
   {
-    id: 3,
+    id: 5,
     head: {
       th: 'ระบบควบคุมและประมวลผลบ้านอัจฉริยะและประตูระบายน้ำ (DPI Dashboard)',
       en: 'DPI Smart Home & Dam Gate Control System (DPI Dashboard)',
@@ -385,7 +568,7 @@ This project highlights strong capabilities in Internet of Things (IoT) and Embe
     githubUrl: 'https://github.com/narawit101/miniproject-iot-smart-home/'
   },
   {
-    id: 4,
+    id: 6,
     head: {
       th: 'บอร์ดสนทนาออนไลน์ DPI Thread Forum',
       en: 'DPI Thread Forum - Web Discussion Board System',
