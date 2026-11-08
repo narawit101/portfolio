@@ -81,7 +81,61 @@ TicketWar demonstrates advanced full-stack engineering in high-stress, real-time
       "Vercel",
       "Render"
     ],
-    githubUrl: "https://github.com/narawit101/TicketWar"
+    githubUrl: "https://github.com/narawit101/TicketWar",
+    demoUrl: "https://ticket-war-ten.vercel.app/",
+    demoInstruction: {
+      th: "กรุณาคัดลอกข้อมูลบัญชีทดสอบด้านล่าง แล้วคลิกปุ่ม 'เปิดหน้าเว็บ Demo' เพื่อเข้าสู่ระบบ (หรือสามารถสลับไปแท็บ Sign Up เพื่อสมัครบัญชีใหม่ของคุณได้เช่นกัน)",
+      en: "Please copy the test credentials below and click 'Open Demo Site' to log in (or switch to the Sign Up tab to register your own custom account)."
+    },
+    demoTabs: [
+      {
+        name: { th: "บัญชีทดสอบและคำแนะนำ", en: "Test Account & Guide" },
+        username: "demo@ticketwar.com",
+        password: "Demo@ticketwar1234@",
+        steps: [
+          {
+            title: {
+              th: "เข้าสู่ระบบ (หรือสมัครบัญชีใหม่)",
+              en: "Log In (or Register New Account)"
+            },
+            detail: {
+              th: "คัดลอกอีเมลและรหัสผ่านทดสอบด้านบน แล้วกดเปิดหน้าเว็บเพื่อล็อกอินเข้าสู่ระบบ หรือสลับไปแท็บ Sign Up หากต้องการสร้างบัญชีของตนเอง",
+              en: "Copy the test credentials above and open the site to log in, or switch to the Sign Up tab if you prefer creating your own account."
+            }
+          },
+          {
+            title: {
+              th: "สร้างหรือเข้าร่วมห้องวอร์รูม",
+              en: "Create or Join a War Room"
+            },
+            detail: {
+              th: "กดปุ่ม '+ สร้างห้องใหม่' ตั้งชื่อคอนเสิร์ตและวันแสดง หรือใช้รหัสห้อง/ลิงก์คำเชิญเพื่อเข้าห้องร่วมกับเพื่อน",
+              en: "Click '+ Create Room' to set the concert title and show date, or use a room code/invite link to join a shared room."
+            }
+          },
+          {
+            title: {
+              th: "วางเป้าหมายและอัปเดตสถานะที่นั่งเรียลไทม์",
+              en: "Track Seat Targets & Sync Real-time Status"
+            },
+            detail: {
+              th: "กำหนดโซนที่นั่งเป้าหมาย ระบุจำนวนและราคา พร้อมคลิกเปลี่ยนสถานะ (ว่าง -> รอจ่าย -> ได้บัตรแล้ว) ข้อมูลจะซิงค์ทันทีโดยไม่ต้องรีเฟรช",
+              en: "Set target seat zones, quantity, and budget. Click status toggles (Available -> Pending Payment -> Completed) for instant real-time synchronization."
+            }
+          },
+          {
+            title: {
+              th: "ทดลองแชทสดและส่งเสียงสัญญาณฉุกเฉิน",
+              en: "Live Chat & Audio Shoutouts"
+            },
+            detail: {
+              th: "ส่งข้อความในห้องวอร์รูม แนบไฟล์รูปสลิป/PDF และกดปุ่มเสียงฉุกเฉิน (ได้บัตรแล้ว!, คิวหลุด!, ขอกำลังเสริม!) เพื่อส่งสัญญาณเสียงเตือนทุกคนในห้อง",
+              en: "Send live messages, upload receipt images or PDF files, and press instant audio alert shoutouts (Got It!, Queue Dropped!, Need Backup!) that ring across all devices."
+            }
+          }
+        ]
+      }
+    ]
   },
   {
     id: 2,
