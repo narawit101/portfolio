@@ -63,4 +63,4 @@ npm run build
 ```
 
 ---
-© 2026 Developed with ❤️ by **[Narawit Soiaudom]**. All rights reserved.
+© 2026 Developed with ❤️ by **[Narawit Sroiudom]**. All rights reserved.

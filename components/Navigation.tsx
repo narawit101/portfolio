@@ -14,7 +14,8 @@ export function CarouselNav({
             <button
                 type="button"
                 onClick={onPrev}
-                className={`theme-floating-control absolute left-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full opacity-100 transition-all hover:border-primary hover:bg-primary hover:text-white sm:left-3 sm:h-10 sm:w-10 sm:opacity-0 sm:group-hover:opacity-100 ${className}`}
+                aria-label="Previous image"
+                className={`theme-floating-control absolute left-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full opacity-100 transition-all hover:border-(--theme-border-strong) hover:bg-(--theme-surface-soft-strong) hover:text-(--theme-text) sm:left-3 sm:h-10 sm:w-10 sm:opacity-0 sm:group-hover:opacity-100 ${className}`}
             >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="h-4 w-4 sm:h-5 sm:w-5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
@@ -23,7 +24,8 @@ export function CarouselNav({
             <button
                 type="button"
                 onClick={onNext}
-                className={`theme-floating-control absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full opacity-100 transition-all hover:border-primary hover:bg-primary hover:text-white sm:right-3 sm:h-10 sm:w-10 sm:opacity-0 sm:group-hover:opacity-100 ${className}`}
+                aria-label="Next image"
+                className={`theme-floating-control absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full opacity-100 transition-all hover:border-(--theme-border-strong) hover:bg-(--theme-surface-soft-strong) hover:text-(--theme-text) sm:right-3 sm:h-10 sm:w-10 sm:opacity-0 sm:group-hover:opacity-100 ${className}`}
             >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="h-4 w-4 sm:h-5 sm:w-5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
@@ -138,7 +140,7 @@ function NavButton({ onClick, disabled, direction }: { onClick: () => void; disa
             type="button"
             onClick={onClick}
             disabled={disabled}
-            className="theme-floating-control flex h-9 w-9 items-center justify-center rounded-full transition-colors hover:border-primary hover:bg-primary/15 sm:h-10 sm:w-10 disabled:cursor-not-allowed disabled:opacity-40"
+            className="theme-floating-control flex h-9 w-9 items-center justify-center rounded-full transition-colors hover:border-(--theme-border-strong) hover:bg-(--theme-surface-soft-strong) hover:text-(--theme-text) sm:h-10 sm:w-10 disabled:cursor-not-allowed disabled:opacity-40"
         >
             {direction === 'left' ? (
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-4 w-4 sm:h-5 sm:w-5"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>

@@ -3,10 +3,11 @@ import { Lang, LocalizedText } from '@/types'
 export type ContactSectionText = {
     title: string
     subtitle: string
-    terminalLabel: string
+    description: string
 }
 
 export type ContactItem = {
+    key: 'phone' | 'email' | 'line' | 'instagram' | 'facebook' | 'github'
     icon: string
     label: LocalizedText
     value: string
@@ -17,49 +18,55 @@ export type ContactItem = {
 export const contactSectionText: Record<Lang, ContactSectionText> = {
     th: {
         title: 'ติดต่อ',
-        subtitle: 'ช่องทางติดต่อ',
-        terminalLabel: '$ cat contact.json',
+        subtitle: 'Get In Touch',
+        description: 'สนใจร่วมงานหรือมีโปรเจกต์ที่ต้องการพัฒนา สามารถติดต่อพูดคุยกับผมได้โดยตรงผ่านช่องทางด้านล่างครับ',
     },
     en: {
         title: 'Contact',
         subtitle: 'Get In Touch',
-        terminalLabel: '$ cat contact.json',
+        description: 'Interested in collaborating or have a project in mind? Feel free to reach out via any of the channels below.',
     },
 }
 
 export const contacts: ContactItem[] = [
     {
-        icon: 'https://img.icons8.com/ios-filled/100/ffffff/phone.png',
+        key: 'phone',
+        icon: 'phone',
         label: { th: 'โทรศัพท์', en: 'Phone' },
         value: '098-184-8532',
         href: 'tel:0981848532',
     },
     {
-        icon: 'https://res.cloudinary.com/do6xlqizt/image/upload/v1773920728/mdi--gmail_rsnsn0.png',
+        key: 'email',
+        icon: 'email',
         label: { th: 'อีเมล', en: 'Email' },
         value: 'narawit532@gmail.com',
         href: 'mailto:narawit532@gmail.com',
     },
     {
-        icon: 'https://res.cloudinary.com/do6xlqizt/image/upload/v1773920729/line-app-logo-block_ek3x9i.png',
+        key: 'line',
+        icon: 'line',
         label: { th: 'ไลน์', en: 'Line' },
         value: '@narawit101',
     },
     {
-        icon: 'https://res.cloudinary.com/do6xlqizt/image/upload/v1773920729/fe--instagram_bzhyko.png',
+        key: 'instagram',
+        icon: 'instagram',
         label: { th: 'อินสตาแกรม', en: 'Instagram' },
         value: 'iiceee.n',
         href: 'https://www.instagram.com/iiceee.n/',
     },
     {
-        icon: 'https://res.cloudinary.com/do6xlqizt/image/upload/v1773920729/--facebook_h0f6hr.png',
+        key: 'facebook',
+        icon: 'facebook',
         label: { th: 'เฟซบุ๊ก', en: 'Facebook' },
-        value: 'Narawit Soiaudom',
+        value: 'Narawit Sroiudom',
         href: 'https://www.facebook.com/iceXD',
     },
     {
-        icon: 'https://cdn-icons-png.flaticon.com/512/25/25231.png',
-        label: { th: 'กิทฮับ', en: 'GitHub' },
+        key: 'github',
+        icon: 'github',
+        label: { th: 'GitHub', en: 'GitHub' },
         value: 'narawit101',
         href: 'https://github.com/narawit101',
     },

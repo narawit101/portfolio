@@ -15,8 +15,6 @@ export default function HeroSection({ lang }: { lang: Lang }) {
         className="hero-bg-image absolute inset-0 bg-[url('https://res.cloudinary.com/do6xlqizt/image/upload/v1773920895/bg_p4eakk.png')] bg-cover bg-center"
         style={{ opacity: 'var(--hero-image-opacity)' }}
       />
-      <div className="absolute top-1/4 right-0 w-80 h-80 bg-primary/10 rounded-full blur-[120px]" />
-      <div className="absolute bottom-1/4 left-0 w-64 h-64 bg-primary/5 rounded-full blur-[100px]" />
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 py-16">
         <div className="flex flex-col items-center text-center lg:flex-row lg:text-left lg:items-center lg:gap-10 xl:gap-14">
           <div className="w-full lg:max-w-2xl flex flex-col items-center lg:items-start">
@@ -33,37 +31,23 @@ export default function HeroSection({ lang }: { lang: Lang }) {
             </p>
 
             <div className="flex flex-row gap-3">
-              <div
+              <button
+                type="button"
                 onClick={() => scrollToSection('section-contact')}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault()
-                    scrollToSection('section-contact')
-                  }
-                }}
-                role="button"
-                tabIndex={0}
-                className="inline-flex hover:cursor-pointer items-center gap-2 rounded-xl bg-primary px-6 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:scale-[1.01] hover:bg-primary-600 hover:shadow-[0_0_24px_rgb(var(--primary-rgb)/0.4)]"
+                className="cursor-pointer inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary-600 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
               >
-                <div>{content.contactCta}</div>
+                <span>{content.contactCta}</span>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
                 </svg>
-              </div>
-              <div
+              </button>
+              <button
+                type="button"
                 onClick={() => scrollToSection('section-project')}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault()
-                    scrollToSection('section-project')
-                  }
-                }}
-                role="button"
-                tabIndex={0}
-                className="hero-secondary-button hover:cursor-pointer inline-flex items-center gap-2 rounded-xl px-6 py-2.5 text-sm font-semibold transition-all duration-300 hover:-translate-y-1"
+                className="hero-secondary-button cursor-pointer inline-flex items-center gap-2 rounded-xl px-6 py-2.5 text-sm font-semibold transition-all duration-200 hover:-translate-y-0.5 hover:border-(--theme-border-strong) focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
               >
                 <span>{content.projectCta}</span>
-              </div>
+              </button>
             </div>
           </div>
 

@@ -98,4 +98,4 @@ Every section component accesses localized content dynamically based on the acti
 
 ---
 
-© 2026 Developed by Narawit Soiaudom. All rights reserved.
+© 2026 Developed by Narawit Sroiudom. All rights reserved.

@@ -15,8 +15,59 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio - Narawit",
-  description: "Welcome to my portfolio",
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "https://narawit.dev",
+  ),
+  title: {
+    default: "Narawit Sroiudom | Full-Stack Developer",
+    template: "%s | Narawit Sroiudom",
+  },
+  description:
+    "Full-Stack Developer specializing in Next.js, React, Node.js, and PostgreSQL. Explore case studies, system architecture, and production web applications.",
+  keywords: [
+    "Narawit Sroiudom",
+    "Full-Stack Developer",
+    "Frontend Developer",
+    "React",
+    "Next.js",
+    "TypeScript",
+    "Node.js",
+    "PostgreSQL",
+    "Web Developer Thailand",
+    "Portfolio",
+  ],
+  authors: [{ name: "Narawit Sroiudom", url: "https://github.com/narawit101" }],
+  creator: "Narawit Sroiudom",
+  openGraph: {
+    type: "website",
+    locale: "th_TH",
+    alternateLocale: "en_US",
+    siteName: "Narawit Sroiudom Portfolio",
+    title: "Narawit Sroiudom | Full-Stack Developer",
+    description:
+      "Full-Stack Developer specializing in Next.js, React, Node.js, and PostgreSQL. Explore case studies, system architecture, and production web applications.",
+    images: [
+      {
+        url: "/profile.jpg",
+        width: 1179,
+        height: 1334,
+        alt: "Narawit Sroiudom - Full-Stack Developer",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Narawit Sroiudom | Full-Stack Developer",
+    description:
+      "Full-Stack Developer specializing in Next.js, React, Node.js, and PostgreSQL.",
+    images: ["/profile.jpg"],
+  },
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico" },
+    ],
+  },
 };
 
 export default async function RootLayout({

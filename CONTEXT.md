@@ -6,7 +6,7 @@ This document provides a comprehensive overview of the portfolio codebase, archi
 
 ## 🔍 1. Project Overview & Purpose
 
-This project is a high-performance, single-page personal portfolio website built for **Narawit Soiaudom**. Its primary purpose is to showcase the developer's work experience, education history, technical skills (Tech Stack), projects, and contact channels in a modern, interactive, and fast interface.
+This project is a high-performance, single-page personal portfolio website built for **Narawit Sroiudom**. Its primary purpose is to showcase the developer's work experience, education history, technical skills (Tech Stack), projects, and contact channels in a modern, interactive, and fast interface.
 
 ### Key Capabilities
 *   **Dual Localization:** Complete support for English (EN) and Thai (TH) across all content.

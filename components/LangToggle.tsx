@@ -17,7 +17,7 @@ export default function LangToggle({ lang, onLangChange }: LangToggleProps) {
   return (
     <div className="lang-toggle-wrapper">
       <div className="theme-toggle-panel">
-        <span className={`lang-toggle-text select-none ${isTh ? 'is-active text-primary' : 'text-(--theme-toggle-icon)'}`}>
+        <span className={`lang-toggle-text select-none ${isTh ? 'is-active' : ''}`}>
           TH
         </span>
         <button
@@ -34,7 +34,7 @@ export default function LangToggle({ lang, onLangChange }: LangToggleProps) {
             aria-hidden="true"
           />
         </button>
-        <span className={`lang-toggle-text select-none ${!isTh ? 'is-active text-primary' : 'text-(--theme-toggle-icon)'}`}>
+        <span className={`lang-toggle-text select-none ${!isTh ? 'is-active' : ''}`}>
           EN
         </span>
       </div>

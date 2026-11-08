@@ -65,11 +65,12 @@ function ProjectCard({
   const [currentIndex, setCurrentIndex] = useState(0);
   const hasMultiple = project.pictures.length > 1;
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      onClick();
+  const handleCardClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLElement;
+    if (target.closest("button, a, input")) {
+      return;
     }
+    onClick();
   };
 
   const prev = (e: React.MouseEvent) => {
@@ -84,12 +85,9 @@ function ProjectCard({
   const copy = sectionCopy[lang];
 
   return (
-    <div
-      onClick={onClick}
-      onKeyDown={handleKeyDown}
-      role="button"
-      tabIndex={0}
-      className="theme-panel-solid theme-panel-hover project-card group flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl transition-all duration-500 hover:-translate-y-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+    <article
+      onClick={handleCardClick}
+      className="theme-card theme-card-hover group flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-0.5"
     >
       <div className="relative h-52 w-full shrink-0 overflow-hidden bg-(--theme-bg) sm:h-56">
         {project.pictures.length > 0 ? (
@@ -145,11 +143,17 @@ function ProjectCard({
       </div>
 
       <div className="p-5 flex flex-col flex-1">
-        {project.tags && project.tags.length > 0 && (
-          <div className="mb-3">
-            <h3 className="mb-2 line-clamp-1 text-base font-semibold leading-snug text-(--theme-text) transition-colors group-hover:text-primary">
+        <div className="mb-3">
+          <h3 className="mb-2 line-clamp-1 text-base font-semibold leading-snug">
+            <button
+              type="button"
+              onClick={onClick}
+              className="cursor-pointer text-left font-semibold text-(--theme-text) transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded"
+            >
               {project.head[lang]}
-            </h3>
+            </button>
+          </h3>
+          {project.tags && project.tags.length > 0 && (
             <div
               className="flex items-center gap-2 overflow-hidden whitespace-nowrap"
               style={{
@@ -162,14 +166,14 @@ function ProjectCard({
               {project.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="shrink-0 rounded-md border border-(--theme-border) bg-(--theme-surface-soft) px-2 py-1 text-[10px] font-semibold uppercase tracking-wider text-(--theme-text-body) transition-colors group-hover:border-primary/30 group-hover:bg-primary/10 group-hover:text-primary-400 sm:text-xs"
+                  className="shrink-0 rounded-md border border-(--theme-border) bg-(--theme-surface-soft) px-2 py-1 text-[10px] font-semibold uppercase tracking-wider text-(--theme-text-body) sm:text-xs"
                 >
                   {tag}
                 </span>
               ))}
             </div>
-          </div>
-        )}
+          )}
+        </div>
 
         <p className="theme-text-muted mt-auto mb-4 line-clamp-2 whitespace-pre-wrap text-sm leading-relaxed">
           {project.description[lang]}
@@ -209,7 +213,7 @@ function ProjectCard({
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
-                className="flex-1 flex items-center justify-center gap-1.5 rounded-lg border-2 border-primary/30 bg-(--theme-surface-soft) py-2 text-xs font-semibold text-(--theme-text) transition-all duration-200 hover:border-primary/60 hover:bg-primary/5"
+                className="flex-1 flex items-center justify-center gap-1.5 rounded-lg border border-(--theme-border) bg-(--theme-surface-soft) py-2 text-xs font-semibold text-(--theme-text) transition-all duration-200 hover:border-(--theme-border-strong) hover:bg-(--theme-surface-soft-strong)"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -230,7 +234,7 @@ function ProjectCard({
           </div>
         )}
       </div>
-    </div>
+    </article>
   );
 }
 
@@ -270,10 +274,14 @@ function DemoCredentialsModal({
     const raf = window.requestAnimationFrame(() => setIsVisible(true));
     const previousOverflow = document.body.style.overflow;
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") requestClose();
+      if (e.key === "Escape") {
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        requestClose();
+      }
     };
     document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown, true);
 
     const hideTimeouts = hideTimeoutsRef.current;
     const closeTimeout = closeTimeoutRef.current;
@@ -286,7 +294,7 @@ function DemoCredentialsModal({
       // Clear all hide timeouts on unmount
       Object.values(hideTimeouts).forEach(clearTimeout);
       document.body.style.overflow = previousOverflow;
-      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keydown", handleKeyDown, true);
     };
   }, [requestClose]);
 
@@ -327,7 +335,10 @@ function DemoCredentialsModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="demo-credentials-modal-title"
+      className="fixed inset-0 z-60 flex items-center justify-center p-4 sm:p-6"
       onClick={requestClose}
     >
       <div
@@ -340,13 +351,16 @@ function DemoCredentialsModal({
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between border-b border-(--theme-border) px-5 py-4">
-          <h3 className="text-xl font-bold text-(--theme-text)">
+          <h3
+            id="demo-credentials-modal-title"
+            className="text-xl font-bold text-(--theme-text)"
+          >
             {project.head[lang]}
           </h3>
           <button
             type="button"
             onClick={requestClose}
-            className="cursor-pointer flex h-8 w-8 items-center justify-center rounded-full border border-(--theme-border) bg-(--theme-surface-soft) text-(--theme-text) transition-colors hover:border-primary hover:bg-primary hover:text-white"
+            className="cursor-pointer flex h-8 w-8 items-center justify-center rounded-full border border-(--theme-border) bg-(--theme-surface-soft) text-(--theme-text) transition-colors hover:border-(--theme-border-strong) hover:bg-(--theme-surface-soft-strong)"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -382,7 +396,7 @@ function DemoCredentialsModal({
                     onClick={() => setActiveTabIdx(index)}
                     className={`flex-1 pb-3 text-sm font-semibold border-b-2 text-center transition-all duration-200 cursor-pointer ${
                       isActive
-                        ? "border-primary text-primary"
+                        ? "border-(--theme-text) theme-text font-bold"
                         : "border-transparent text-(--theme-text-muted) hover:text-(--theme-text)"
                     }`}
                   >
@@ -412,7 +426,7 @@ function DemoCredentialsModal({
                         />
                         <button
                           onClick={() => handleCopy(activeTab.username!, `user-${activeTabIdx}`)}
-                          className="cursor-pointer flex shrink-0 items-center gap-1.5 rounded-md bg-primary/10 hover:bg-primary/20 border border-primary/20 px-3 py-1.5 text-xs font-semibold text-primary transition-all duration-200"
+                          className="cursor-pointer flex shrink-0 items-center gap-1.5 rounded-md border border-(--theme-border) bg-(--theme-surface-soft-strong) px-3 py-1.5 text-xs font-semibold theme-text transition-all duration-200 hover:border-(--theme-border-strong) hover:bg-(--theme-surface-card)"
                         >
                           {copiedField === `user-${activeTabIdx}` ? (
                             <>
@@ -474,7 +488,7 @@ function DemoCredentialsModal({
                               `pass-${activeTabIdx}`,
                             )
                           }
-                          className="cursor-pointer flex shrink-0 items-center gap-1.5 rounded-md bg-primary/10 hover:bg-primary/20 border border-primary/20 px-3 py-1.5 text-xs font-semibold text-primary transition-all duration-200"
+                          className="cursor-pointer flex shrink-0 items-center gap-1.5 rounded-md border border-(--theme-border) bg-(--theme-surface-soft-strong) px-3 py-1.5 text-xs font-semibold theme-text transition-all duration-200 hover:border-(--theme-border-strong) hover:bg-(--theme-surface-card)"
                           title={`${text.show} & ${text.copy}`}
                         >
                           {copiedField === `pass-${activeTabIdx}` ? (
@@ -530,9 +544,9 @@ function DemoCredentialsModal({
                   {activeTab.steps.map((step, stepIdx) => (
                     <div
                       key={stepIdx}
-                      className="flex gap-4 rounded-xl border border-(--theme-border) bg-(--theme-surface-soft) p-4 transition-all duration-300 hover:border-primary/30 hover:bg-primary/5 hover:translate-x-0.5"
+                      className="flex gap-4 rounded-xl border border-(--theme-border) bg-(--theme-surface-soft) p-4 transition-all duration-300 hover:border-(--theme-border-strong) hover:bg-(--theme-surface-soft-strong) hover:translate-x-0.5"
                     >
-                      <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary border border-primary/20">
+                      <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-(--theme-border-strong) bg-(--theme-surface-soft-strong) text-xs font-bold theme-text">
                         {stepIdx + 1}
                       </div>
                       <div className="space-y-1">
@@ -657,6 +671,7 @@ function ImageLightboxModal({
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         e.stopPropagation();
+        e.stopImmediatePropagation();
         requestClose();
       } else if (e.key === "ArrowLeft") {
         e.stopPropagation();
@@ -664,8 +679,9 @@ function ImageLightboxModal({
       } else if (e.key === "ArrowRight") {
         e.stopPropagation();
         next();
-      } else if (e.key === " " || e.key === "z" || e.key === "Z") {
+      } else if (e.key === "z" || e.key === "Z") {
         e.preventDefault();
+        e.stopPropagation();
         toggleZoom();
       }
     };
@@ -679,7 +695,10 @@ function ImageLightboxModal({
 
   return (
     <div
-      className={`fixed inset-0 z-60 flex flex-col justify-between transition-opacity duration-300 ${isVisible ? "opacity-100" : "opacity-0"}`}
+      role="dialog"
+      aria-modal="true"
+      aria-label={title}
+      className={`fixed inset-0 z-70 flex flex-col justify-between transition-opacity duration-300 ${isVisible ? "opacity-100" : "opacity-0"}`}
       style={{ backgroundColor: "rgba(5, 5, 10, 0.96)" }}
       onClick={requestClose}
     >
@@ -707,8 +726,8 @@ function ImageLightboxModal({
             title={isZoomed ? copy.zoomOut : copy.zoomIn}
             className={`cursor-pointer flex h-9 w-9 items-center justify-center rounded-full border transition-all ${
               isZoomed
-                ? "border-primary bg-primary text-white"
-                : "border-white/15 bg-white/10 text-white/90 hover:border-primary hover:text-primary"
+                ? "border-white bg-white text-black"
+                : "border-white/15 bg-white/10 text-white/90 hover:border-white/40 hover:text-white"
             }`}
           >
             {isZoomed ? (
@@ -749,7 +768,7 @@ function ImageLightboxModal({
             onClick={requestClose}
             aria-label={copy.closeLightbox}
             title={copy.closeLightbox}
-            className="cursor-pointer flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white/90 transition-colors hover:border-primary hover:bg-primary hover:text-white"
+            className="cursor-pointer flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white/90 transition-colors hover:border-white/40 hover:bg-white/20 hover:text-white"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -799,7 +818,7 @@ function ImageLightboxModal({
               type="button"
               onClick={prev}
               aria-label="Previous image"
-              className="cursor-pointer fixed left-3 sm:left-6 top-1/2 -translate-y-1/2 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-black/60 text-white shadow-2xl backdrop-blur-md transition-all hover:border-primary hover:bg-primary hover:scale-105"
+              className="cursor-pointer fixed left-3 sm:left-6 top-1/2 -translate-y-1/2 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-black/60 text-white shadow-2xl backdrop-blur-md transition-all hover:border-white/50 hover:bg-black/80 hover:scale-105"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -820,7 +839,7 @@ function ImageLightboxModal({
               type="button"
               onClick={next}
               aria-label="Next image"
-              className="cursor-pointer fixed right-3 sm:right-6 top-1/2 -translate-y-1/2 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-black/60 text-white shadow-2xl backdrop-blur-md transition-all hover:border-primary hover:bg-primary hover:scale-105"
+              className="cursor-pointer fixed right-3 sm:right-6 top-1/2 -translate-y-1/2 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-black/60 text-white shadow-2xl backdrop-blur-md transition-all hover:border-white/50 hover:bg-black/80 hover:scale-105"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -847,7 +866,8 @@ function ImageLightboxModal({
         onClick={(e) => e.stopPropagation()}
       >
         <span className="text-xs text-white/60 tracking-wide select-none">
-          {isZoomed ? copy.zoomOut : copy.clickToEnlarge}
+          {isZoomed ? copy.zoomOut : copy.clickToEnlarge}{" "}
+          <span className="text-white/40 hidden sm:inline">(Z)</span>
         </span>
 
         {hasMultiple && (
@@ -857,7 +877,7 @@ function ImageLightboxModal({
         )}
 
         <span className="text-xs text-white/50 tracking-wide select-none hidden sm:inline">
-          Esc: {copy.closeAria}
+          Esc: {copy.closeLightbox}
         </span>
       </div>
     </div>
@@ -869,11 +889,13 @@ function ProjectModal({
   onClose,
   lang,
   onDemoClick,
+  isDemoModalOpen = false,
 }: {
   project: Project;
   onClose: () => void;
   lang: Lang;
   onDemoClick: (project: Project) => void;
+  isDemoModalOpen?: boolean;
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
@@ -895,7 +917,7 @@ function ProjectModal({
     const raf = window.requestAnimationFrame(() => setIsVisible(true));
     const previousOverflow = document.body.style.overflow;
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (isLightboxOpen) return;
+      if (isLightboxOpen || isDemoModalOpen) return;
       if (e.key === "Escape") requestClose();
     };
     document.body.style.overflow = "hidden";
@@ -908,7 +930,7 @@ function ProjectModal({
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [requestClose, isLightboxOpen]);
+  }, [requestClose, isLightboxOpen, isDemoModalOpen]);
 
   const prev = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -923,6 +945,9 @@ function ProjectModal({
 
   return (
     <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="project-modal-heading"
       className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
       onClick={requestClose}
     >
@@ -941,7 +966,10 @@ function ProjectModal({
         >
           <div className="flex items-center justify-between gap-3 px-4 sm:px-6 py-3">
             <div className="min-w-0">
-              <p className="mt-1 truncate text-2xl font-semibold text-(--theme-text)">
+              <p
+                id="project-modal-heading"
+                className="mt-1 truncate text-2xl font-semibold text-(--theme-text)"
+              >
                 {project.head[lang]}
               </p>
             </div>
@@ -950,7 +978,7 @@ function ProjectModal({
                 type="button"
                 onClick={requestClose}
                 aria-label={copy.closeAria}
-                className="cursor-pointer flex h-8 w-8 items-center justify-center rounded-full border border-(--theme-border) bg-(--theme-surface-soft) text-(--theme-text) transition-colors hover:border-primary hover:bg-primary hover:text-white"
+                className="cursor-pointer flex h-8 w-8 items-center justify-center rounded-full border border-(--theme-border) bg-(--theme-surface-soft) text-(--theme-text) transition-colors hover:border-(--theme-border-strong) hover:bg-(--theme-surface-soft-strong)"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -994,7 +1022,7 @@ function ProjectModal({
                 type="button"
                 onClick={() => setIsLightboxOpen(true)}
                 aria-label={copy.clickToEnlarge}
-                className="cursor-pointer pointer-events-auto absolute top-3 right-3 z-10 flex items-center gap-1.5 rounded-full border border-white/20 bg-black/65 px-3 py-1.5 text-xs font-medium text-white shadow-lg backdrop-blur-md opacity-0 transition-all duration-200 group-hover:opacity-100 hover:bg-black/85 hover:border-primary/60 hover:scale-105"
+                className="cursor-pointer pointer-events-auto absolute top-3 right-3 z-10 flex items-center gap-1.5 rounded-full border border-white/20 bg-black/65 px-3 py-1.5 text-xs font-medium text-white shadow-lg backdrop-blur-md opacity-0 transition-all duration-200 group-hover:opacity-100 hover:bg-black/85 hover:border-white/50 hover:scale-105"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -1002,7 +1030,7 @@ function ProjectModal({
                   viewBox="0 0 24 24"
                   strokeWidth={2}
                   stroke="currentColor"
-                  className="w-3.5 h-3.5 text-primary"
+                  className="w-3.5 h-3.5 text-white/80"
                 >
                   <path
                     strokeLinecap="round"
@@ -1058,15 +1086,15 @@ function ProjectModal({
 
         <div className="p-6 sm:p-8 flex flex-col">
           {project.tags && project.tags.length > 0 && (
-            <div className="mb-4">
-              <p className="mb-2 font-semibold tracking-[0.15em] uppercase text-primary">
+            <div className="mb-6">
+              <p className="mb-2.5 text-xs font-semibold tracking-[0.2em] uppercase theme-text-muted">
                 {copy.tags}
               </p>
               <div className="flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-2.5 py-1 text-xs font-semibold uppercase tracking-wider rounded-md border border-primary/30 bg-primary/10 text-primary-400"
+                    className="rounded-lg border border-(--theme-border) bg-(--theme-surface-soft) px-3 py-1 text-xs font-medium uppercase tracking-wider theme-text-body transition-colors hover:border-(--theme-border-strong)"
                   >
                     {tag}
                   </span>
@@ -1112,7 +1140,7 @@ function ProjectModal({
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 rounded-xl border-2 border-primary/30 bg-(--theme-surface-soft) px-5 py-3.5 text-sm font-semibold text-(--theme-text) transition-all duration-300 hover:border-primary/60 hover:bg-primary/5 hover:-translate-y-0.5 flex-1"
+                  className="flex items-center justify-center gap-2 rounded-xl border border-(--theme-border) bg-(--theme-surface-soft) px-5 py-3.5 text-sm font-semibold text-(--theme-text) transition-all duration-200 hover:border-(--theme-border-strong) hover:bg-(--theme-surface-soft-strong) flex-1"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -1184,16 +1212,11 @@ export default function ProjectsSection({ lang }: { lang: Lang }) {
       className="scroll-mt-20 py-10 sm:py-12 px-6 sm:px-10 relative"
     >
       <div className="theme-divider-line absolute top-0 left-0 h-px w-full" />
-      <div className="absolute bottom-0 right-0 w-80 h-80 bg-primary/3 rounded-full blur-[100px]" />
       <div className="relative z-10 max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="mt-3 text-3xl font-bold text-(--theme-text) sm:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight text-(--theme-text) sm:text-4xl">
             {copy.title}
           </h2>
-          <p className="text-xs font-semibold tracking-[0.3em] text-primary uppercase">
-            {copy.subtitle}
-          </p>
-          <div className="mt-4 h-[3px] w-12 bg-primary rounded-full mx-auto" />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
@@ -1225,6 +1248,7 @@ export default function ProjectsSection({ lang }: { lang: Lang }) {
           onClose={() => setSelectedProject(null)}
           lang={lang}
           onDemoClick={handleDemoClick}
+          isDemoModalOpen={!!demoProject}
         />
       )}
 

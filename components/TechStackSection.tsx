@@ -56,10 +56,7 @@ const TechStackCategoryCard = ({
   const hasPagination = totalPages > 1;
 
   return (
-    <article className="theme-card theme-card-hover relative overflow-hidden rounded-3xl transition-transform duration-500 hover:-translate-y-2">
-      <div
-        className={`pointer-events-none absolute inset-0 bg-linear-to-br ${category.accent} opacity-20 blur-[100px]`}
-      />
+    <article className="theme-card theme-card-hover relative overflow-hidden rounded-3xl transition-all duration-300 hover:-translate-y-0.5">
       <div className="relative p-6 sm:p-8 space-y-4">
         <div className="flex items-center justify-between">
           <span className="text-(--theme-text) text-lg uppercase tracking-[0.15em] font-bold">
@@ -99,20 +96,13 @@ export default function TechStackSection({ lang }: { lang: Lang }) {
       id="section-stack"
       className="scroll-mt-20 py-12 lg:py-14 px-6 sm:px-10 relative"
     >
-      <div className="absolute inset-0 opacity-100">
-        <div className="theme-divider-line absolute top-0 left-0 h-px w-full" />
-        <div className="absolute bottom-0 right-0 w-80 h-80 bg-primary/3 rounded-full blur-[100px]" />
-      </div>
+      <div className="theme-divider-line absolute top-0 left-0 h-px w-full" />
 
       <div className="relative z-10 max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="mt-3 text-3xl font-bold text-(--theme-text) sm:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight text-(--theme-text) sm:text-4xl">
             {copy.title}
           </h2>
-          <p className="text-xs font-semibold tracking-[0.3em] text-primary uppercase">
-            {copy.subtitle}
-          </p>
-          <div className="mt-4 h-[3px] w-12 bg-primary rounded-full mx-auto" />
         </div>
 
         <div className="grid gap-6 md:grid-cols-2">

@@ -11,28 +11,21 @@ export default function ExperienceSection({ lang }: { lang: Lang }) {
       id="section-experience"
       className="scroll-mt-20 py-12 lg:py-14 px-6 sm:px-10 relative"
     >
-      <div className="absolute inset-0 opacity-100 pointer-events-none">
-        <div className="theme-divider-line absolute top-0 left-0 h-px w-full" />
-        <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-primary/2 rounded-full blur-[100px]" />
-      </div>
+      <div className="theme-divider-line absolute top-0 left-0 h-px w-full" />
 
       <div className="relative z-10 max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-12">
-          <h2 className="mt-3 text-3xl font-bold text-(--theme-text) sm:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight text-(--theme-text) sm:text-4xl">
             {copy.title}
           </h2>
-          <p className="text-xs font-semibold tracking-[0.3em] text-primary uppercase">
-            {copy.subtitle}
-          </p>
-          <div className="mt-4 h-[3px] w-12 bg-primary rounded-full mx-auto" />
         </div>
 
         <div className="grid gap-12 md:grid-cols-2">
           {/* Work Experience Column */}
           <div>
             <div className="flex items-center gap-3 mb-6">
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-(--theme-border) bg-(--theme-surface-soft) theme-text">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5"
@@ -58,16 +51,18 @@ export default function ExperienceSection({ lang }: { lang: Lang }) {
                 {copy.experiences.map((exp, idx) => (
                   <div key={idx} className="relative group">
                     {/* Timeline dot */}
-                    <span className="absolute -left-[31px] top-1.5 flex h-3.5 w-3.5 items-center justify-center rounded-full border border-primary bg-(--theme-bg) ring-4 ring-primary/10 transition-transform duration-300 group-hover:scale-115"></span>
+                    <span className="absolute -left-[31px] top-1.5 flex h-3.5 w-3.5 items-center justify-center rounded-full border-2 border-(--theme-text-muted) bg-(--theme-surface-solid) transition-all duration-300 group-hover:border-(--theme-text) group-hover:scale-110">
+                      <span className="h-1.5 w-1.5 rounded-full bg-(--theme-text-muted) transition-colors duration-300 group-hover:bg-(--theme-text)" />
+                    </span>
 
                     {/* Card */}
-                    <div className="theme-panel-solid rounded-2xl p-5 relative overflow-hidden transition-all duration-300 hover:border-primary/30 hover:-translate-y-1">
+                    <div className="theme-panel-solid rounded-2xl p-5 relative overflow-hidden transition-all duration-300 hover:border-(--theme-border-strong) hover:-translate-y-0.5">
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 mb-3">
                         <div>
-                          <h4 className="font-bold text-(--theme-text) transition-colors group-hover:text-primary">
+                          <h4 className="font-bold text-(--theme-text)">
                             {exp.role}
                           </h4>
-                          <p className="text-sm font-semibold text-primary-400 mt-0.5">
+                          <p className="text-sm font-medium theme-text-muted mt-0.5">
                             {exp.company}
                           </p>
                         </div>
@@ -91,7 +86,7 @@ export default function ExperienceSection({ lang }: { lang: Lang }) {
           {/* Education Column */}
           <div>
             <div className="flex items-center gap-3 mb-6">
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-(--theme-border) bg-(--theme-surface-soft) theme-text">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5"
@@ -127,16 +122,18 @@ export default function ExperienceSection({ lang }: { lang: Lang }) {
                 {copy.educations.map((edu, idx) => (
                   <div key={idx} className="relative group">
                     {/* Timeline dot */}
-                    <span className="absolute -left-[31px] top-1.5 flex h-3.5 w-3.5 items-center justify-center rounded-full border border-primary bg-(--theme-bg) ring-4 ring-primary/10 transition-transform duration-300 group-hover:scale-115"></span>
+                    <span className="absolute -left-[31px] top-1.5 flex h-3.5 w-3.5 items-center justify-center rounded-full border-2 border-(--theme-text-muted) bg-(--theme-surface-solid) transition-all duration-300 group-hover:border-(--theme-text) group-hover:scale-110">
+                      <span className="h-1.5 w-1.5 rounded-full bg-(--theme-text-muted) transition-colors duration-300 group-hover:bg-(--theme-text)" />
+                    </span>
 
                     {/* Card */}
-                    <div className="theme-panel-solid rounded-2xl p-5 relative overflow-hidden transition-all duration-300 hover:border-primary/30 hover:-translate-y-1">
+                    <div className="theme-panel-solid rounded-2xl p-5 relative overflow-hidden transition-all duration-300 hover:border-(--theme-border-strong) hover:-translate-y-0.5">
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 mb-2">
                         <div>
-                          <h4 className="font-bold text-(--theme-text) transition-colors group-hover:text-primary">
+                          <h4 className="font-bold text-(--theme-text)">
                             {edu.school}
                           </h4>
-                          <p className="text-sm font-semibold text-primary-400 mt-0.5">
+                          <p className="text-sm font-medium theme-text-muted mt-0.5">
                             {edu.degree}
                           </p>
                         </div>
@@ -146,8 +143,11 @@ export default function ExperienceSection({ lang }: { lang: Lang }) {
                       </div>
 
                       {edu.gpa && (
-                        <span className="inline-flex items-center rounded-md bg-primary/10 border border-primary/20 px-2 py-0.5 text-xs font-medium text-primary">
-                          {copy.gpaLabel}: {edu.gpa}
+                        <span className="inline-flex items-center rounded-md border border-(--theme-border) bg-(--theme-surface-soft) px-2.5 py-1 text-xs font-medium theme-text-body">
+                          {copy.gpaLabel}:{" "}
+                          <strong className="ml-1 theme-text font-semibold">
+                            {edu.gpa}
+                          </strong>
                         </span>
                       )}
                     </div>

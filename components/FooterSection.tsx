@@ -64,12 +64,12 @@ export default function FooterSection({ lang }: { lang: Lang }) {
   return (
     <footer className="border-t border-(--theme-border) px-4 py-12 lg:py-6">
       <div
-        className="theme-panel-solid mx-auto max-w-7xl overflow-hidden rounded-3xl"
+        className="theme-card mx-auto max-w-7xl overflow-hidden rounded-3xl"
         style={{ boxShadow: "var(--theme-shadow)" }}
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-6 py-8 md:px-8 lg:px-10">
           <div>
-            <h4 className="text-base font-bold text-primary">
+            <h4 className="text-base font-bold theme-text">
               {copy.profileTitle}
             </h4>
             <p className="theme-text-body mt-3 text-sm leading-relaxed">
@@ -78,7 +78,7 @@ export default function FooterSection({ lang }: { lang: Lang }) {
           </div>
 
           <div>
-            <h4 className="text-base font-bold text-primary">
+            <h4 className="text-base font-bold theme-text">
               {copy.servicesTitle}
             </h4>
             <ul className="theme-text-body mt-3 space-y-2 text-sm">
@@ -91,7 +91,7 @@ export default function FooterSection({ lang }: { lang: Lang }) {
           </div>
 
           <div>
-            <h4 className="text-base font-bold text-primary">
+            <h4 className="text-base font-bold theme-text">
               {copy.navigationTitle}
             </h4>
             <ul className="theme-text-body mt-3 space-y-2 text-sm">
@@ -99,7 +99,7 @@ export default function FooterSection({ lang }: { lang: Lang }) {
                 <li key={item.id}>
                   <a
                     href={item.href}
-                    className="inline-flex items-center gap-2 transition-colors hover:text-primary-400"
+                    className="inline-flex items-center gap-2 transition-colors hover:text-(--theme-text)"
                   >
                     <span>{item.label[lang]}</span>
                   </a>
@@ -109,7 +109,7 @@ export default function FooterSection({ lang }: { lang: Lang }) {
           </div>
 
           <div>
-            <h4 className="text-base font-bold text-primary">
+            <h4 className="text-base font-bold theme-text">
               {copy.contactTitle}
             </h4>
             <div className="theme-text-body mt-3 space-y-2 text-sm">
@@ -117,7 +117,7 @@ export default function FooterSection({ lang }: { lang: Lang }) {
                 {copy.telLabel}:{" "}
                 <a
                   href="tel:0981848532"
-                  className="transition-colors hover:text-primary-400"
+                  className="transition-colors hover:text-(--theme-text)"
                 >
                   098 184 8532
                 </a>
@@ -126,7 +126,7 @@ export default function FooterSection({ lang }: { lang: Lang }) {
                 {copy.emailLabel}:{" "}
                 <a
                   href="mailto:narawit532@gmail.com"
-                  className="transition-colors hover:text-primary-400"
+                  className="transition-colors hover:text-(--theme-text)"
                 >
                   narawit532@gmail.com
                 </a>
@@ -143,7 +143,7 @@ export default function FooterSection({ lang }: { lang: Lang }) {
                   target={item.external ? "_blank" : undefined}
                   rel={item.external ? "noopener noreferrer" : undefined}
                   aria-label={item.label}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-(--theme-border) bg-(--theme-surface-soft) text-(--theme-text) transition-colors hover:border-primary/35 hover:text-primary-400"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-(--theme-border) bg-(--theme-surface-soft) theme-text transition-all duration-200 hover:border-(--theme-border-strong) hover:bg-(--theme-surface-soft-strong)"
                 >
                   <SocialIcon label={item.label} />
                   <span className="sr-only">{item.label}</span>
@@ -153,7 +153,7 @@ export default function FooterSection({ lang }: { lang: Lang }) {
           </div>
         </div>
         <div className="theme-text-faint flex items-center justify-center gap-3 border-t border-(--theme-border) px-10 py-4 text-xs xl:px-0">
-          <p>&copy; {currentYear} Narawit Soiaudom. All rights reserved</p>
+          <p>&copy; {currentYear} Narawit Sroiudom. All rights reserved</p>
         </div>
       </div>
     </footer>

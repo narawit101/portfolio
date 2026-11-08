@@ -37,7 +37,9 @@ export const experienceContent: Record<Lang, ExperienceSectionContent> = {
                 company: 'บริษัท อีสานดอทคอม จำกัด',
                 period: 'พ.ย. 2025 - ก.พ. 2026',
                 responsibilities: [
-                    'พัฒนา Web Application และ Mobile Application ในส่วน Frontend ตาม Requirements ที่ได้รับมอบหมาย โดยรับผิดชอบทั้งการพัฒนาฟีเจอร์ใหม่ การปรับปรุงระบบเดิม และการแก้ไขปัญหาที่พบระหว่างการใช้งาน นอกจากนี้ยังทำงานร่วมกับทีม Backend เพื่อเชื่อมต่อ RESTful APIs และทดสอบการทำงานของระบบให้เป็นไปตามความต้องการของผู้ใช้งาน'
+                    'พัฒนา Web Application ส่วน Frontend ด้วย Next.js ตาม Requirements พัฒนาฟีเจอร์ใหม่และปรับปรุงแก้ไขปัญหาของระบบตามที่ได้รับมอบหมาย',
+                    'พัฒนา Mobile Application ด้วย React Native (Expo) และปรับโครงสร้างฟีเจอร์ให้รองรับการใช้งานบนเว็บอย่างราบรื่น',
+                    'ทำงานร่วมกับทีม Backend ในการเชื่อมต่อ RESTful APIs และร่วมทดสอบการทำงานของระบบให้ตรงตามเป้าหมาย'
                 ]
             }
         ],

@@ -128,13 +128,16 @@ export default function Navbar({ lang }: NavbarProps) {
                                 key={item.id}
                                 type="button"
                                 onClick={() => scrollTo(item.id)}
-                                className={`relative cursor-pointer rounded-r-xl px-3 py-2 text-left border-l-2 transition-all duration-300 ${
+                                className={`group flex items-center justify-between cursor-pointer rounded-xl px-4 py-2.5 text-left text-sm transition-all duration-200 ${
                                     isActive 
-                                        ? 'text-primary bg-primary/5 font-medium border-primary' 
-                                        : 'theme-text-muted hover:text-(--theme-text) hover:bg-(--theme-surface-soft) border-transparent'
+                                        ? 'text-primary bg-primary/10 font-semibold' 
+                                        : 'theme-text-muted hover:text-(--theme-text) hover:bg-(--theme-surface-soft) font-medium'
                                 }`}
                             >
-                                {item.label[lang]}
+                                <span>{item.label[lang]}</span>
+                                {isActive && (
+                                    <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                                )}
                             </button>
                         )
                     })}
