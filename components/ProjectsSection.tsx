@@ -12,6 +12,13 @@ const sectionCopy: Record<
     tags: string;
     details: string;
     closeAria: string;
+    previewPlaceholder: string;
+    previewModalPlaceholder: string;
+    previewModalSubtext: string;
+    clickToEnlarge: string;
+    zoomIn: string;
+    zoomOut: string;
+    closeLightbox: string;
   }
 > = {
   th: {
@@ -20,6 +27,13 @@ const sectionCopy: Record<
     tags: "แท็ก",
     details: "รายละเอียด",
     closeAria: "ปิดหน้าต่างโปรเจกต์",
+    previewPlaceholder: "กำลังจัดเตรียมภาพจำลองระบบ",
+    previewModalPlaceholder: "กำลังจัดเตรียมภาพหน้าจอระบบ",
+    previewModalSubtext: "คุณสามารถเข้าดูซอร์สโค้ดและรายละเอียดสถาปัตยกรรมได้ทาง GitHub",
+    clickToEnlarge: "คลิกเพื่อดูภาพขนาดใหญ่",
+    zoomIn: "ขยายขนาดภาพ 100%",
+    zoomOut: "ย่อขนาดให้พอดีจอ",
+    closeLightbox: "ปิดมุมมองภาพขนาดใหญ่",
   },
   en: {
     title: "Projects",
@@ -27,6 +41,13 @@ const sectionCopy: Record<
     tags: "Tags",
     details: "Details",
     closeAria: "Close project modal",
+    previewPlaceholder: "Preview Images Coming Soon",
+    previewModalPlaceholder: "Preview Screenshots Coming Soon",
+    previewModalSubtext: "You can explore the source code and architecture on GitHub",
+    clickToEnlarge: "Click to enlarge",
+    zoomIn: "Zoom to 100%",
+    zoomOut: "Fit to screen",
+    closeLightbox: "Close enlarged view",
   },
 };
 
@@ -60,6 +81,8 @@ function ProjectCard({
     setCurrentIndex((i) => (i === project.pictures.length - 1 ? 0 : i + 1));
   };
 
+  const copy = sectionCopy[lang];
+
   return (
     <div
       onClick={onClick}
@@ -69,19 +92,43 @@ function ProjectCard({
       className="theme-panel-solid theme-panel-hover project-card group flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl transition-all duration-500 hover:-translate-y-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
     >
       <div className="relative h-52 w-full shrink-0 overflow-hidden bg-(--theme-bg) sm:h-56">
-        <div
-          className="flex h-full transition-transform duration-500 ease-in-out"
-          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-        >
-          {project.pictures.map((pic, i) => (
-            <img
-              key={i}
-              src={pic}
-              alt={`${project.head[lang]} - ${i + 1}`}
-              className="w-full h-full object-contain shrink-0"
-            />
-          ))}
-        </div>
+        {project.pictures.length > 0 ? (
+          <div
+            className="flex h-full transition-transform duration-500 ease-in-out"
+            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+          >
+            {project.pictures.map((pic, i) => (
+              <img
+                key={i}
+                src={pic}
+                alt={`${project.head[lang]} - ${i + 1}`}
+                className="w-full h-full object-contain shrink-0"
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="flex h-full w-full flex-col items-center justify-center gap-2.5 px-4 text-center select-none">
+            <div className="flex h-11 w-11 items-center justify-center rounded-full border border-(--theme-border) bg-(--theme-surface-soft) text-primary">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-5 h-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 0 1 0 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 0 1 0-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375Z"
+                />
+              </svg>
+            </div>
+            <span className="text-xs font-medium tracking-wide text-(--theme-text-muted)">
+              {copy.previewPlaceholder}
+            </span>
+          </div>
+        )}
 
         {hasMultiple && (
           <>
@@ -542,6 +589,281 @@ function DemoCredentialsModal({
   );
 }
 
+function ImageLightboxModal({
+  pictures,
+  initialIndex = 0,
+  onClose,
+  lang,
+  title,
+}: {
+  pictures: string[];
+  initialIndex?: number;
+  onClose: () => void;
+  lang: Lang;
+  title: string;
+}) {
+  const [currentIndex, setCurrentIndex] = useState(initialIndex);
+  const [isZoomed, setIsZoomed] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isClosingRef = useRef(false);
+
+  const copy = sectionCopy[lang];
+  const hasMultiple = pictures.length > 1;
+
+  const requestClose = useCallback(() => {
+    if (isClosingRef.current) return;
+    isClosingRef.current = true;
+    setIsVisible(false);
+    closeTimeoutRef.current = setTimeout(() => {
+      onClose();
+    }, 250);
+  }, [onClose]);
+
+  const prev = useCallback(
+    (e?: React.MouseEvent) => {
+      if (e) e.stopPropagation();
+      setIsZoomed(false);
+      setCurrentIndex((i) => (i === 0 ? pictures.length - 1 : i - 1));
+      if (containerRef.current) {
+        containerRef.current.scrollTop = 0;
+        containerRef.current.scrollLeft = 0;
+      }
+    },
+    [pictures.length],
+  );
+
+  const next = useCallback(
+    (e?: React.MouseEvent) => {
+      if (e) e.stopPropagation();
+      setIsZoomed(false);
+      setCurrentIndex((i) => (i === pictures.length - 1 ? 0 : i + 1));
+      if (containerRef.current) {
+        containerRef.current.scrollTop = 0;
+        containerRef.current.scrollLeft = 0;
+      }
+    },
+    [pictures.length],
+  );
+
+  const toggleZoom = useCallback((e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    setIsZoomed((z) => !z);
+  }, []);
+
+  useEffect(() => {
+    const raf = window.requestAnimationFrame(() => setIsVisible(true));
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.stopPropagation();
+        requestClose();
+      } else if (e.key === "ArrowLeft") {
+        e.stopPropagation();
+        prev();
+      } else if (e.key === "ArrowRight") {
+        e.stopPropagation();
+        next();
+      } else if (e.key === " " || e.key === "z" || e.key === "Z") {
+        e.preventDefault();
+        toggleZoom();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown, true);
+    return () => {
+      window.cancelAnimationFrame(raf);
+      if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+      window.removeEventListener("keydown", handleKeyDown, true);
+    };
+  }, [requestClose, prev, next, toggleZoom]);
+
+  return (
+    <div
+      className={`fixed inset-0 z-60 flex flex-col justify-between transition-opacity duration-300 ${isVisible ? "opacity-100" : "opacity-0"}`}
+      style={{ backgroundColor: "rgba(5, 5, 10, 0.96)" }}
+      onClick={requestClose}
+    >
+      {/* Top Bar */}
+      <div
+        className="relative z-20 flex items-center justify-between gap-3 border-b border-white/10 px-4 py-3 sm:px-6 backdrop-blur-md bg-black/50"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center gap-3 min-w-0">
+          <p className="truncate text-sm sm:text-base font-semibold text-white/95">
+            {title}
+          </p>
+          {hasMultiple && (
+            <span className="shrink-0 rounded-full border border-white/15 bg-white/10 px-2.5 py-0.5 text-xs font-semibold text-white/80 select-none">
+              {currentIndex + 1} / {pictures.length}
+            </span>
+          )}
+        </div>
+
+        <div className="flex items-center gap-2 shrink-0">
+          <button
+            type="button"
+            onClick={toggleZoom}
+            aria-label={isZoomed ? copy.zoomOut : copy.zoomIn}
+            title={isZoomed ? copy.zoomOut : copy.zoomIn}
+            className={`cursor-pointer flex h-9 w-9 items-center justify-center rounded-full border transition-all ${
+              isZoomed
+                ? "border-primary bg-primary text-white"
+                : "border-white/15 bg-white/10 text-white/90 hover:border-primary hover:text-primary"
+            }`}
+          >
+            {isZoomed ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2}
+                stroke="currentColor"
+                className="w-4 h-4"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM13.5 10.5h-6"
+                />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2}
+                stroke="currentColor"
+                className="w-4 h-4"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6"
+                />
+              </svg>
+            )}
+          </button>
+
+          <button
+            type="button"
+            onClick={requestClose}
+            aria-label={copy.closeLightbox}
+            title={copy.closeLightbox}
+            className="cursor-pointer flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white/90 transition-colors hover:border-primary hover:bg-primary hover:text-white"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+              stroke="currentColor"
+              className="w-5 h-5"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      {/* Main Viewport */}
+      <div
+        ref={containerRef}
+        className={`relative flex-1 w-full overflow-auto flex justify-center p-3 sm:p-6 select-none ${
+          isZoomed
+            ? "cursor-zoom-out items-start"
+            : "cursor-zoom-in items-center"
+        }`}
+        onClick={requestClose}
+      >
+        <img
+          src={pictures[currentIndex]}
+          alt={`${title} - ${currentIndex + 1}`}
+          onClick={(e) => {
+            e.stopPropagation();
+            toggleZoom();
+          }}
+          className={`rounded-lg shadow-2xl transition-all duration-300 ${
+            isZoomed
+              ? "w-auto max-w-none max-h-none object-none cursor-zoom-out my-auto mx-auto"
+              : "max-h-[82vh] max-w-[94vw] object-contain cursor-zoom-in"
+          }`}
+        />
+
+        {hasMultiple && (
+          <>
+            <button
+              type="button"
+              onClick={prev}
+              aria-label="Previous image"
+              className="cursor-pointer fixed left-3 sm:left-6 top-1/2 -translate-y-1/2 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-black/60 text-white shadow-2xl backdrop-blur-md transition-all hover:border-primary hover:bg-primary hover:scale-105"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2.5}
+                stroke="currentColor"
+                className="w-5 h-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15.75 19.5L8.25 12l7.5-7.5"
+                />
+              </svg>
+            </button>
+            <button
+              type="button"
+              onClick={next}
+              aria-label="Next image"
+              className="cursor-pointer fixed right-3 sm:right-6 top-1/2 -translate-y-1/2 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-black/60 text-white shadow-2xl backdrop-blur-md transition-all hover:border-primary hover:bg-primary hover:scale-105"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2.5}
+                stroke="currentColor"
+                className="w-5 h-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M8.25 4.5l7.5 7.5-7.5 7.5"
+                />
+              </svg>
+            </button>
+          </>
+        )}
+      </div>
+
+      {/* Bottom Bar */}
+      <div
+        className="relative z-20 flex items-center justify-between gap-4 px-4 py-3 bg-black/50 border-t border-white/10 backdrop-blur-md sm:px-6"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <span className="text-xs text-white/60 tracking-wide select-none">
+          {isZoomed ? copy.zoomOut : copy.clickToEnlarge}
+        </span>
+
+        {hasMultiple && (
+          <span className="text-xs font-semibold text-white/80 tracking-wider select-none">
+            {currentIndex + 1} / {pictures.length}
+          </span>
+        )}
+
+        <span className="text-xs text-white/50 tracking-wide select-none hidden sm:inline">
+          Esc: {copy.closeAria}
+        </span>
+      </div>
+    </div>
+  );
+}
+
 function ProjectModal({
   project,
   onClose,
@@ -554,6 +876,7 @@ function ProjectModal({
   onDemoClick: (project: Project) => void;
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const hasMultiple = project.pictures.length > 1;
   const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -572,6 +895,7 @@ function ProjectModal({
     const raf = window.requestAnimationFrame(() => setIsVisible(true));
     const previousOverflow = document.body.style.overflow;
     const handleKeyDown = (e: KeyboardEvent) => {
+      if (isLightboxOpen) return;
       if (e.key === "Escape") requestClose();
     };
     document.body.style.overflow = "hidden";
@@ -584,7 +908,7 @@ function ProjectModal({
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [requestClose]);
+  }, [requestClose, isLightboxOpen]);
 
   const prev = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -648,19 +972,75 @@ function ProjectModal({
         </div>
 
         <div className="group relative h-64 w-full shrink-0 bg-(--theme-bg) sm:h-80 md:h-[400px]">
-          <div
-            className="flex h-full transition-transform duration-500 ease-in-out"
-            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-          >
-            {project.pictures.map((pic, i) => (
-              <img
-                key={i}
-                src={pic}
-                alt={`${project.head[lang]} - ${i + 1}`}
-                className="w-full h-full object-contain shrink-0"
-              />
-            ))}
-          </div>
+          {project.pictures.length > 0 ? (
+            <>
+              <div
+                className="flex h-full transition-transform duration-500 ease-in-out cursor-zoom-in"
+                style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+                onClick={() => setIsLightboxOpen(true)}
+              >
+                {project.pictures.map((pic, i) => (
+                  <img
+                    key={i}
+                    src={pic}
+                    alt={`${project.head[lang]} - ${i + 1}`}
+                    className="w-full h-full object-contain shrink-0"
+                  />
+                ))}
+              </div>
+
+              {/* Hover Zoom Badge */}
+              <button
+                type="button"
+                onClick={() => setIsLightboxOpen(true)}
+                aria-label={copy.clickToEnlarge}
+                className="cursor-pointer pointer-events-auto absolute top-3 right-3 z-10 flex items-center gap-1.5 rounded-full border border-white/20 bg-black/65 px-3 py-1.5 text-xs font-medium text-white shadow-lg backdrop-blur-md opacity-0 transition-all duration-200 group-hover:opacity-100 hover:bg-black/85 hover:border-primary/60 hover:scale-105"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={2}
+                  stroke="currentColor"
+                  className="w-3.5 h-3.5 text-primary"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6"
+                  />
+                </svg>
+                <span>{copy.clickToEnlarge}</span>
+              </button>
+            </>
+          ) : (
+            <div className="flex h-full w-full flex-col items-center justify-center gap-3 px-4 text-center select-none">
+              <div className="flex h-14 w-14 items-center justify-center rounded-full border border-(--theme-border) bg-(--theme-surface-soft) text-primary">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-7 h-7"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 0 1 0 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 0 1 0-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375Z"
+                  />
+                </svg>
+              </div>
+              <div className="flex flex-col items-center gap-1">
+                <span className="text-sm font-medium text-(--theme-text)">
+                  {copy.previewModalPlaceholder}
+                </span>
+                <span className="text-xs text-(--theme-text-muted)">
+                  {copy.previewModalSubtext}
+                </span>
+              </div>
+            </div>
+          )}
 
           {hasMultiple && (
             <>
@@ -754,6 +1134,16 @@ function ProjectModal({
           )}
         </div>
       </div>
+
+      {isLightboxOpen && project.pictures.length > 0 && (
+        <ImageLightboxModal
+          pictures={project.pictures}
+          initialIndex={currentIndex}
+          onClose={() => setIsLightboxOpen(false)}
+          lang={lang}
+          title={project.head[lang]}
+        />
+      )}
     </div>
   );
 }
